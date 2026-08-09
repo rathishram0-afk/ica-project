@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased text-slate-800 bg-[#FFFFFF];
+  }
+}
+
+/* Custom Corporate Button & Glass Utility Classes */
+.gold-btn {
+  background: linear-gradient(135deg, #C8A24A 0%, #B89035 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(200, 162, 74, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gold-btn:hover {
+  background: linear-gradient(135deg, #D4AF37 0%, #C8A24A 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(200, 162, 74, 0.4);
+}
+
+/* World Map Watermark Background Pattern (Enhanced 12% opacity) */
+.world-map-bg {
+  background-image: radial-gradient(rgba(11, 46, 107, 0.12) 1.2px, transparent 1.2px);
+  background-size: 26px 26px;
+}
+
+/* Subtle Gentle Floating Animation (3-5px) */
+@keyframes softFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-soft-float {
+  animation: softFloat 4.5s ease-in-out infinite;
+}
