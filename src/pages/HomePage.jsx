@@ -36,92 +36,94 @@ export default function HomePage({ setActivePage }) {
     <div className="w-full bg-white text-slate-800">
       
       {/* ---------------------------------------------------- */}
-      {/* HERO SECTION - Exact Reference Layout Match */}
+      {/* HERO SECTION – Full Background Image with Overlay */}
       {/* ---------------------------------------------------- */}
-      <section className="relative overflow-hidden bg-white pt-8 lg:pt-14 pb-10 lg:pb-16 border-b border-slate-100 min-h-[580px] lg:min-h-[640px] flex flex-col justify-center">
-        
-        {/* World Map Watermark Pattern (Subtle & Elegant) */}
-        <div className="absolute inset-0 opacity-[0.14] world-map-bg pointer-events-none z-0"></div>
+      <section
+        className="relative overflow-hidden min-h-[92vh] flex flex-col"
+        style={{
+          backgroundImage: "url('/images/hero/ica-hero-banner.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        {/* Left gradient overlay — dark on left for text, fades to transparent on right */}
+        <div
+          className="absolute inset-0 pointer-events-none z-0"
+          style={{
+            background: 'linear-gradient(100deg, rgba(4,18,50,0.82) 0%, rgba(11,46,107,0.65) 38%, rgba(11,46,107,0.15) 62%, transparent 100%)',
+          }}
+        />
 
-        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-16 relative z-10 my-auto">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-            
-            {/* LEFT SIDE (45%) - Text & CTAs */}
-            <div className="w-full lg:w-[45%] space-y-6 animate-fadeIn shrink-0 z-10 relative">
-              
-              {/* Welcome Badge */}
-              <div className="inline-block text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] bg-[#F8F9FB] px-4 py-1.5 rounded-full border border-[#C8A24A]/40 shadow-xs">
-                WELCOME TO INTERNATIONAL CUBE ACADEMY
-              </div>
+        {/* Main Hero Content */}
+        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-16 relative z-10 flex-1 flex items-center py-20 lg:py-28">
+          <div className="w-full lg:w-[50%] space-y-7">
 
-              {/* Large Heading */}
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.14] tracking-tight">
-                <span className="text-[#0B2D6B] block">Empowering Minds.</span>
-                <span className="text-[#C8A24A] block">Building Tomorrow.</span>
-              </h1>
-
-              {/* Description Paragraph (Exact Client Copy) */}
-              <p className="text-slate-600 text-sm sm:text-base leading-[1.8] font-light max-w-[560px]">
-                The International Cube Academy (ICA) is a global educational institution dedicated to developing cognitive skills through Rubik's Cube-based learning. Our innovative programs combine brain development, STEM education, creativity, and leadership to help learners of all ages unlock their full potential.
-              </p>
-
-              {/* Two CTA Buttons */}
-              <div className="flex flex-wrap gap-4 pt-1">
-                <button 
-                  onClick={() => setActivePage('about')}
-                  className="px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider bg-[#0B2D6B] text-white hover:bg-[#071d47] transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5 flex items-center gap-2 group"
-                >
-                  <span>ABOUT ICA</span>
-                  <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
-                </button>
-
-                <button 
-                  onClick={() => setActivePage('contact')}
-                  className="px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider bg-[#C8A24A] text-white hover:bg-[#b89035] transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5 flex items-center gap-2 group"
-                >
-                  <span>PARTNER WITH US</span>
-                  <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
-
+            {/* Welcome Badge */}
+            <div className="inline-block text-[11px] font-semibold tracking-widest text-[#C8A24A] bg-white/10 backdrop-blur-sm px-5 py-2 rounded-full border border-[#C8A24A]/50 shadow-sm">
+              WELCOME TO INTERNATIONAL CUBE ACADEMY
             </div>
 
-            {/* RIGHT SIDE (55%) - High-Res Hero Artwork Graphic */}
-            <div className="w-full lg:w-[55%] flex justify-center lg:justify-end items-center relative z-1">
-              <img 
-                src="/images/hero/ica-hero-banner.png" 
-                alt="International Cube Academy Hero Banner" 
-                className="w-full max-w-[650px] lg:max-w-none h-auto object-contain block bg-transparent animate-soft-float scale-[1.08] transform origin-center lg:origin-right"
-                style={{ objectPosition: 'right center' }}
-              />
+            {/* Headline */}
+            <h1 className="font-serif font-extrabold leading-[1.1] tracking-tight">
+              <span className="text-white text-5xl sm:text-6xl lg:text-[4.2rem] block drop-shadow-lg">Empowering Minds.</span>
+              <span className="text-[#C8A24A] text-5xl sm:text-6xl lg:text-[4.2rem] block drop-shadow-lg">Building Tomorrow.</span>
+            </h1>
+
+            {/* Description */}
+            <p className="text-slate-200 text-sm sm:text-[15px] leading-[1.9] font-light max-w-[490px]">
+              The International Cube Academy (ICA) is a global educational institution dedicated to developing cognitive skills through Rubik's Cube-based learning. Our innovative programs combine brain development, STEM education, creativity, and leadership to help learners of all ages unlock their full potential.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4 pt-2">
+              <button
+                onClick={() => setActivePage('about')}
+                className="px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider bg-[#0B2D6B] text-white hover:bg-[#071d47] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2 group border border-white/20"
+              >
+                <span>ABOUT ICA</span>
+                <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+              <button
+                onClick={() => setActivePage('contact')}
+                className="px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider bg-[#C8A24A] text-white hover:bg-[#b89035] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2 group"
+              >
+                <span>PARTNER WITH US</span>
+                <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+              </button>
             </div>
 
           </div>
+        </div>
 
-          {/* Floating Statistics Cards Bar (Clean Separation Below Hero Content) */}
-          <div className="mt-12 lg:mt-16 bg-[#F8F9FB] rounded-2xl border border-slate-200/80 shadow-xs p-5 sm:p-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-left relative z-10">
+        {/* Stats Bar — frosted glass bar pinned to bottom of hero */}
+        <div className="relative z-10 w-full">
+          <div
+            className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/20 border-t border-white/20"
+            style={{ background: 'rgba(5,18,50,0.55)', backdropFilter: 'blur(14px)' }}
+          >
             {[
-              { icon: Globe, num: "20+", title: "Countries", sub: "Global presence across 5 continents" },
-              { icon: School, num: "500+", title: "Schools", sub: "Partnered educational institutions worldwide" },
-              { icon: Users, num: "1M+", title: "Learners", sub: "Empowering learners of all ages" },
-              { icon: Award, num: "100+", title: "Certified Trainers", sub: "Trained & accredited professionals" }
+              { icon: Globe,  num: "20+",  title: "Countries",          sub: "Global presence across 5 continents" },
+              { icon: School, num: "500+", title: "Schools",            sub: "Partnered educational institutions worldwide" },
+              { icon: Users,  num: "1M+",  title: "Learners",           sub: "Empowering learners of all ages" },
+              { icon: Award,  num: "100+", title: "Certified Trainers", sub: "Trained & accredited professionals" },
             ].map((stat, idx) => (
-              <div key={idx} className="flex items-start gap-4 py-1 hover:translate-y-[-2px] transition-transform duration-200">
-                <div className="w-11 h-11 rounded-xl bg-[#0B2D6B]/5 text-[#0B2D6B] flex items-center justify-center shrink-0 mt-0.5 border border-[#0B2D6B]/10">
-                  <stat.icon size={22} />
+              <div key={idx} className="flex items-center gap-3.5 px-6 py-5 hover:bg-white/10 transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-white/15 text-[#C8A24A] flex items-center justify-center shrink-0">
+                  <stat.icon size={20} />
                 </div>
                 <div>
                   <div className="flex items-baseline gap-1.5">
-                    <span className="text-2xl font-extrabold text-[#0B2D6B] font-serif">{stat.num}</span>
-                    <span className="text-xs font-bold text-[#C8A24A]">{stat.title}</span>
+                    <span className="text-xl font-extrabold text-white font-serif">{stat.num}</span>
+                    <span className="text-[11px] font-bold text-[#C8A24A]">{stat.title}</span>
                   </div>
-                  <div className="text-[11px] text-slate-500 font-light mt-0.5 leading-tight">{stat.sub}</div>
+                  <div className="text-[10px] text-white/55 font-light mt-0.5 leading-tight">{stat.sub}</div>
                 </div>
               </div>
             ))}
           </div>
-
         </div>
+
       </section>
 
 
