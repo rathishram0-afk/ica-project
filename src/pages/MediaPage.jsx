@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Image, Calendar, X, ChevronLeft, ChevronRight, Eye, ArrowRight, Camera, Trophy, Sparkles } from 'lucide-react';
+import AnimatedSection from '../components/AnimatedSection';
 
 export default function MediaPage({ setActivePage }) {
   const [activeTab, setActiveTab] = useState('gallery');

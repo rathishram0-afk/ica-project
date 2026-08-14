@@ -1,6 +1,9 @@
 import React from 'react';
 import { Trophy, Users, Award, Medal, School, Box, Star, Sparkles, Building2 } from 'lucide-react';
 import AchievementImagePlaceholder from '../components/AchievementImagePlaceholder';
+import AnimatedSection from '../components/AnimatedSection';
+import ParticleField from '../components/ParticleField';
+import useCountUp from '../hooks/useCountUp';
 
 export default function AchievementsPage({ setActivePage }) {
   const stats = [
@@ -56,11 +59,11 @@ export default function AchievementsPage({ setActivePage }) {
       <div className="max-w-[1440px] mx-auto px-6 lg:px-16 py-12 lg:py-16 space-y-12 lg:space-y-16">
 
         {/* ─── 1. CENTER TOP EYEBROW BADGE ─── */}
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white px-5 py-2 rounded-full border border-[#C8A24A]/40 shadow-xs">
+        <AnimatedSection animation="fadeUp" className="text-center">
+          <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white px-5 py-2 rounded-full border border-[#C8A24A]/40 shadow-xs animate-border-shimmer">
             <Trophy size={14} /> ACHIEVEMENTS & RECOGNITION
           </div>
-        </div>
+        </AnimatedSection>
 
         {/* ─── 2. HERO TWO-COLUMN SECTION ─── */}
         <section className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
@@ -82,11 +85,11 @@ export default function AchievementsPage({ setActivePage }) {
             </div>
 
             {/* 3 STATISTIC CARDS SIDE-BY-SIDE */}
-            <div className="grid grid-cols-3 gap-4 pt-2">
+            <AnimatedSection animation="stagger" staggerDelay={120} className="grid grid-cols-3 gap-4 pt-2">
               {stats.map((st, i) => (
-                <div key={i} className="bg-[#F8F9FB] rounded-2xl p-4 sm:p-5 border border-slate-200/80 text-center flex flex-col items-center justify-between group hover:border-[#C8A24A]/50 transition-all duration-300 shadow-xs">
-                  <div className="w-10 h-10 rounded-full bg-white text-[#C8A24A] flex items-center justify-center mb-3 shadow-xs border border-slate-100 group-hover:bg-[#0B2D6B] transition-colors">
-                    <Users size={18} />
+                <div key={i} className="bg-[#F8F9FB] rounded-2xl p-4 sm:p-5 border border-slate-200/80 text-center flex flex-col items-center justify-between group hover:border-[#C8A24A]/50 transition-all duration-300 shadow-xs card-hover-lift">
+                  <div className="w-10 h-10 rounded-full bg-white text-[#C8A24A] flex items-center justify-center mb-3 shadow-xs border border-slate-100 group-hover:bg-[#0B2D6B] transition-colors duration-300">
+                    <Users size={18} className="icon-hover-rotate" />
                   </div>
                   <div className="font-serif text-2xl sm:text-3xl font-extrabold text-[#0B2D6B] mb-1">
                     {st.num}
@@ -96,7 +99,7 @@ export default function AchievementsPage({ setActivePage }) {
                   </div>
                 </div>
               ))}
-            </div>
+            </AnimatedSection>
 
           </div>
 
@@ -114,7 +117,8 @@ export default function AchievementsPage({ setActivePage }) {
         </section>
 
         {/* ─── 3. GUINNESS WORLD RECORDS FEATURE BAR ─── */}
-        <section className="bg-gradient-to-r from-[#061F4F] via-[#0B2D6B] to-[#071D47] rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden border border-[#C8A24A]/30">
+        <AnimatedSection animation="fadeUp" as="section" className="bg-gradient-to-r from-[#061F4F] via-[#0B2D6B] to-[#071D47] rounded-3xl p-6 sm:p-8 text-white shadow-elevated relative overflow-hidden border border-[#C8A24A]/30">
+          <ParticleField count={8} />
           <div className="grid md:grid-cols-12 gap-6 items-center relative z-10">
             
             {/* Left Trophy Circle + Title */}
@@ -140,18 +144,18 @@ export default function AchievementsPage({ setActivePage }) {
             </div>
 
           </div>
-        </section>
+        </AnimatedSection>
 
         {/* ─── 4. SIX-COLUMN HIGHLIGHT GRID (ICONS ONLY - NO EXTRA PHOTOS) ─── */}
-        <section className="pt-2">
+        <AnimatedSection animation="stagger" staggerDelay={80} as="section" className="pt-2">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
             {highlights.map((h, idx) => {
               const Icon = h.icon;
               return (
-                <div key={idx} className="bg-[#F8F9FB] rounded-2xl p-5 border border-slate-200/80 text-center flex flex-col items-center justify-between group hover:border-[#C8A24A] hover:-translate-y-1 transition-all duration-300 h-full shadow-xs">
+                <div key={idx} className="bg-[#F8F9FB] rounded-2xl p-5 border border-slate-200/80 text-center flex flex-col items-center justify-between group hover:border-[#C8A24A] card-hover-lift transition-all duration-300 h-full shadow-xs">
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-white text-[#0B2D6B] flex items-center justify-center mb-4 mx-auto shadow-xs border border-slate-100 group-hover:bg-[#0B2D6B] group-hover:text-[#C8A24A] transition-colors">
-                      <Icon size={22} />
+                    <div className="w-12 h-12 rounded-2xl bg-white text-[#0B2D6B] flex items-center justify-center mb-4 mx-auto shadow-xs border border-slate-100 group-hover:bg-[#0B2D6B] group-hover:text-[#C8A24A] transition-colors duration-300">
+                      <Icon size={22} className="icon-hover-rotate" />
                     </div>
                     <h4 className="font-serif font-bold text-xs sm:text-sm text-[#0B2D6B] mb-2 leading-snug">
                       {h.title}
@@ -164,7 +168,7 @@ export default function AchievementsPage({ setActivePage }) {
               );
             })}
           </div>
-        </section>
+        </AnimatedSection>
 
       </div>
     </div>

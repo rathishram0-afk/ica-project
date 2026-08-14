@@ -2,38 +2,310 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════════════════
+   GLOBAL BASE STYLES
+   ═══════════════════════════════════════════════════════ */
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply antialiased text-slate-800 bg-[#FFFFFF];
+    overflow-x: hidden;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0B2D6B;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #C8A24A 0%, #9E7B2B 100%);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #D4AF37 0%, #C8A24A 100%);
   }
 }
 
-/* Custom Corporate Button & Glass Utility Classes */
+
+/* ═══════════════════════════════════════════════════════
+   GOLD BUTTON WITH SHIMMER SWEEP
+   ═══════════════════════════════════════════════════════ */
 .gold-btn {
   background: linear-gradient(135deg, #C8A24A 0%, #B89035 100%);
   color: #FFFFFF;
   box-shadow: 0 4px 15px rgba(200, 162, 74, 0.25);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.gold-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  animation: shimmerSweep 3s ease-in-out infinite;
 }
 
 .gold-btn:hover {
   background: linear-gradient(135deg, #D4AF37 0%, #C8A24A 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(200, 162, 74, 0.4);
+  box-shadow: 0 8px 25px rgba(200, 162, 74, 0.45);
 }
 
-/* World Map Watermark Background Pattern (Enhanced 12% opacity) */
+
+/* ═══════════════════════════════════════════════════════
+   WORLD MAP WATERMARK
+   ═══════════════════════════════════════════════════════ */
 .world-map-bg {
   background-image: radial-gradient(rgba(11, 46, 107, 0.12) 1.2px, transparent 1.2px);
   background-size: 26px 26px;
 }
 
-/* Subtle Gentle Floating Animation (3-5px) */
+
+/* ═══════════════════════════════════════════════════════
+   KEYFRAME ANIMATIONS
+   ═══════════════════════════════════════════════════════ */
+
+/* Soft Float (original, preserved) */
 @keyframes softFloat {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-4px); }
 }
-
 .animate-soft-float {
   animation: softFloat 4.5s ease-in-out infinite;
+}
+
+/* Shimmer Sweep for buttons */
+@keyframes shimmerSweep {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+/* Gold Glow Pulse */
+@keyframes goldGlowPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(200, 162, 74, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(200, 162, 74, 0.5), 0 0 50px rgba(200, 162, 74, 0.15); }
+}
+.animate-gold-glow {
+  animation: goldGlowPulse 3s ease-in-out infinite;
+}
+
+/* Gradient Shift Background */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+
+/* Float Slow */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(1deg); }
+  66% { transform: translateY(-3px) rotate(-1deg); }
+}
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+/* Float Medium */
+@keyframes floatMedium {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float-medium {
+  animation: floatMedium 4s ease-in-out infinite;
+}
+
+/* Spin Slow (for decorative elements) */
+@keyframes spinSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Page Transition */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-page-enter {
+  animation: pageEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Badge Border Shimmer */
+@keyframes borderShimmer {
+  0%, 100% { border-color: rgba(200, 162, 74, 0.3); }
+  50% { border-color: rgba(200, 162, 74, 0.7); }
+}
+.animate-border-shimmer {
+  animation: borderShimmer 2.5s ease-in-out infinite;
+}
+
+/* Text Gradient Animation */
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   GLASSMORPHISM UTILITIES
+   ═══════════════════════════════════════════════════════ */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.glass-gold {
+  background: rgba(200, 162, 74, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(200, 162, 74, 0.2);
+}
+
+.glass-dark {
+  background: rgba(11, 45, 107, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   GRADIENT TEXT UTILITY
+   ═══════════════════════════════════════════════════════ */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #D4AF37 0%, #C8A24A 40%, #DFBF73 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(135deg, #0B2D6B 0%, #16489C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   CARD HOVER EFFECTS
+   ═══════════════════════════════════════════════════════ */
+.card-hover-lift {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+.card-hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -15px rgba(11, 46, 107, 0.12),
+              0 0 20px rgba(200, 162, 74, 0.08);
+}
+
+/* 3D Tilt on Hover */
+.card-3d-tilt {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+.card-3d-tilt:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   NAVBAR SCROLL TRANSITION UTILITY
+   ═══════════════════════════════════════════════════════ */
+.navbar-transparent {
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+
+.navbar-solid {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 30px rgba(11, 46, 107, 0.06);
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   LINK HOVER UNDERLINE ANIMATION
+   ═══════════════════════════════════════════════════════ */
+.nav-link-hover {
+  position: relative;
+}
+.nav-link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #C8A24A;
+  border-radius: 1px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-50%);
+}
+.nav-link-hover:hover::after {
+  width: 80%;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   ICON HOVER ROTATION
+   ═══════════════════════════════════════════════════════ */
+.icon-hover-rotate {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .icon-hover-rotate {
+  transform: rotate(360deg);
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE PARALLAX DISABLE
+   ═══════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

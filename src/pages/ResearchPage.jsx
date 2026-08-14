@@ -1,5 +1,7 @@
 import React from 'react';
 import { FlaskConical, Lightbulb, ArrowRight, BookOpen, Cpu, Globe, Brain, Microscope, Zap } from 'lucide-react';
+import AnimatedSection from '../components/AnimatedSection';
+import ParticleField from '../components/ParticleField';
 
 const researchAreas = [
   { icon: Brain, title: "Cognitive Development", desc: "Studying how puzzle-based learning activates and strengthens neural pathways, enhancing memory, focus, and analytical thinking." },

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Handshake, Building2, ArrowRight, Globe, GraduationCap, Award, CheckCircle2, MapPin, School, Sparkles, FileText, Search, FileCheck, Users, Rocket, ShieldCheck, HeartHandshake } from 'lucide-react';
+import AnimatedSection from '../components/AnimatedSection';
+import ParticleField from '../components/ParticleField';
 
 export default function PartnersPage({ setActivePage }) {
   return (
@@ -97,7 +99,7 @@ export default function PartnersPage({ setActivePage }) {
               return (
                 <div 
                   key={idx} 
-                  className="bg-[#F8F9FB] rounded-3xl p-7 border border-slate-200/80 shadow-xs hover:border-[#C8A24A] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group h-full"
+                  className="bg-[#F8F9FB] rounded-3xl p-7 border border-slate-200/80 shadow-xs hover:border-[#C8A24A] card-hover-lift transition-all duration-400 flex flex-col justify-between group h-full"
                 >
                   {/* Clean Neutral Placeholder Container */}
                   <div className="w-full h-36 rounded-2xl bg-white border border-slate-200/60 flex items-center justify-center mb-6 shadow-xs group-hover:border-[#C8A24A]/40 transition-colors">
@@ -170,7 +172,7 @@ export default function PartnersPage({ setActivePage }) {
               ].map((step, idx) => {
                 const Icon = step.icon;
                 return (
-                  <div key={idx} className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col items-center text-center relative group hover:border-[#C8A24A] transition-all duration-200 h-full">
+                  <div key={idx} className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col items-center text-center relative group hover:border-[#C8A24A] transition-all duration-300 h-full card-hover-lift">
                     {/* Number Badge */}
                     <div className="w-8 h-8 rounded-full bg-[#C8A24A] text-white text-xs font-extrabold flex items-center justify-center mb-3 shadow-xs border-2 border-white">
                       {step.num}
@@ -266,7 +268,8 @@ export default function PartnersPage({ setActivePage }) {
         </section>
 
         {/* ─── 4. REFINED "ICA GLOBAL PRESENCE" SECTION (CLEAN SOLID NAVY - NO MAP IMAGE) ─── */}
-        <section className="bg-gradient-to-br from-[#061F4F] to-[#0B2D6B] rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-xl">
+        <AnimatedSection animation="scaleIn" as="section" className="bg-gradient-to-br from-[#061F4F] to-[#0B2D6B] rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-elevated">
+          <ParticleField count={10} />
           <div className="relative z-10 space-y-8 text-center max-w-3xl mx-auto">
             <div className="space-y-2">
               <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white/10 px-4 py-1.5 rounded-full border border-[#C8A24A]/30">
@@ -298,10 +301,10 @@ export default function PartnersPage({ setActivePage }) {
               </div>
             </div>
           </div>
-        </section>
+        </AnimatedSection>
 
         {/* ─── 5. FINAL CTA BANNER ─── */}
-        <section className="bg-gradient-to-r from-[#C8A24A] to-[#9E7B2B] rounded-3xl p-8 sm:p-12 text-white text-center shadow-xl">
+        <AnimatedSection animation="scaleIn" as="section" className="bg-gradient-to-r from-[#C8A24A] to-[#9E7B2B] rounded-3xl p-8 sm:p-12 text-white text-center shadow-elevated relative overflow-hidden">
           <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">
             Let's build a smarter future together.
           </h2>
@@ -314,7 +317,7 @@ export default function PartnersPage({ setActivePage }) {
           >
             BECOME AN ICA PARTNER <ArrowRight size={14} />
           </button>
-        </section>
+        </AnimatedSection>
 
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Award, ArrowLeft, CheckCircle2, ArrowRight, ShieldCheck, User, Mail, Phone, Globe, BookOpen, AlertCircle } from 'lucide-react';
+import AnimatedSection from '../components/AnimatedSection';
 
 export default function CertificationApplyPage({ setActivePage }) {
   const [formData, setFormData] = useState({

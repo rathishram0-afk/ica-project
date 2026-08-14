@@ -1,12 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   ArrowRight, Brain, Globe, GraduationCap, Trophy, Users, CheckCircle2, 
   Sparkles, Award, Lightbulb, Send, ChevronRight, School, ChevronLeft, Calendar
 } from 'lucide-react';
+import anime from 'animejs';
+import useParallax from '../hooks/useParallax';
+import useCountUp from '../hooks/useCountUp';
+import AnimatedSection from '../components/AnimatedSection';
+import ParticleField from '../components/ParticleField';
+import MagneticButton from '../components/MagneticButton';
+import Cube3D from '../components/Cube3D';
+
+/* Stat counter sub-component */
+function StatItem({ icon: Icon, num, label }) {
+  const { ref, displayValue } = useCountUp(num, 2200);
+  return (
+    <div className="flex items-center gap-3 px-4 sm:px-6 py-2">
+      <div className="w-9 h-9 rounded-xl bg-white/10 text-[#C8A24A] flex items-center justify-center shrink-0 border border-white/10 icon-hover-rotate">
+        <Icon size={18} />
+      </div>
+      <div>
+        <div ref={ref} className="text-xl sm:text-2xl font-extrabold text-white font-serif leading-none">
+          {displayValue}
+        </div>
+        <div className="text-[11px] font-bold text-[#C8A24A] uppercase tracking-wider mt-1">
+          {label}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function HomePage({ setActivePage }) {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [emailInput, setEmailInput] = useState('');
+  const heroContentRef = useRef(null);
+  const parallaxBgRef = useParallax(0.15);
+
+  // Hero entrance animation timeline
+  useEffect(() => {
+    if (!heroContentRef.current) return;
+    const tl = anime.timeline({ easing: 'easeOutCubic' });
+
+    tl
+      .add({
+        targets: heroContentRef.current.querySelector('.hero-badge'),
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 600,
+      })
+      .add({
+        targets: heroContentRef.current.querySelectorAll('.hero-headline span'),
+        opacity: [0, 1],
+        translateY: [40, 0],
+        duration: 700,
+        delay: anime.stagger(150),
+      }, '-=300')
+      .add({
+        targets: heroContentRef.current.querySelector('.hero-desc'),
+        opacity: [0, 1],
+        translateY: [25, 0],
+        duration: 600,
+      }, '-=400')
+      .add({
+        targets: heroContentRef.current.querySelectorAll('.hero-cta'),
+        opacity: [0, 1],
+        translateY: [20, 0],
+        scale: [0.9, 1],
+        duration: 500,
+        delay: anime.stagger(100),
+      }, '-=300');
+  }, []);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -36,105 +100,100 @@ export default function HomePage({ setActivePage }) {
     <div className="w-full bg-white text-slate-800">
       
       {/* ---------------------------------------------------- */}
-      {/* HERO SECTION – Complete Composition with Content & Stats */}
+      {/* HERO SECTION */}
       {/* ---------------------------------------------------- */}
       <section 
         className="relative w-full overflow-hidden bg-[#07245b] border-b border-slate-100 flex flex-col justify-between"
         style={{ minHeight: 'calc(100vh - 64px)' }}
       >
-        {/* Background Image Layer */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/images/hero/ica-hero-cube.png" 
-            alt="International Cube Academy Hero Visual" 
-            className="w-full h-full object-cover object-[80%_center] lg:object-right block select-none pointer-events-none"
-          />
-          {/* Gradient overlay for contrast on left side */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#041232]/85 via-[#07245b]/60 to-transparent pointer-events-none" />
+        {/* Background Layer with Interactive 3D Cube */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          {/* Position the cube slightly to the right */}
+          <div ref={parallaxBgRef} className="absolute right-[-10%] md:right-[5%] lg:right-[15%] top-1/2 -translate-y-1/2 w-[120vw] h-[120vw] md:w-[800px] md:h-[800px]">
+            <Cube3D />
+          </div>
+          {/* Gradient overlay for contrast on left side text */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#041232]/95 via-[#07245b]/80 to-transparent pointer-events-none" />
         </div>
 
+        {/* Gold Particle Overlay */}
+        <ParticleField count={20} />
+
+        {/* Decorative floating shapes */}
+        <div className="absolute top-20 right-[15%] w-24 h-24 border border-[#C8A24A]/15 rounded-full animate-float-slow pointer-events-none z-[2]"></div>
+        <div className="absolute bottom-40 right-[30%] w-16 h-16 border border-white/10 rounded-full animate-float-medium pointer-events-none z-[2]"></div>
+        <div className="absolute top-[40%] left-[5%] w-2 h-2 bg-[#C8A24A]/30 rounded-full animate-float-slow pointer-events-none z-[2]"></div>
+
         {/* Hero Left Content Container */}
-        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-16 flex-1 flex items-center py-10 lg:py-14">
+        <div ref={heroContentRef} className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-16 flex-1 flex items-center py-10 lg:py-14">
           <div className="w-full lg:w-[52%] xl:w-[48%] space-y-5 sm:space-y-6">
 
             {/* Outlined Gold Badge */}
-            <div className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#C8A24A]/40 shadow-xs">
+            <div className="hero-badge inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] glass px-4 py-1.5 rounded-full border border-[#C8A24A]/40 shadow-xs animate-border-shimmer" style={{opacity: 0}}>
+              <Sparkles size={12} className="animate-float-medium" />
               WELCOME TO INTERNATIONAL CUBE ACADEMY
             </div>
 
             {/* Main Headline */}
-            <h1 className="font-serif font-extrabold leading-[1.1] tracking-tight">
-              <span className="text-white text-3xl sm:text-5xl xl:text-6xl block drop-shadow-md">Empowering Minds.</span>
-              <span className="text-[#C8A24A] text-3xl sm:text-5xl xl:text-6xl block drop-shadow-md">Building Tomorrow.</span>
+            <h1 className="hero-headline font-serif font-extrabold leading-[1.1] tracking-tight">
+              <span className="text-white text-3xl sm:text-5xl xl:text-6xl block drop-shadow-md" style={{opacity: 0}}>Empowering Minds.</span>
+              <span className="text-[#C8A24A] text-3xl sm:text-5xl xl:text-6xl block drop-shadow-md" style={{opacity: 0}}>Building Tomorrow.</span>
             </h1>
 
             {/* Description Paragraph */}
-            <p className="text-slate-100/90 text-xs sm:text-sm lg:text-[15px] font-light max-w-lg leading-relaxed">
-              The International Cube Academy (ICA) is a global educational institution dedicated to developing cognitive skills through Rubik’s Cube-based learning. Our innovative programs combine brain development, STEM education, creativity, and leadership to help learners of all ages unlock their full potential.
+            <p className="hero-desc text-slate-100/90 text-xs sm:text-sm lg:text-[15px] font-light max-w-lg leading-relaxed" style={{opacity: 0}}>
+              The International Cube Academy (ICA) is a global educational institution dedicated to developing cognitive skills through Rubik's Cube-based learning. Our innovative programs combine brain development, STEM education, creativity, and leadership to help learners of all ages unlock their full potential.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 pt-1 sm:pt-2">
-              <button
+              <MagneticButton
                 onClick={() => setActivePage('about')}
-                className="px-7 py-3 rounded-full font-bold text-xs uppercase tracking-wider bg-[#0B2D6B]/80 text-white hover:bg-[#0B2D6B] border border-white/30 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center gap-2 group backdrop-blur-xs"
+                className="hero-cta glass px-7 py-3 rounded-full font-bold text-xs uppercase tracking-wider text-white hover:bg-white/15 border border-white/30 transition-all duration-400 shadow-md hover:shadow-lg flex items-center gap-2 group"
+                style={{opacity: 0}}
               >
                 <span>ABOUT ICA</span>
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform text-[#C8A24A]" />
-              </button>
-              <button
+                <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300 text-[#C8A24A]" />
+              </MagneticButton>
+              <MagneticButton
                 onClick={() => setActivePage('contact')}
-                className="px-7 py-3 rounded-full font-bold text-xs uppercase tracking-wider bg-[#C8A24A] text-white hover:bg-[#b89035] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center gap-2 group"
+                className="hero-cta gold-btn px-7 py-3 rounded-full font-bold text-xs uppercase tracking-wider text-white transition-all duration-400 shadow-md hover:shadow-lg flex items-center gap-2 group"
+                style={{opacity: 0}}
               >
                 <span>PARTNER WITH US</span>
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </button>
+                <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+              </MagneticButton>
             </div>
 
           </div>
         </div>
 
         {/* Bottom Statistics Panel */}
-        <div className="relative z-10 w-full bg-[#051232]/75 backdrop-blur-md border-t border-white/15">
+        <AnimatedSection animation="fadeUp" delay={800} className="relative z-10 w-full glass-dark border-t border-white/15">
           <div className="max-w-[1440px] mx-auto px-4 lg:px-12">
             <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/15 py-3 sm:py-4">
-              {[
-                { icon: Award, num: "15+", label: "Years of Experience" },
-                { icon: GraduationCap, num: "1 Lakh+", label: "Students Trained" },
-                { icon: Calendar, num: "80+", label: "Events Organized" },
-                { icon: Trophy, num: "8+", label: "Guinness World Records" },
-              ].map((stat, idx) => {
-                const Icon = stat.icon;
-                return (
-                  <div key={idx} className="flex items-center gap-3 px-4 sm:px-6 py-2">
-                    <div className="w-9 h-9 rounded-xl bg-white/10 text-[#C8A24A] flex items-center justify-center shrink-0 border border-white/10">
-                      <Icon size={18} />
-                    </div>
-                    <div>
-                      <div className="text-xl sm:text-2xl font-extrabold text-white font-serif leading-none">
-                        {stat.num}
-                      </div>
-                      <div className="text-[11px] font-bold text-[#C8A24A] uppercase tracking-wider mt-1">
-                        {stat.label}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+              <StatItem icon={Award} num="15+" label="Years of Experience" />
+              <StatItem icon={GraduationCap} num="1 Lakh+" label="Students Trained" />
+              <StatItem icon={Calendar} num="80+" label="Events Organized" />
+              <StatItem icon={Trophy} num="8+" label="Guinness World Records" />
             </div>
           </div>
-        </div>
+        </AnimatedSection>
 
       </section>
 
 
       {/* ---------------------------------------------------- */}
-      {/* WHY CHOOSE INTERNATIONAL CUBE ACADEMY? (Verbatim Client Copy) */}
+      {/* WHY CHOOSE INTERNATIONAL CUBE ACADEMY? */}
       {/* ---------------------------------------------------- */}
-      <section className="py-16 bg-white border-b border-slate-100">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-16">
+      <section className="py-16 bg-white border-b border-slate-100 relative overflow-hidden">
+        {/* Decorative background shape */}
+        <div className="absolute -top-20 -right-20 w-80 h-80 bg-[#C8A24A]/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-[#0B2D6B]/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-16 relative z-10">
           
-          <div className="mb-8">
+          <AnimatedSection animation="fadeUp" className="mb-8">
             <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block mb-2">
               WHY CHOOSE US
             </span>
@@ -144,22 +203,22 @@ export default function HomePage({ setActivePage }) {
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-light max-w-3xl">
               At ICA, we believe that every child has extraordinary potential. Our mission is to unlock that potential through innovative educational experiences.
             </p>
-          </div>
+          </AnimatedSection>
 
           {/* 12 Bullet Points Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+          <AnimatedSection animation="stagger" staggerDelay={60} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
             {whyChooseChecklist.map((item, idx) => (
               <div 
                 key={idx} 
-                className="bg-[#F8F9FB] p-4 rounded-2xl border border-slate-200/80 hover:border-[#C8A24A]/50 transition-all flex items-center gap-3 shadow-xs"
+                className="bg-[#F8F9FB] p-4 rounded-2xl border border-slate-200/80 hover:border-[#C8A24A]/50 transition-all duration-300 flex items-center gap-3 shadow-xs card-hover-lift group"
               >
-                <div className="w-8 h-8 rounded-xl bg-[#0B2D6B]/5 text-[#C8A24A] flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-[#0B2D6B]/5 text-[#C8A24A] flex items-center justify-center shrink-0 group-hover:bg-[#C8A24A] group-hover:text-white transition-colors duration-300">
                   <CheckCircle2 size={18} />
                 </div>
                 <span className="text-xs sm:text-sm font-semibold text-[#0B2D6B]">{item}</span>
               </div>
             ))}
-          </div>
+          </AnimatedSection>
 
         </div>
       </section>
@@ -167,11 +226,14 @@ export default function HomePage({ setActivePage }) {
       {/* ---------------------------------------------------- */}
       {/* ACHIEVEMENTS PREVIEW SECTION */}
       {/* ---------------------------------------------------- */}
-      <section className="py-16 bg-[#F8F9FB] border-t border-b border-slate-100">
+      <section className="py-16 bg-[#F8F9FB] border-t border-b border-slate-100 relative overflow-hidden">
+        {/* Decorative */}
+        <div className="absolute top-10 left-10 w-40 h-40 border border-[#C8A24A]/10 rounded-full animate-spin-slow pointer-events-none"></div>
+
         <div className="max-w-[1440px] mx-auto px-6 lg:px-16 space-y-10">
           
-          <div className="text-center space-y-2 max-w-2xl mx-auto">
-            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white px-4 py-1.5 rounded-full border border-[#C8A24A]/30">
+          <AnimatedSection animation="fadeUp" className="text-center space-y-2 max-w-2xl mx-auto">
+            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white px-4 py-1.5 rounded-full border border-[#C8A24A]/30 animate-border-shimmer inline-block">
               EXCELLENCE THAT INSPIRES
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0B2D6B] pt-1">
@@ -180,10 +242,10 @@ export default function HomePage({ setActivePage }) {
             <p className="text-slate-500 text-xs sm:text-sm font-light leading-relaxed">
               From student milestones to meaningful recognition, ICA celebrates achievements that inspire the next generation of cubers.
             </p>
-          </div>
+          </AnimatedSection>
 
           {/* 3 Achievement Preview Cards */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <AnimatedSection animation="stagger" staggerDelay={120} className="grid md:grid-cols-3 gap-6">
             {[
               {
                 icon: Trophy,
@@ -203,10 +265,10 @@ export default function HomePage({ setActivePage }) {
             ].map((card, idx) => {
               const Icon = card.icon;
               return (
-                <div key={idx} className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs hover:border-[#C8A24A] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                <div key={idx} className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs hover:border-[#C8A24A] card-hover-lift transition-all duration-400 flex flex-col justify-between group">
                   <div className="space-y-4">
-                    <div className="w-12 h-12 rounded-2xl bg-[#0B2D6B] text-[#C8A24A] flex items-center justify-center shadow-xs group-hover:bg-[#C8A24A] group-hover:text-white transition-colors">
-                      <Icon size={24} />
+                    <div className="w-12 h-12 rounded-2xl bg-[#0B2D6B] text-[#C8A24A] flex items-center justify-center shadow-xs group-hover:bg-[#C8A24A] group-hover:text-white transition-colors duration-300">
+                      <Icon size={24} className="icon-hover-rotate" />
                     </div>
                     <div className="space-y-2">
                       <h3 className="font-serif font-bold text-base text-[#0B2D6B]">
@@ -220,43 +282,49 @@ export default function HomePage({ setActivePage }) {
                 </div>
               );
             })}
-          </div>
+          </AnimatedSection>
 
-          <div className="text-center pt-2">
+          <AnimatedSection animation="scaleIn" delay={200} className="text-center pt-2">
             <button
               onClick={() => setActivePage('achievements')}
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0B2D6B] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#071d47] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 group"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0B2D6B] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#071d47] transition-all duration-300 shadow-md hover:shadow-elevated transform hover:-translate-y-1 group"
             >
               <span>VIEW ALL ACHIEVEMENTS</span>
-              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
             </button>
-          </div>
+          </AnimatedSection>
 
         </div>
       </section>
 
 
       {/* ---------------------------------------------------- */}
-      {/* OUR IMPACT SECTION (Verbatim Client Copy) */}
+      {/* OUR IMPACT SECTION */}
       {/* ---------------------------------------------------- */}
       <section className="py-16 bg-[#0B2D6B] text-white relative overflow-hidden">
         {/* World Map Overlay */}
         <div className="absolute inset-0 opacity-15 world-map-bg pointer-events-none"></div>
+        <ParticleField count={12} />
+
+        {/* Decorative */}
+        <div className="absolute -bottom-10 -right-10 w-60 h-60 border border-[#C8A24A]/10 rounded-full animate-float-slow pointer-events-none"></div>
 
         <div className="max-w-[1440px] mx-auto px-6 lg:px-16 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             
-            <div className="lg:col-span-6">
-              <div className="w-full h-64 sm:h-72 border border-[#C8A24A]/30 rounded-2xl p-0 overflow-hidden shadow-md group relative">
+            <AnimatedSection animation="fadeLeft" className="lg:col-span-6">
+              <div className="w-full h-64 sm:h-72 border border-[#C8A24A]/30 rounded-2xl p-0 overflow-hidden shadow-md group relative card-3d-tilt">
                 <img 
                   src="/images/events/world-map.png" 
                   alt="ICA World Map" 
-                  className="w-full h-full object-cover object-center block select-none transform group-hover:scale-[1.02] transition-transform duration-500"
+                  className="w-full h-full object-cover object-center block select-none transform group-hover:scale-[1.05] transition-transform duration-700"
                 />
+                {/* Overlay glow */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B2D6B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
               </div>
-            </div>
+            </AnimatedSection>
 
-            <div className="lg:col-span-6 space-y-6">
+            <AnimatedSection animation="fadeRight" className="lg:col-span-6 space-y-6">
               <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A]">
                 OUR IMPACT
               </span>
@@ -270,13 +338,13 @@ export default function HomePage({ setActivePage }) {
               <div>
                 <button 
                   onClick={() => setActivePage('about')}
-                  className="px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider bg-[#C8A24A] text-white hover:bg-[#b89035] transition-colors inline-flex items-center gap-2 shadow-md"
+                  className="gold-btn px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider text-white transition-all duration-300 inline-flex items-center gap-2 shadow-md hover:shadow-gold-glow transform hover:-translate-y-0.5 group"
                 >
                   <span>Read Full ICA Profile</span>
-                  <ArrowRight size={14} />
+                  <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
                 </button>
               </div>
-            </div>
+            </AnimatedSection>
 
           </div>
         </div>
@@ -286,12 +354,18 @@ export default function HomePage({ setActivePage }) {
       {/* ---------------------------------------------------- */}
       {/* NEWSLETTER SECTION */}
       {/* ---------------------------------------------------- */}
-      <section className="py-14 bg-[#F8F9FB]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl p-8 sm:p-10 border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center justify-between gap-8">
+      <section className="py-14 bg-[#F8F9FB] relative overflow-hidden">
+        {/* Decorative */}
+        <div className="absolute top-0 right-0 w-72 h-72 bg-[#C8A24A]/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <AnimatedSection animation="fadeUp" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-2xl p-8 sm:p-10 border border-slate-200/80 shadow-premium flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
             
+            {/* Shimmer accent line */}
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C8A24A] to-transparent animate-gradient-shift"></div>
+
             <div className="flex items-center gap-5 max-w-xl">
-              <div className="w-14 h-14 rounded-full bg-[#C8A24A]/15 text-[#C8A24A] flex items-center justify-center shrink-0">
+              <div className="w-14 h-14 rounded-full bg-[#C8A24A]/15 text-[#C8A24A] flex items-center justify-center shrink-0 animate-gold-glow">
                 <Send size={24} />
               </div>
               <div>
@@ -309,11 +383,11 @@ export default function HomePage({ setActivePage }) {
                 placeholder="Enter your email"
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
-                className="px-4 py-3 rounded-full bg-[#F8F9FB] border border-slate-200 text-xs text-[#0B2D6B] focus:outline-none focus:border-[#C8A24A] w-full md:w-64"
+                className="px-4 py-3 rounded-full bg-[#F8F9FB] border border-slate-200 text-xs text-[#0B2D6B] focus:outline-none focus:border-[#C8A24A] focus:shadow-glass-gold transition-all duration-300 w-full md:w-64"
               />
               <button 
                 type="submit"
-                className="px-6 py-3 rounded-full bg-[#0B2D6B] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#071d47] transition-colors shrink-0 shadow-sm"
+                className="px-6 py-3 rounded-full bg-[#0B2D6B] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#071d47] transition-all duration-300 shrink-0 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
               >
                 Subscribe
               </button>
@@ -326,7 +400,7 @@ export default function HomePage({ setActivePage }) {
               ✓ Thank you for subscribing to ICA updates.
             </div>
           )}
-        </div>
+        </AnimatedSection>
       </section>
 
     </div>

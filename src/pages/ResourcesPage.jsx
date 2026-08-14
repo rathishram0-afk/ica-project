@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Download, HelpCircle, ChevronDown, ChevronUp, FileText, BookOpen, School, Award, Globe, ArrowRight } from 'lucide-react';
+import AnimatedSection from '../components/AnimatedSection';
 
 const resources = [
   {
