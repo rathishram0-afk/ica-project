@@ -19,6 +19,7 @@ export default function Navbar({ activePage, setActivePage }) {
       ],
     },
     { id: 'events', label: 'Events' },
+    { id: 'achievements', label: 'Achievements' },
     { id: 'partners', label: 'Partners' },
     { id: 'media', label: 'Media' },
     { id: 'resources', label: 'Resources' },
@@ -50,7 +51,7 @@ export default function Navbar({ activePage, setActivePage }) {
   return (
     <nav className="sticky top-0 left-0 w-full z-50 bg-white border-b border-slate-100 shadow-sm transition-all">
       <div className="max-w-[1440px] mx-auto px-4 lg:px-12">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-18 lg:h-20 py-2">
 
           {/* Logo */}
           <div
@@ -60,7 +61,7 @@ export default function Navbar({ activePage, setActivePage }) {
             <img
               src="/images/logo/ica-logo.png"
               alt="International Cube Academy"
-              className="h-10 w-auto object-contain block bg-transparent"
+              className="h-12 sm:h-14 lg:h-16 w-auto object-contain block bg-transparent transition-all"
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'flex';

@@ -1,167 +1,319 @@
 import React from 'react';
-import { Handshake, Building2, ArrowRight, Globe, GraduationCap, Award, CheckCircle2, MapPin } from 'lucide-react';
-
-const partnerTypes = [
-  { icon: Building2, title: "Schools & Universities", desc: "Educational institutions that integrate ICA programs into their mainstream academic offering." },
-  { icon: Globe, title: "International Organizations", desc: "Global bodies and NGOs that partner with ICA to expand access to quality brain development education." },
-  { icon: GraduationCap, title: "Educational Leaders", desc: "Individual educators and education entrepreneurs committed to building innovative learning institutions." },
-  { icon: Award, title: "Corporate Partners", desc: "Companies that sponsor ICA programs and competitions, contributing to global educational development." },
-];
-
-const trainingCentreFeatures = [
-  "Access to ICA's officially certified curriculum and teaching materials",
-  "Standardized training programs delivered by ICA-certified trainers",
-  "Authorization to issue internationally recognized ICA student certificates",
-  "Regular quality audits and continuous academic support from ICA",
-  "Listing on ICA's global directory of authorized training centres",
-  "Access to ICA competitions, events, and community programs",
-];
-
-const partnerSteps = [
-  { num: "01", title: "Submit Partnership Inquiry", desc: "Reach out to ICA with your organization's profile and partnership interest." },
-  { num: "02", title: "Review & Assessment", desc: "ICA reviews your application and assesses alignment with our quality standards." },
-  { num: "03", title: "Partnership Agreement", desc: "Sign the official ICA partnership agreement and agree on program scope." },
-  { num: "04", title: "Onboarding & Training", desc: "Your team undergoes ICA's certified trainer onboarding and curriculum training." },
-  { num: "05", title: "Launch & Support", desc: "Launch ICA programs with full ongoing support, resources, and community access." },
-];
+import { Handshake, Building2, ArrowRight, Globe, GraduationCap, Award, CheckCircle2, MapPin, School, Sparkles, FileText, Search, FileCheck, Users, Rocket, ShieldCheck, HeartHandshake } from 'lucide-react';
 
 export default function PartnersPage({ setActivePage }) {
   return (
     <div className="w-full bg-white text-slate-800">
 
-      {/* PAGE HEADER */}
-      <section className="relative py-16 lg:py-20 bg-[#0B2D6B] text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10 world-map-bg pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-full h-16 bg-white" style={{ clipPath: 'ellipse(55% 100% at 50% 100%)' }}></div>
-        <div className="max-w-5xl mx-auto px-6 lg:px-12 relative z-10 text-center space-y-4 pb-8">
-          <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white/10 px-5 py-2 rounded-full border border-[#C8A24A]/40 backdrop-blur-sm">
-            <Handshake size={14} /> Partners & Training Centres
+      {/* ---------------------------------------------------- */}
+      {/* HERO SECTION — PARTNERS & TRAINING CENTRES (MATCHING REFERENCE) */}
+      {/* ---------------------------------------------------- */}
+      <section className="relative py-16 lg:py-24 bg-gradient-to-r from-[#061F4F] via-[#0B2D6B] to-[#082B68] text-white overflow-hidden">
+        
+        {/* World Map Asset Overlay — Transparent PNG (Zero Rectangular Box, Zero Blue Mismatch) */}
+        <div className="absolute top-0 right-0 w-full sm:w-[65%] lg:w-[58%] h-full pointer-events-none z-0 overflow-hidden flex items-center justify-end">
+          <img 
+            src="/images/events/world-map-transparent.png" 
+            alt="ICA Global World Map" 
+            className="w-full h-full object-contain object-right block bg-transparent"
+          />
+        </div>
+
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-16 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            
+            {/* LEFT COLUMN (48%) — Clean Text Content (Zero Map Overlap) */}
+            <div className="lg:col-span-6 space-y-6 text-left relative z-20 py-4">
+              
+              {/* Outlined Gold Eyebrow Badge */}
+              <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white/10 px-4 py-1.5 rounded-full border border-[#C8A24A]/40 backdrop-blur-sm shadow-sm">
+                <Handshake size={14} /> PARTNERS & TRAINING CENTRES
+              </div>
+
+              {/* Main Heading */}
+              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.14] tracking-tight text-white">
+                Grow Together with<br />
+                <span className="text-[#C8A24A]">ICA Partnership</span>
+              </h1>
+
+              {/* Supporting Text */}
+              <p className="text-slate-300 text-xs sm:text-sm font-light leading-relaxed max-w-lg">
+                ICA welcomes schools, universities, organizations, and educational leaders to collaborate in expanding innovative learning opportunities across the globe.
+              </p>
+
+            </div>
+
+            {/* RIGHT COLUMN (52%) — Space reserved for right-aligned World Map PNG */}
+            <div className="lg:col-span-6 relative min-h-[300px] sm:min-h-[360px] lg:min-h-[400px] flex items-center justify-end z-10">
+              {/* The PNG asset in the absolute background renders map + locations seamlessly */}
+            </div>
+
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-            Grow Together with<br />
-            <span className="text-[#C8A24A]">ICA Partnership</span>
-          </h1>
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light">
-            ICA welcomes schools, universities, organizations, and educational leaders to collaborate in expanding innovative learning opportunities across the globe.
-          </p>
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-6 lg:px-12 py-14 space-y-20">
+      {/* ---------------------------------------------------- */}
+      {/* MAIN CONTENT AREA */}
+      {/* ---------------------------------------------------- */}
+      <div className="max-w-6xl mx-auto px-6 lg:px-12 py-16 lg:py-20 space-y-20">
 
-        {/* BECOME A PARTNER */}
-        <section>
-          <div className="text-center mb-10">
-            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A]">Join Our Network</span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0B2D6B] mt-1">Become a Partner</h2>
-            <p className="text-slate-500 text-sm mt-3 max-w-2xl mx-auto font-light leading-relaxed">
-              ICA welcomes schools, universities, organizations, and educational leaders to collaborate in expanding innovative learning opportunities across the globe.
+        {/* ─── 1. BECOME A PARTNER SECTION ─── */}
+        <section className="space-y-12">
+          <div className="text-center space-y-2">
+            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] bg-[#F8F9FB] px-4 py-1.5 rounded-full border border-[#C8A24A]/30">
+              JOIN OUR NETWORK
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0B2D6B] pt-1">Become a Partner</h2>
+            <p className="text-slate-500 text-xs sm:text-sm font-light max-w-xl mx-auto leading-relaxed">
+              Partner with ICA and be part of a global mission to shape creative minds and build a smarter future.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
-            {partnerTypes.map((pt, i) => {
-              const Icon = pt.icon;
+          {/* 4 PARTNER CATEGORY CARDS */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: School,
+                title: "Schools & Universities",
+                desc: "Integrate ICA programs into your curriculum and enhance problem-solving skills among students."
+              },
+              {
+                icon: Globe,
+                title: "International Organizations",
+                desc: "Partner with ICA to promote quality brain development education and global collaboration."
+              },
+              {
+                icon: Award,
+                title: "Educational Leaders",
+                desc: "Empower educators with certified training, resources, and academic support from ICA."
+              },
+              {
+                icon: Sparkles,
+                title: "Corporate Partners",
+                desc: "Support innovative education initiatives and build future-ready problem solvers with ICA programs."
+              }
+            ].map((card, idx) => {
+              const Icon = card.icon;
               return (
-                <div key={i} className="bg-[#F8F9FB] rounded-3xl p-6 border border-slate-200/80 shadow-xs hover:border-[#C8A24A]/50 hover:-translate-y-1 transition-all duration-200 text-center">
-                  <div className="w-12 h-12 rounded-2xl bg-[#0B2D6B] text-[#C8A24A] flex items-center justify-center mx-auto mb-4">
-                    <Icon size={22} />
+                <div 
+                  key={idx} 
+                  className="bg-[#F8F9FB] rounded-3xl p-7 border border-slate-200/80 shadow-xs hover:border-[#C8A24A] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group h-full"
+                >
+                  {/* Clean Neutral Placeholder Container */}
+                  <div className="w-full h-36 rounded-2xl bg-white border border-slate-200/60 flex items-center justify-center mb-6 shadow-xs group-hover:border-[#C8A24A]/40 transition-colors">
+                    <div className="w-14 h-14 rounded-2xl bg-[#0B2D6B] text-[#C8A24A] flex items-center justify-center shadow-xs group-hover:bg-[#C8A24A] group-hover:text-white transition-colors">
+                      <Icon size={26} />
+                    </div>
                   </div>
-                  <h3 className="font-serif font-bold text-sm text-[#0B2D6B] mb-2">{pt.title}</h3>
-                  <p className="text-slate-500 text-[11px] font-light leading-relaxed">{pt.desc}</p>
+
+                  {/* Title & Description */}
+                  <div className="space-y-2 flex-1">
+                    <h3 className="font-serif font-bold text-base sm:text-lg text-[#0B2D6B] leading-snug">
+                      {card.title}
+                    </h3>
+                    <p className="text-slate-500 text-xs font-light leading-relaxed">
+                      {card.desc}
+                    </p>
+                  </div>
                 </div>
               );
             })}
           </div>
+        </section>
 
-          {/* Partnership Process */}
-          <div className="bg-[#F8F9FB] rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-xs">
-            <div className="text-center mb-8">
-              <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A]">The Process</span>
-              <h3 className="font-serif text-2xl font-bold text-[#0B2D6B] mt-1">How to Become a Partner</h3>
-            </div>
-            <div className="space-y-4">
-              {partnerSteps.map((step, i) => (
-                <div key={i} className="flex items-start gap-5 bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-[#C8A24A]/50 transition-all">
-                  <div className="font-serif text-2xl font-extrabold text-[#C8A24A] shrink-0 w-10 text-right">{step.num}</div>
-                  <div className="w-px bg-slate-200 self-stretch shrink-0"></div>
-                  <div>
-                    <h4 className="font-bold text-sm text-[#0B2D6B] mb-1">{step.title}</h4>
-                    <p className="text-slate-500 text-xs font-light leading-relaxed">{step.desc}</p>
+        {/* ─── 2. HOW TO BECOME A PARTNER (THE PROCESS) ─── */}
+        <section className="bg-[#F8F9FB] rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-xs space-y-10">
+          <div className="text-center space-y-2">
+            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A]">
+              THE PROCESS
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0B2D6B]">How to Become a Partner</h2>
+          </div>
+
+          {/* 5-Step Connected Process Row */}
+          <div className="relative">
+            {/* Horizontal Line connector on desktop */}
+            <div className="hidden lg:block absolute top-7 left-[8%] right-[8%] h-0.5 border-t-2 border-dashed border-[#C8A24A]/40 z-0"></div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 relative z-10">
+              {[
+                {
+                  num: "01",
+                  icon: FileText,
+                  title: "Submit Inquiry",
+                  desc: "Reach out to ICA with your organization's profile and partnership interest."
+                },
+                {
+                  num: "02",
+                  icon: Search,
+                  title: "Review & Assessment",
+                  desc: "ICA reviews your application and assesses alignment with our mission."
+                },
+                {
+                  num: "03",
+                  icon: FileCheck,
+                  title: "Partnership Agreement",
+                  desc: "Sign the official ICA partnership agreement and agree on program scope."
+                },
+                {
+                  num: "04",
+                  icon: Users,
+                  title: "Onboarding & Training",
+                  desc: "Your team undergoes ICA's certified trainer onboarding and curriculum training."
+                },
+                {
+                  num: "05",
+                  icon: Rocket,
+                  title: "Launch & Support",
+                  desc: "Launch ICA programs with full ongoing support, resources, and community access."
+                }
+              ].map((step, idx) => {
+                const Icon = step.icon;
+                return (
+                  <div key={idx} className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col items-center text-center relative group hover:border-[#C8A24A] transition-all duration-200 h-full">
+                    {/* Number Badge */}
+                    <div className="w-8 h-8 rounded-full bg-[#C8A24A] text-white text-xs font-extrabold flex items-center justify-center mb-3 shadow-xs border-2 border-white">
+                      {step.num}
+                    </div>
+
+                    {/* Icon */}
+                    <div className="w-10 h-10 rounded-xl bg-[#F8F9FB] text-[#0B2D6B] flex items-center justify-center mb-3 border border-slate-100 group-hover:bg-[#0B2D6B] group-hover:text-[#C8A24A] transition-colors">
+                      <Icon size={18} />
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="font-serif font-bold text-xs sm:text-sm text-[#0B2D6B] mb-1.5 leading-snug">
+                      {step.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-slate-500 text-[11px] font-light leading-relaxed mt-auto">
+                      {step.desc}
+                    </p>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* TRAINING CENTRES */}
-        <section>
-          <div className="grid lg:grid-cols-2 gap-10 items-start">
-            <div className="space-y-5">
-              <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A]">Official Centres</span>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0B2D6B] leading-tight">Training Centres</h2>
-              <p className="text-slate-500 text-sm leading-relaxed font-light">
-                Authorized ICA Training Centres deliver internationally recognized programs using standardized curriculum, certified trainers, and continuous academic support.
+        {/* ─── 3. BUILD A TRAINING CENTRE NETWORK SECTION ─── */}
+        <section className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-xs space-y-10">
+          <div className="grid lg:grid-cols-12 gap-10 items-center">
+            
+            {/* Left Box (Training Centre Intro + Button) */}
+            <div className="lg:col-span-5 space-y-5 text-left">
+              <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] bg-[#F8F9FB] px-4 py-1.5 rounded-full border border-[#C8A24A]/30">
+                OUR TRAINING CENTRES
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0B2D6B] leading-tight">
+                Build a Training Centre Network
+              </h2>
+              <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-light">
+                ICA is establishing a network of authorized training centres, beginning with our initial locations and expanding internationally.
               </p>
-              <p className="text-slate-500 text-sm leading-relaxed font-light">
-                As an ICA Training Centre, you become part of a trusted global network committed to delivering quality brain development education with consistency and excellence.
-              </p>
-              <button
-                onClick={() => setActivePage && setActivePage('contact')}
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#C8A24A] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#b89035] transition-all shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
-              >
-                Register Your Centre <ArrowRight size={13} />
-              </button>
-            </div>
-
-            <div className="bg-gradient-to-br from-[#0B2D6B] to-[#16489C] rounded-3xl p-8 text-white">
-              <div className="text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] mb-5">Training Centre Benefits</div>
-              <ul className="space-y-3">
-                {trainingCentreFeatures.map((feat, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 size={15} className="text-[#C8A24A] shrink-0 mt-0.5" />
-                    <span className="text-slate-200 text-xs font-light leading-relaxed">{feat}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* GLOBAL MAP PLACEHOLDER */}
-        <section className="bg-gradient-to-br from-[#0B2D6B] to-[#16489C] rounded-3xl p-8 sm:p-12 text-white text-center relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10 world-map-bg pointer-events-none rounded-3xl"></div>
-          <div className="relative z-10">
-            <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 rounded-full bg-[#C8A24A]/20 flex items-center justify-center">
-                <MapPin size={32} className="text-[#C8A24A]" />
+              <div className="pt-2">
+                <button
+                  onClick={() => setActivePage && setActivePage('contact')}
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#C8A24A] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#b89035] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 group"
+                >
+                  <span>REGISTER YOUR CENTRE</span>
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </button>
               </div>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold mb-3">Find an ICA Training Centre Near You</h2>
-            <p className="text-slate-200 text-sm font-light max-w-xl mx-auto mb-6 leading-relaxed">
-              With authorized training centres in 20+ countries, quality ICA education is closer than you think. Contact us to find your nearest centre.
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+
+            {/* Right Grid (4 Training Centre Benefits) */}
+            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-5">
               {[
-                { num: "20+", label: "Countries" },
-                { num: "200+", label: "Training Centres" },
-                { num: "500+", label: "Certified Trainers" },
-                { num: "1M+", label: "Students Reached" },
-              ].map((s, i) => (
-                <div key={i} className="bg-white/10 rounded-2xl p-4 text-center">
-                  <div className="font-serif text-2xl font-extrabold text-[#C8A24A]">{s.num}</div>
-                  <div className="text-slate-200 text-[11px] mt-0.5 font-light">{s.label}</div>
-                </div>
-              ))}
+                {
+                  icon: GraduationCap,
+                  title: "Certified Programs",
+                  desc: "Access ICA's certified curriculum and training materials."
+                },
+                {
+                  icon: ShieldCheck,
+                  title: "Trainer Authorization",
+                  desc: "Become an authorized ICA trainer and deliver quality education."
+                },
+                {
+                  icon: HeartHandshake,
+                  title: "Academic Support",
+                  desc: "Receive continuous academic support and quality assurance."
+                },
+                {
+                  icon: Globe,
+                  title: "Global Recognition",
+                  desc: "Gain global recognition as an ICA Training Centre."
+                }
+              ].map((b, i) => {
+                const Icon = b.icon;
+                return (
+                  <div key={i} className="bg-[#F8F9FB] rounded-2xl p-5 border border-slate-200/80 shadow-xs flex flex-col items-start gap-3 hover:border-[#C8A24A]/50 transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-[#0B2D6B] text-[#C8A24A] flex items-center justify-center shrink-0">
+                      <Icon size={20} />
+                    </div>
+                    <div>
+                      <h3 className="font-serif font-bold text-sm text-[#0B2D6B] mb-1">{b.title}</h3>
+                      <p className="text-slate-500 text-xs font-light leading-relaxed">{b.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            <button
-              onClick={() => setActivePage && setActivePage('contact')}
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#C8A24A] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#b89035] transition-all shadow-lg"
-            >
-              Contact Us <ArrowRight size={14} />
-            </button>
+
           </div>
+        </section>
+
+        {/* ─── 4. REFINED "ICA GLOBAL PRESENCE" SECTION (CLEAN SOLID NAVY - NO MAP IMAGE) ─── */}
+        <section className="bg-gradient-to-br from-[#061F4F] to-[#0B2D6B] rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-xl">
+          <div className="relative z-10 space-y-8 text-center max-w-3xl mx-auto">
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white/10 px-4 py-1.5 rounded-full border border-[#C8A24A]/30">
+                <Globe size={14} /> Global Expansion
+              </div>
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold">
+                ICA Global Presence
+              </h2>
+              <p className="text-slate-300 text-xs sm:text-sm font-light">
+                Starting in Dubai. Expanding to the USA.
+              </p>
+            </div>
+
+            {/* 3 Accurate Current Statistics Cards */}
+            <div className="grid grid-cols-3 gap-4 max-w-xl mx-auto">
+              <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
+                <div className="font-serif text-3xl font-extrabold text-[#C8A24A]">2</div>
+                <div className="text-slate-200 text-[11px] font-medium mt-1">Global Locations</div>
+              </div>
+
+              <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
+                <div className="font-serif text-3xl font-extrabold text-[#C8A24A]">1</div>
+                <div className="text-slate-200 text-[11px] font-medium mt-1">Active Office (Dubai)</div>
+              </div>
+
+              <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
+                <div className="font-serif text-3xl font-extrabold text-[#C8A24A]">1</div>
+                <div className="text-slate-200 text-[11px] font-medium mt-1">Upcoming (USA)</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 5. FINAL CTA BANNER ─── */}
+        <section className="bg-gradient-to-r from-[#C8A24A] to-[#9E7B2B] rounded-3xl p-8 sm:p-12 text-white text-center shadow-xl">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">
+            Let's build a smarter future together.
+          </h2>
+          <p className="text-white/90 text-xs sm:text-sm font-light max-w-xl mx-auto mb-6 leading-relaxed">
+            Partner with ICA and join a global movement dedicated to brain development, cognitive excellence, and 21st-century education.
+          </p>
+          <button
+            onClick={() => setActivePage && setActivePage('contact')}
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0B2D6B] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#071d47] transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          >
+            BECOME AN ICA PARTNER <ArrowRight size={14} />
+          </button>
         </section>
 
       </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   ArrowRight, Brain, Globe, GraduationCap, Trophy, Users, CheckCircle2, 
-  Sparkles, Award, Lightbulb, Send, ChevronRight, School, ChevronLeft
+  Sparkles, Award, Lightbulb, Send, ChevronRight, School, ChevronLeft, Calendar
 } from 'lucide-react';
 
 export default function HomePage({ setActivePage }) {
@@ -36,91 +36,92 @@ export default function HomePage({ setActivePage }) {
     <div className="w-full bg-white text-slate-800">
       
       {/* ---------------------------------------------------- */}
-      {/* HERO SECTION – Full Background Image with Overlay */}
+      {/* HERO SECTION – Complete Composition with Content & Stats */}
       {/* ---------------------------------------------------- */}
-      <section
-        className="relative overflow-hidden min-h-[92vh] flex flex-col"
-        style={{
-          backgroundImage: "url('/images/hero/ica-hero-banner.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat',
-        }}
+      <section 
+        className="relative w-full overflow-hidden bg-[#07245b] border-b border-slate-100 flex flex-col justify-between"
+        style={{ minHeight: 'calc(100vh - 64px)' }}
       >
-        {/* Left gradient overlay — dark on left for text, fades to transparent on right */}
-        <div
-          className="absolute inset-0 pointer-events-none z-0"
-          style={{
-            background: 'linear-gradient(100deg, rgba(4,18,50,0.82) 0%, rgba(11,46,107,0.65) 38%, rgba(11,46,107,0.15) 62%, transparent 100%)',
-          }}
-        />
+        {/* Background Image Layer */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/images/hero/ica-hero-cube.png" 
+            alt="International Cube Academy Hero Visual" 
+            className="w-full h-full object-cover object-[80%_center] lg:object-right block select-none pointer-events-none"
+          />
+          {/* Gradient overlay for contrast on left side */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#041232]/85 via-[#07245b]/60 to-transparent pointer-events-none" />
+        </div>
 
-        {/* Main Hero Content */}
-        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-16 relative z-10 flex-1 flex items-center py-20 lg:py-28">
-          <div className="w-full lg:w-[50%] space-y-7">
+        {/* Hero Left Content Container */}
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-16 flex-1 flex items-center py-10 lg:py-14">
+          <div className="w-full lg:w-[52%] xl:w-[48%] space-y-5 sm:space-y-6">
 
-            {/* Welcome Badge */}
-            <div className="inline-block text-[11px] font-semibold tracking-widest text-[#C8A24A] bg-white/10 backdrop-blur-sm px-5 py-2 rounded-full border border-[#C8A24A]/50 shadow-sm">
+            {/* Outlined Gold Badge */}
+            <div className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#C8A24A]/40 shadow-xs">
               WELCOME TO INTERNATIONAL CUBE ACADEMY
             </div>
 
-            {/* Headline */}
+            {/* Main Headline */}
             <h1 className="font-serif font-extrabold leading-[1.1] tracking-tight">
-              <span className="text-white text-5xl sm:text-6xl lg:text-[4.2rem] block drop-shadow-lg">Empowering Minds.</span>
-              <span className="text-[#C8A24A] text-5xl sm:text-6xl lg:text-[4.2rem] block drop-shadow-lg">Building Tomorrow.</span>
+              <span className="text-white text-3xl sm:text-5xl xl:text-6xl block drop-shadow-md">Empowering Minds.</span>
+              <span className="text-[#C8A24A] text-3xl sm:text-5xl xl:text-6xl block drop-shadow-md">Building Tomorrow.</span>
             </h1>
 
-            {/* Description */}
-            <p className="text-slate-200 text-sm sm:text-[15px] leading-[1.9] font-light max-w-[490px]">
-              The International Cube Academy (ICA) is a global educational institution dedicated to developing cognitive skills through Rubik's Cube-based learning. Our innovative programs combine brain development, STEM education, creativity, and leadership to help learners of all ages unlock their full potential.
+            {/* Description Paragraph */}
+            <p className="text-slate-100/90 text-xs sm:text-sm lg:text-[15px] font-light max-w-lg leading-relaxed">
+              The International Cube Academy (ICA) is a global educational institution dedicated to developing cognitive skills through Rubik’s Cube-based learning. Our innovative programs combine brain development, STEM education, creativity, and leadership to help learners of all ages unlock their full potential.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 pt-2">
+            <div className="flex flex-wrap gap-4 pt-1 sm:pt-2">
               <button
                 onClick={() => setActivePage('about')}
-                className="px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider bg-[#0B2D6B] text-white hover:bg-[#071d47] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2 group border border-white/20"
+                className="px-7 py-3 rounded-full font-bold text-xs uppercase tracking-wider bg-[#0B2D6B]/80 text-white hover:bg-[#0B2D6B] border border-white/30 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center gap-2 group backdrop-blur-xs"
               >
                 <span>ABOUT ICA</span>
-                <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform text-[#C8A24A]" />
               </button>
               <button
                 onClick={() => setActivePage('contact')}
-                className="px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider bg-[#C8A24A] text-white hover:bg-[#b89035] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2 group"
+                className="px-7 py-3 rounded-full font-bold text-xs uppercase tracking-wider bg-[#C8A24A] text-white hover:bg-[#b89035] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center gap-2 group"
               >
                 <span>PARTNER WITH US</span>
-                <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
 
           </div>
         </div>
 
-        {/* Stats Bar — frosted glass bar pinned to bottom of hero */}
-        <div className="relative z-10 w-full">
-          <div
-            className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/20 border-t border-white/20"
-            style={{ background: 'rgba(5,18,50,0.55)', backdropFilter: 'blur(14px)' }}
-          >
-            {[
-              { icon: Globe,  num: "20+",  title: "Countries",          sub: "Global presence across 5 continents" },
-              { icon: School, num: "500+", title: "Schools",            sub: "Partnered educational institutions worldwide" },
-              { icon: Users,  num: "1M+",  title: "Learners",           sub: "Empowering learners of all ages" },
-              { icon: Award,  num: "100+", title: "Certified Trainers", sub: "Trained & accredited professionals" },
-            ].map((stat, idx) => (
-              <div key={idx} className="flex items-center gap-3.5 px-6 py-5 hover:bg-white/10 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-white/15 text-[#C8A24A] flex items-center justify-center shrink-0">
-                  <stat.icon size={20} />
-                </div>
-                <div>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-xl font-extrabold text-white font-serif">{stat.num}</span>
-                    <span className="text-[11px] font-bold text-[#C8A24A]">{stat.title}</span>
+        {/* Bottom Statistics Panel */}
+        <div className="relative z-10 w-full bg-[#051232]/75 backdrop-blur-md border-t border-white/15">
+          <div className="max-w-[1440px] mx-auto px-4 lg:px-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/15 py-3 sm:py-4">
+              {[
+                { icon: Award, num: "15+", label: "Years of Experience" },
+                { icon: GraduationCap, num: "1 Lakh+", label: "Students Trained" },
+                { icon: Calendar, num: "80+", label: "Events Organized" },
+                { icon: Trophy, num: "8+", label: "Guinness World Records" },
+              ].map((stat, idx) => {
+                const Icon = stat.icon;
+                return (
+                  <div key={idx} className="flex items-center gap-3 px-4 sm:px-6 py-2">
+                    <div className="w-9 h-9 rounded-xl bg-white/10 text-[#C8A24A] flex items-center justify-center shrink-0 border border-white/10">
+                      <Icon size={18} />
+                    </div>
+                    <div>
+                      <div className="text-xl sm:text-2xl font-extrabold text-white font-serif leading-none">
+                        {stat.num}
+                      </div>
+                      <div className="text-[11px] font-bold text-[#C8A24A] uppercase tracking-wider mt-1">
+                        {stat.label}
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-[10px] text-white/55 font-light mt-0.5 leading-tight">{stat.sub}</div>
-                </div>
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
         </div>
 
@@ -163,6 +164,77 @@ export default function HomePage({ setActivePage }) {
         </div>
       </section>
 
+      {/* ---------------------------------------------------- */}
+      {/* ACHIEVEMENTS PREVIEW SECTION */}
+      {/* ---------------------------------------------------- */}
+      <section className="py-16 bg-[#F8F9FB] border-t border-b border-slate-100">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-16 space-y-10">
+          
+          <div className="text-center space-y-2 max-w-2xl mx-auto">
+            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white px-4 py-1.5 rounded-full border border-[#C8A24A]/30">
+              EXCELLENCE THAT INSPIRES
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0B2D6B] pt-1">
+              Excellence That Inspires
+            </h2>
+            <p className="text-slate-500 text-xs sm:text-sm font-light leading-relaxed">
+              From student milestones to meaningful recognition, ICA celebrates achievements that inspire the next generation of cubers.
+            </p>
+          </div>
+
+          {/* 3 Achievement Preview Cards */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: Trophy,
+                title: "Guinness World Record Training",
+                desc: "Trained 6 students for Guinness World Record attempts in Rubik's Cube solving."
+              },
+              {
+                icon: GraduationCap,
+                title: "Student Excellence",
+                desc: "Empowering 10,000+ students across schools and international platforms."
+              },
+              {
+                icon: Award,
+                title: "Awards & Recognition",
+                desc: "Honored with national and international awards for social impact and cubing education."
+              }
+            ].map((card, idx) => {
+              const Icon = card.icon;
+              return (
+                <div key={idx} className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs hover:border-[#C8A24A] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                  <div className="space-y-4">
+                    <div className="w-12 h-12 rounded-2xl bg-[#0B2D6B] text-[#C8A24A] flex items-center justify-center shadow-xs group-hover:bg-[#C8A24A] group-hover:text-white transition-colors">
+                      <Icon size={24} />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-serif font-bold text-base text-[#0B2D6B]">
+                        {card.title}
+                      </h3>
+                      <p className="text-slate-500 text-xs font-light leading-relaxed">
+                        {card.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="text-center pt-2">
+            <button
+              onClick={() => setActivePage('achievements')}
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0B2D6B] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#071d47] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 group"
+            >
+              <span>VIEW ALL ACHIEVEMENTS</span>
+              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+
+        </div>
+      </section>
+
 
       {/* ---------------------------------------------------- */}
       {/* OUR IMPACT SECTION (Verbatim Client Copy) */}
@@ -175,10 +247,12 @@ export default function HomePage({ setActivePage }) {
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-6">
-              <div className="w-full h-64 border border-[#C8A24A]/30 rounded-2xl bg-[#071d47]/60 p-6 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-md">
-                <Globe size={48} className="text-[#C8A24A] mb-3 animate-pulse" />
-                <span className="text-xs font-mono text-slate-300">Global Educational Network Map</span>
-                <span className="text-[10px] text-[#C8A24A] mt-1">Connecting Students & Schools Worldwide</span>
+              <div className="w-full h-64 sm:h-72 border border-[#C8A24A]/30 rounded-2xl p-0 overflow-hidden shadow-md group relative">
+                <img 
+                  src="/images/events/world-map.png" 
+                  alt="ICA World Map" 
+                  className="w-full h-full object-cover object-center block select-none transform group-hover:scale-[1.02] transition-transform duration-500"
+                />
               </div>
             </div>
 

@@ -1,268 +1,333 @@
-import React, { useState } from 'react';
-import { Image, Newspaper, MessageSquare, ArrowRight, Star, Quote, Play } from 'lucide-react';
-
-const testimonials = [
-  {
-    name: "Sarah M.",
-    role: "Parent",
-    country: "United Kingdom",
-    text: "My daughter joined ICA two years ago and the transformation has been incredible. Her concentration, memory, and confidence have improved beyond what I ever expected. ICA is truly special.",
-    rating: 5,
-  },
-  {
-    name: "Rajesh Kumar",
-    role: "School Principal",
-    country: "India",
-    text: "Integrating ICA's program into our school curriculum was one of the best decisions we made. The teachers are well-trained, students are engaged, and academic results have improved.",
-    rating: 5,
-  },
-  {
-    name: "Prof. Linda Torres",
-    role: "Educator",
-    country: "Philippines",
-    text: "The ICA Teacher Certification changed the way I teach. The methodologies are grounded in neuroscience and the practical training made me a far more effective educator.",
-    rating: 5,
-  },
-  {
-    name: "Ahmed Al-Rashid",
-    role: "ICA Student",
-    country: "UAE",
-    text: "Competing at the ICA International Championship was the highlight of my year. I made friends from around the world and proved to myself what hard work and practice can achieve.",
-    rating: 5,
-  },
-  {
-    name: "Ms. Priya Nair",
-    role: "ICA Certified Trainer",
-    country: "Singapore",
-    text: "Becoming an ICA Certified Trainer opened doors I never expected. I now run my own training centre with ICA's support and am making a difference in hundreds of children's lives.",
-    rating: 5,
-  },
-  {
-    name: "Michael Chen",
-    role: "Parent",
-    country: "Australia",
-    text: "The ICA Brain Skills Assessment identified areas my son needed to develop. Three months in, his teachers at school noticed the difference. Remarkable program.",
-    rating: 5,
-  },
-];
-
-const galleryItems = [
-  { category: "Competition", title: "ICA International Championship 2024", tag: "Champion" },
-  { category: "Workshop", title: "Teacher Development Workshop – India", tag: "Training" },
-  { category: "Ceremony", title: "Certification Award Ceremony", tag: "Achievement" },
-  { category: "School", title: "ICA School Launch – Malaysia", tag: "Partnership" },
-  { category: "Research", title: "Cognitive Education Symposium", tag: "Research" },
-  { category: "Community", title: "ICA Global Learning Community Day", tag: "Community" },
-];
-
-const newsPosts = [
-  {
-    date: "August 2026",
-    category: "Competition",
-    title: "ICA Announces 2026 International Cube Championship",
-    excerpt: "Students from over 20 countries to compete in the most prestigious ICA event of the year.",
-  },
-  {
-    date: "July 2026",
-    category: "Partnership",
-    title: "ICA Signs Partnership with 50 New Schools Across Southeast Asia",
-    excerpt: "Major expansion brings ICA's brain development curriculum to thousands of new learners.",
-  },
-  {
-    date: "June 2026",
-    category: "Research",
-    title: "New Study Confirms Rubik's Cube Learning Boosts Cognitive Scores by 38%",
-    excerpt: "Landmark research validates ICA's curriculum methodology across three countries.",
-  },
-];
+import React, { useState, useEffect } from 'react';
+import { Image, Calendar, X, ChevronLeft, ChevronRight, Eye, ArrowRight, Camera, Trophy, Sparkles } from 'lucide-react';
 
 export default function MediaPage({ setActivePage }) {
   const [activeTab, setActiveTab] = useState('gallery');
+  const [visibleCount, setVisibleCount] = useState(6);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const galleryColors = [
-    "from-[#0B2D6B] to-[#16489C]",
-    "from-[#C8A24A] to-[#9E7B2B]",
-    "from-[#16489C] to-[#0B2D6B]",
-    "from-[#9E7B2B] to-[#C8A24A]",
-    "from-[#0B2D6B] to-[#C8A24A]",
-    "from-[#16489C] to-[#9E7B2B]",
+  // Reset visible count when tab changes
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId);
+    setVisibleCount(6);
+  };
+
+  // 1. GALLERY CATEGORY ITEMS (EXACTLY 6 PHOTOS)
+  const galleryItems = [
+    {
+      title: "ICA International Speedcubing Championship",
+      category: "Competition Event",
+      image: "/images/gallery/event1.jpg",
+      objectPosition: "center",
+      desc: "Students participating in timed speedcubing rounds and championship matches."
+    },
+    {
+      title: "Championship Recognition & Trophy Ceremony",
+      category: "Award Ceremony",
+      image: "/images/gallery/event2.jpg",
+      objectPosition: "center",
+      desc: "Recognizing outstanding young solvers with medals, trophies, and honors."
+    },
+    {
+      title: "Guinness World Record Candidate Demonstration",
+      category: "Special Milestone",
+      image: "/images/gallery/event3.jpg",
+      objectPosition: "center",
+      desc: "Live speedcubing demonstration by candidates trained for Guinness World Records."
+    },
+    {
+      title: "Interactive Cubing Workshop & Training Stage",
+      category: "Workshop Event",
+      image: "/images/gallery/event4.jpg",
+      objectPosition: "center",
+      desc: "Interactive learning sessions and group demonstrations on stage."
+    },
+    {
+      title: "Inter-School Cubing Rolling Trophy Event",
+      category: "School Championship",
+      image: "/images/gallery/event5.jpg",
+      objectPosition: "center",
+      desc: "School teams competing for the annual ICA rolling trophy."
+    },
+    {
+      title: "Youth Speedcubers Grand Celebration",
+      category: "Public Celebration",
+      image: "/images/gallery/event6.jpg",
+      objectPosition: "center",
+      desc: "Celebrating team achievements, dedication, and cognitive excellence."
+    }
   ];
+
+  // 2. EVENTS & MOMENTS CATEGORY ITEMS (EXACTLY 6 PHOTOS)
+  const eventsItems = [
+    {
+      title: "SISC Event Moment 1",
+      alt: "SISC event photo",
+      image: "/images/events-and-moments/moment1.jpg",
+      objectPosition: "center"
+    },
+    {
+      title: "SISC Achievement Moment 2",
+      alt: "SISC achievement photo",
+      image: "/images/events-and-moments/moment2.jpg",
+      objectPosition: "center 10%",
+      objectFit: "contain",
+      scale: 0.88
+    },
+    {
+      title: "SISC Event Moment 3",
+      alt: "SISC event photo",
+      image: "/images/events-and-moments/moment3.jpg",
+      objectPosition: "center"
+    },
+    {
+      title: "SISC Competition Moment 4",
+      alt: "SISC competition photo",
+      image: "/images/events-and-moments/moment4.jpg",
+      objectPosition: "center"
+    },
+    {
+      title: "SISC Team Moment 5",
+      alt: "SISC team photo",
+      image: "/images/events-and-moments/moment5.jpg",
+      objectPosition: "center"
+    },
+    {
+      title: "SISC Achievement Moment 6",
+      alt: "SISC achievement photo",
+      image: "/images/events-and-moments/moment6.jpg",
+      objectPosition: "center"
+    }
+  ];
+
+  // Active items based on selected tab
+  const getActiveItems = () => {
+    switch (activeTab) {
+      case 'events-moments':
+        return eventsItems;
+      case 'gallery':
+      default:
+        return galleryItems;
+    }
+  };
+
+  const currentItems = getActiveItems();
+  const displayedItems = currentItems.slice(0, visibleCount);
+  const hasMore = visibleCount < currentItems.length;
+
+  // Open Lightbox
+  const openLightbox = (index) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  };
+
+  // Close Lightbox
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
+  // Lightbox Navigation
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? currentItems.length - 1 : prev - 1));
+  };
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev === currentItems.length - 1 ? 0 : prev + 1));
+  };
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!lightboxOpen) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen, currentItems.length]);
 
   return (
     <div className="w-full bg-white text-slate-800">
 
+      {/* ---------------------------------------------------- */}
       {/* PAGE HEADER */}
-      <section className="relative py-16 lg:py-20 bg-[#F8F9FB] border-b border-slate-100 overflow-hidden">
+      {/* ---------------------------------------------------- */}
+      <section className="relative py-14 lg:py-18 bg-[#F8F9FB] border-b border-slate-100 overflow-hidden text-center">
         <div className="absolute inset-0 opacity-[0.10] world-map-bg pointer-events-none"></div>
-        <div className="max-w-5xl mx-auto px-6 lg:px-12 relative z-10 text-center space-y-4">
+        <div className="max-w-4xl mx-auto px-6 relative z-10 space-y-4">
           <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white px-5 py-2 rounded-full border border-[#C8A24A]/40 shadow-xs">
-            <Image size={14} /> Media & Gallery
+            <Camera size={14} /> MEDIA & GALLERY
           </div>
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B2D6B] leading-tight">
-            Our Story in<br />
-            <span className="text-[#C8A24A]">Pictures & Words</span>
+            Our Story in <span className="text-[#C8A24A]">Pictures & Moments</span>
           </h1>
-          <p className="text-slate-500 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light">
-            Explore the world of ICA through news, gallery moments, and inspiring testimonials from our global community.
+          <p className="text-slate-500 text-xs sm:text-sm max-w-xl mx-auto font-light leading-relaxed">
+            Explore photographs, milestones, and memorable learning experiences from the International Cube Academy global community.
           </p>
+
+          {/* TWO CATEGORY TABS (GALLERY & EVENTS & MOMENTS) */}
+          <div className="pt-4 flex justify-center">
+            <div className="inline-flex bg-white rounded-full p-1.5 border border-slate-200 shadow-xs gap-1 flex-wrap justify-center">
+              {[
+                { id: 'gallery', label: 'Gallery', icon: Image },
+                { id: 'events-moments', label: 'Events & Moments', icon: Calendar },
+              ].map(tab => {
+                const Icon = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => handleTabChange(tab.id)}
+                    className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
+                      activeTab === tab.id
+                        ? 'bg-[#0B2D6B] text-white shadow-sm'
+                        : 'text-slate-600 hover:text-[#0B2D6B]'
+                    }`}
+                  >
+                    <Icon size={14} /> {tab.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-6 lg:px-12 py-14 space-y-16">
+      {/* ---------------------------------------------------- */}
+      {/* MAIN MEDIA CONTENT */}
+      {/* ---------------------------------------------------- */}
+      <div className="max-w-6xl mx-auto px-6 lg:px-12 py-12 lg:py-16 space-y-12">
 
-        {/* TAB NAVIGATION */}
-        <div className="flex justify-center">
-          <div className="inline-flex bg-[#F8F9FB] rounded-full p-1.5 border border-slate-200 gap-1 flex-wrap justify-center">
-            {[
-              { id: 'gallery', label: 'Gallery', icon: Image },
-              { id: 'news', label: 'News & Media', icon: Newspaper },
-              { id: 'testimonials', label: 'Testimonials', icon: MessageSquare },
-            ].map(tab => {
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
-                    activeTab === tab.id
-                      ? 'bg-[#0B2D6B] text-white shadow-sm'
-                      : 'text-slate-500 hover:text-[#0B2D6B]'
-                  }`}
-                >
-                  <Icon size={13} /> {tab.label}
-                </button>
-              );
-            })}
-          </div>
+        {/* CATEGORY SECTION DESCRIPTION */}
+        <div className="text-center space-y-2 max-w-xl mx-auto">
+          <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A]">
+            {activeTab === 'gallery' ? "TRAINING & CLASSROOM MOMENTS" : "COMPETITIONS & CELEBRATIONS"}
+          </span>
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0B2D6B]">
+            {activeTab === 'gallery' ? "Gallery" : "Events & Moments"}
+          </h2>
+          <p className="text-slate-500 text-xs sm:text-sm font-light leading-relaxed">
+            {activeTab === 'gallery'
+              ? "Photographs showcasing training sessions, classroom activities, students solving cubes, and workshops."
+              : "Highlights from competitions, award ceremonies, stage programs, and memorable event celebrations."}
+          </p>
         </div>
 
-        {/* GALLERY TAB */}
-        {activeTab === 'gallery' && (
-          <section>
-            <div className="text-center mb-8">
-              <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A]">Visual Journey</span>
-              <h2 className="font-serif text-3xl font-bold text-[#0B2D6B] mt-1">Gallery</h2>
-              <p className="text-slate-500 text-sm mt-2 max-w-xl mx-auto font-light">
-                Explore photographs and videos showcasing our programs, workshops, competitions, partnerships, and memorable learning experiences.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {galleryItems.map((item, i) => (
-                <div
-                  key={i}
-                  className={`relative bg-gradient-to-br ${galleryColors[i]} rounded-3xl overflow-hidden aspect-[4/3] flex flex-col justify-end p-5 cursor-pointer group shadow-lg hover:-translate-y-1 transition-all duration-200`}
-                >
-                  <div className="absolute inset-0 opacity-10 world-map-bg pointer-events-none"></div>
-                  {/* Play icon for visual appeal */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Play size={22} className="text-white" />
+        {/* IMAGE GRID WITH CONSISTENT 4:3 ASPECT RATIO - PHOTOS ONLY (NO TEXT BELOW) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {displayedItems.map((item, idx) => (
+            <div
+              key={idx}
+              onClick={() => openLightbox(idx)}
+              className="w-full aspect-[4/3] bg-[#F8F9FB] rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:border-[#C8A24A]/70 hover:shadow-md hover:-translate-y-1 transition-all duration-300 relative group cursor-pointer"
+            >
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.alt || item.title || "Gallery Photo"}
+                  loading="lazy"
+                  style={{
+                    objectPosition: item.objectPosition || 'center',
+                    objectFit: item.objectFit || 'cover',
+                    transform: item.scale ? `scale(${item.scale})` : undefined
+                  }}
+                  className="w-full h-full block group-hover:scale-105 transition-transform duration-500 rounded-3xl"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-[#0B2D6B]/5 to-[#C8A24A]/10 p-6 flex flex-col items-center justify-center text-center space-y-2 group-hover:bg-[#0B2D6B]/10 transition-colors rounded-3xl">
+                  <div className="w-12 h-12 rounded-2xl bg-white text-[#0B2D6B] flex items-center justify-center shadow-xs border border-slate-200/60 group-hover:bg-[#0B2D6B] group-hover:text-[#C8A24A] transition-colors">
+                    <Camera size={22} />
                   </div>
-                  <div className="relative z-10">
-                    <div className="inline-block text-[10px] font-extrabold uppercase tracking-widest text-[#C8A24A] bg-black/30 px-2.5 py-1 rounded-full mb-2 backdrop-blur-sm">
-                      {item.category}
-                    </div>
-                    <div className="text-white font-bold text-sm leading-snug">{item.title}</div>
-                    <div className="text-white/60 text-[10px] mt-1 font-light">{item.tag}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* NEWS TAB */}
-        {activeTab === 'news' && (
-          <section>
-            <div className="text-center mb-8">
-              <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A]">Latest Updates</span>
-              <h2 className="font-serif text-3xl font-bold text-[#0B2D6B] mt-1">News & Media</h2>
-              <p className="text-slate-500 text-sm mt-2 max-w-xl mx-auto font-light">
-                Stay informed with the latest updates, announcements, educational initiatives, and success stories from the International Cube Academy.
-              </p>
-            </div>
-            <div className="space-y-5">
-              {newsPosts.map((post, i) => (
-                <div key={i} className="bg-[#F8F9FB] rounded-3xl p-6 border border-slate-200/80 hover:border-[#C8A24A]/50 transition-all flex flex-col sm:flex-row gap-5">
-                  <div className="sm:w-28 shrink-0">
-                    <div
-                      className="h-20 sm:h-full rounded-2xl bg-gradient-to-br flex items-center justify-center text-white text-center text-xs font-bold p-3"
-                      style={{ background: i === 0 ? 'linear-gradient(135deg,#0B2D6B,#16489C)' : i === 1 ? 'linear-gradient(135deg,#C8A24A,#9E7B2B)' : 'linear-gradient(135deg,#16489C,#0B2D6B)' }}
-                    >
-                      <Newspaper size={24} className="opacity-60" />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#C8A24A]">{post.category}</span>
-                      <span className="text-[10px] text-slate-400">·</span>
-                      <span className="text-[10px] text-slate-400 font-light">{post.date}</span>
-                    </div>
-                    <h3 className="font-serif font-bold text-base text-[#0B2D6B] mb-2">{post.title}</h3>
-                    <p className="text-slate-500 text-xs font-light leading-relaxed">{post.excerpt}</p>
-                    <button className="inline-flex items-center gap-1 text-[#C8A24A] text-xs font-bold mt-3 hover:gap-2 transition-all">
-                      Read More <ArrowRight size={12} />
-                    </button>
+                  <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A]">
+                    Photograph Placeholder
                   </div>
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
+              )}
 
-        {/* TESTIMONIALS TAB */}
-        {activeTab === 'testimonials' && (
-          <section>
-            <div className="text-center mb-8">
-              <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A]">Success Stories</span>
-              <h2 className="font-serif text-3xl font-bold text-[#0B2D6B] mt-1">Testimonials</h2>
-              <p className="text-slate-500 text-sm mt-2 max-w-xl mx-auto font-light">
-                Hear from students, parents, educators, and schools who have experienced the positive impact of ICA's innovative educational programs.
-              </p>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {testimonials.map((t, i) => (
-                <div key={i} className="bg-[#F8F9FB] rounded-3xl p-6 border border-slate-200/80 hover:border-[#C8A24A]/50 hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between">
-                  <div>
-                    <Quote size={24} className="text-[#C8A24A]/40 mb-3" />
-                    <p className="text-slate-600 text-xs font-light leading-relaxed mb-4">"{t.text}"</p>
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-0.5 mb-3">
-                      {[...Array(t.rating)].map((_, j) => (
-                        <Star key={j} size={12} className="text-[#C8A24A] fill-[#C8A24A]" />
-                      ))}
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#0B2D6B] to-[#16489C] flex items-center justify-center text-white text-xs font-bold shrink-0">
-                        {t.name.charAt(0)}
-                      </div>
-                      <div>
-                        <div className="font-bold text-xs text-[#0B2D6B]">{t.name}</div>
-                        <div className="text-[10px] text-slate-400 font-light">{t.role} · {t.country}</div>
-                      </div>
-                    </div>
-                  </div>
+              {/* Subtle hover icon overlay */}
+              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none rounded-3xl">
+                <div className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+                  <Eye size={20} />
                 </div>
-              ))}
+              </div>
             </div>
-          </section>
-        )}
+          ))}
+        </div>
 
-        {/* MEDIA INQUIRY CTA */}
-        <section className="bg-gradient-to-r from-[#0B2D6B] to-[#16489C] rounded-3xl p-8 sm:p-10 text-white text-center">
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold mb-3">Media Inquiries & Press</h2>
-          <p className="text-slate-200 text-sm font-light max-w-xl mx-auto mb-6 leading-relaxed">
-            Are you a journalist, media house, or content creator interested in covering ICA? We welcome media collaborations and press coverage.
-          </p>
-          <button
-            onClick={() => setActivePage && setActivePage('contact')}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#C8A24A] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#b89035] transition-all shadow-lg"
-          >
-            Contact Media Team <ArrowRight size={14} />
-          </button>
-        </section>
+        {/* VIEW MORE BUTTON */}
+        {hasMore && (
+          <div className="text-center pt-4">
+            <button
+              onClick={() => setVisibleCount((prev) => prev + 4)}
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0B2D6B] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#071d47] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 group"
+            >
+              <span>VIEW MORE PHOTOS</span>
+              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        )}
 
       </div>
+
+      {/* ---------------------------------------------------- */}
+      {/* LIGHTBOX MODAL (PURE PHOTO ONLY - NO NAVY CARD OR TEXT) */}
+      {/* ---------------------------------------------------- */}
+      {lightboxOpen && (
+        <div 
+          onClick={closeLightbox}
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-fadeIn cursor-pointer"
+        >
+          {/* Close Button */}
+          <button
+            onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
+            className="absolute top-5 right-5 text-white/80 hover:text-white p-2.5 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-50"
+            aria-label="Close Lightbox"
+          >
+            <X size={24} />
+          </button>
+
+          {/* Previous Button */}
+          <button
+            onClick={(e) => { e.stopPropagation(); prevImage(); }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-50"
+            aria-label="Previous Image"
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          {/* Next Button */}
+          <button
+            onClick={(e) => { e.stopPropagation(); nextImage(); }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-50"
+            aria-label="Next Image"
+          >
+            <ChevronRight size={24} />
+          </button>
+
+          {/* PURE PHOTO CONTAINER - NO NAVY PANEL, NO CAPTIONS, MAXIMUM VIEWPORT AREA */}
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-full max-h-[92vh] flex items-center justify-center pointer-events-auto"
+          >
+            {currentItems[currentImageIndex]?.image ? (
+              <img
+                src={currentItems[currentImageIndex].image}
+                alt={currentItems[currentImageIndex].title}
+                className="max-w-full max-h-[92vh] w-auto h-auto object-contain block mx-auto rounded-md shadow-2xl transition-all duration-300 select-none"
+              />
+            ) : (
+              <div className="text-center space-y-3 p-8 bg-black/40 border border-white/20 rounded-2xl">
+                <Camera size={32} className="text-[#C8A24A] mx-auto" />
+                <div className="text-sm font-semibold text-white">Photograph Placeholder</div>
+              </div>
+            )}
+          </div>
+
+        </div>
+      )}
+
     </div>
   );
 }

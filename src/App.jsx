@@ -8,9 +8,11 @@ import ProgramsPage from './pages/ProgramsPage';
 import AccreditationPage from './pages/AccreditationPage';
 import ResearchPage from './pages/ResearchPage';
 import EventsPage from './pages/EventsPage';
+import AchievementsPage from './pages/AchievementsPage';
 import PartnersPage from './pages/PartnersPage';
 import MediaPage from './pages/MediaPage';
 import ResourcesPage from './pages/ResourcesPage';
+import CertificationApplyPage from './pages/CertificationApplyPage';
 
 export default function App() {
   const [activePage, setActivePage] = useState('home');
@@ -26,13 +28,18 @@ export default function App() {
       case 'about':
         return <AboutPage setActivePage={setActivePage} />;
       case 'programs':
+      case 'certification':
         return <ProgramsPage setActivePage={setActivePage} />;
+      case 'certification-apply':
+        return <CertificationApplyPage setActivePage={setActivePage} />;
       case 'accreditation':
         return <AccreditationPage setActivePage={setActivePage} />;
       case 'research':
         return <ResearchPage setActivePage={setActivePage} />;
       case 'events':
         return <EventsPage setActivePage={setActivePage} />;
+      case 'achievements':
+        return <AchievementsPage setActivePage={setActivePage} />;
       case 'partners':
         return <PartnersPage setActivePage={setActivePage} />;
       case 'media':
