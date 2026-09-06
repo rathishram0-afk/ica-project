@@ -271,7 +271,7 @@ export default function EventsPage({ setActivePage }) {
                       <Globe size={20} />
                     </div>
                     <div>
-                      <div className="text-[10px] font-extrabold uppercase tracking-widest text-[#C8A24A]">
+                      <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A]">
                         Conferences
                       </div>
                       <h3 className="font-serif font-bold text-base text-[#0B2D6B]">
@@ -301,7 +301,7 @@ export default function EventsPage({ setActivePage }) {
                       <Users size={20} />
                     </div>
                     <div>
-                      <div className="text-[10px] font-extrabold uppercase tracking-widest text-[#C8A24A]">
+                      <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A]">
                         Workshops
                       </div>
                       <h3 className="font-serif font-bold text-base text-[#0B2D6B]">

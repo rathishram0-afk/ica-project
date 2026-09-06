@@ -182,7 +182,7 @@ export default function MediaPage() {
                   <button
                     key={tab.id}
                     onClick={() => handleTabChange(tab.id)}
-                    className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
+                    className={`inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[44px] rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
                       activeTab === tab.id
                         ? 'bg-[#0B2D6B] text-white shadow-sm'
                         : 'text-slate-600 hover:text-[#0B2D6B]'

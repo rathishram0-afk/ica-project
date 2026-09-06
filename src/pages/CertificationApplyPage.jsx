@@ -59,7 +59,7 @@ export default function CertificationApplyPage({ setActivePage }) {
         <div className="mb-6">
           <button
             onClick={() => setActivePage && setActivePage('programs')}
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0B2D6B] hover:text-[#C8A24A] transition-colors"
+            className="inline-flex items-center gap-2 py-2.5 min-h-[44px] text-xs font-bold uppercase tracking-wider text-[#0B2D6B] hover:text-[#C8A24A] transition-colors"
           >
             <ArrowLeft size={16} /> Back to Programs & Certifications
           </button>
@@ -87,7 +87,7 @@ export default function CertificationApplyPage({ setActivePage }) {
             <div className="hidden sm:flex shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-br from-[#16489C] to-[#0B2D6B] border border-[#C8A24A]/40 items-center justify-center shadow-lg relative z-10">
               <div className="text-center">
                 <div className="font-serif font-extrabold text-xl text-[#C8A24A] leading-none">ICA</div>
-                <div className="text-[8px] font-bold text-white uppercase tracking-tighter mt-0.5">Certified</div>
+                <div className="text-[11px] font-bold text-white uppercase tracking-tighter mt-0.5">Certified</div>
               </div>
             </div>
           </div>

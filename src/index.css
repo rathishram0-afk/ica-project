@@ -221,6 +221,20 @@
 
 
 /* ═══════════════════════════════════════════════════════
+   SMALL-SCREEN TYPE FLOOR
+   11px reads fine as a micro-label on a monitor but is too
+   small for the body copy that shares the class on a phone.
+   Lifted here in one place rather than at 59 call sites.
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .text-\[11px\] {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════
    GLASSMORPHISM UTILITIES
    ═══════════════════════════════════════════════════════ */
 .glass {

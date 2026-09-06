@@ -78,11 +78,11 @@ function NewsletterForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="your@email.com"
-        className="w-full sm:w-72 bg-white/10 border border-white/20 rounded-full px-5 py-2.5 text-sm text-white placeholder:text-slate-400 focus:outline-none focus:border-[#C8A24A] focus:bg-white/[0.14] transition-colors duration-300"
+        className="w-full sm:w-72 bg-white/10 border border-white/20 rounded-full px-5 py-3 min-h-[44px] text-sm text-white placeholder:text-slate-400 focus:outline-none focus:border-[#C8A24A] focus:bg-white/[0.14] transition-colors duration-300"
       />
       <button
         type="submit"
-        className="gold-btn shrink-0 px-6 py-2.5 rounded-full text-[11px] font-bold uppercase tracking-wider text-white flex items-center justify-center gap-2 group"
+        className="gold-btn shrink-0 px-6 py-3 min-h-[44px] rounded-full text-[11px] font-bold uppercase tracking-wider text-white flex items-center justify-center gap-2 group"
       >
         Join
         <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
@@ -159,7 +159,7 @@ export default function Footer() {
                   <li key={link.id}>
                     <Link
                       to={pathFor(link.id)}
-                      className="text-slate-300 hover:text-[#C8A24A] transition-colors duration-200 inline-flex items-start gap-1.5 group"
+                      className="text-slate-300 hover:text-[#C8A24A] transition-colors duration-200 flex items-start gap-1.5 group py-2 -my-0.5 min-h-[40px] sm:min-h-0 sm:py-1"
                     >
                       <span className="text-[#C8A24A]/70 group-hover:text-[#C8A24A] transition-colors duration-200">&rsaquo;</span>
                       <span>{link.name}</span>
@@ -183,13 +183,13 @@ export default function Footer() {
                 </span>
               </li>
               <li>
-                <a href="mailto:info@ica.world" className="flex items-center gap-2.5 hover:text-[#C8A24A] transition-colors duration-200">
+                <a href="mailto:info@ica.world" className="flex items-center gap-2.5 hover:text-[#C8A24A] transition-colors duration-200 py-2 -my-1 min-h-[40px] sm:min-h-0 sm:py-0 sm:my-0">
                   <Mail size={14} className="text-[#C8A24A] shrink-0" />
                   info@ica.world
                 </a>
               </li>
               <li>
-                <a href="tel:+001234567890" className="flex items-center gap-2.5 hover:text-[#C8A24A] transition-colors duration-200">
+                <a href="tel:+001234567890" className="flex items-center gap-2.5 hover:text-[#C8A24A] transition-colors duration-200 py-2 -my-1 min-h-[40px] sm:min-h-0 sm:py-0 sm:my-0">
                   <Phone size={14} className="text-[#C8A24A] shrink-0" />
                   +00 123 456 7890
                 </a>
@@ -215,7 +215,7 @@ export default function Footer() {
                 href="#"
                 aria-label={label}
                 onClick={(e) => e.preventDefault()}
-                className="w-8 h-8 rounded-full bg-white/[0.08] border border-white/10 flex items-center justify-center text-slate-300 hover:bg-[#C8A24A] hover:text-[#0B2D6B] hover:border-[#C8A24A] transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-white/[0.08] border border-white/10 flex items-center justify-center text-slate-300 hover:bg-[#C8A24A] hover:text-[#0B2D6B] hover:border-[#C8A24A] transition-all duration-300"
               >
                 <Icon size={14} />
               </a>
@@ -223,11 +223,11 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-4">
-            <Link to={pathFor('about')} className="hover:text-[#C8A24A] transition-colors duration-200">Privacy Policy</Link>
+            <Link to={pathFor('about')} className="hover:text-[#C8A24A] transition-colors duration-200 inline-flex items-center min-h-[40px] sm:min-h-0">Privacy Policy</Link>
             <span className="text-white/20">|</span>
-            <Link to={pathFor('about')} className="hover:text-[#C8A24A] transition-colors duration-200">Terms of Service</Link>
+            <Link to={pathFor('about')} className="hover:text-[#C8A24A] transition-colors duration-200 inline-flex items-center min-h-[40px] sm:min-h-0">Terms of Service</Link>
             <span className="text-white/20">|</span>
-            <Link to={pathFor('resources')} className="hover:text-[#C8A24A] transition-colors duration-200">Resources</Link>
+            <Link to={pathFor('resources')} className="hover:text-[#C8A24A] transition-colors duration-200 inline-flex items-center min-h-[40px] sm:min-h-0">Resources</Link>
           </div>
         </div>
 

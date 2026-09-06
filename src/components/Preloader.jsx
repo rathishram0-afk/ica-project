@@ -166,10 +166,10 @@ export default function Preloader({ onComplete }) {
         />
 
         <div ref={textRef} className="text-center mt-4" style={{ opacity: reduced ? 1 : 0 }}>
-          <p className="text-[10px] sm:text-[11px] text-[#0B2D6B] font-extrabold uppercase tracking-[0.32em]">
+          <p className="text-[11px] sm:text-[11px] text-[#0B2D6B] font-extrabold uppercase tracking-[0.32em]">
             International Cube Academy
           </p>
-          <p className="text-[10px] sm:text-[11px] text-[#C8A24A] font-semibold tracking-[0.16em] mt-1.5">
+          <p className="text-[11px] sm:text-[11px] text-[#C8A24A] font-semibold tracking-[0.16em] mt-1.5">
             Connecting Cubers Worldwide
           </p>
         </div>
@@ -183,10 +183,10 @@ export default function Preloader({ onComplete }) {
             />
           </div>
           <div className="flex items-center justify-between mt-2.5">
-            <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-slate-400">
+            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-slate-400">
               Loading
             </span>
-            <span className="text-[10px] font-bold tabular-nums text-[#0B2D6B]">
+            <span className="text-[11px] font-bold tabular-nums text-[#0B2D6B]">
               {progress}%
             </span>
           </div>

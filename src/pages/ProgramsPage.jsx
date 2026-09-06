@@ -327,23 +327,23 @@ export default function ProgramsPage({ setActivePage }) {
                       </div>
 
                       <div className="mt-8 pt-4 border-t border-slate-100 space-y-2">
-                        <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                        <div className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
                           Assessment Breakdown
                         </div>
 
                         <div className="grid grid-cols-2 gap-2">
                           <div className="bg-[#0B2D6B]/5 rounded-xl p-2.5 text-center border border-[#0B2D6B]/10">
-                            <div className="text-[9px] uppercase font-bold text-slate-500 tracking-wider">Theory</div>
+                            <div className="text-[11px] uppercase font-bold text-slate-500 tracking-wider">Theory</div>
                             <div className="font-serif font-extrabold text-base text-[#0B2D6B] mt-0.5">{level.theory}</div>
                           </div>
                           <div className="bg-[#C8A24A]/10 rounded-xl p-2.5 text-center border border-[#C8A24A]/20">
-                            <div className="text-[9px] uppercase font-bold text-[#9E7B2B] tracking-wider">Practical</div>
+                            <div className="text-[11px] uppercase font-bold text-[#9E7B2B] tracking-wider">Practical</div>
                             <div className="font-serif font-extrabold text-base text-[#C8A24A] mt-0.5">{level.practical}</div>
                           </div>
                         </div>
 
                         {level.extra && (
-                          <div className="mt-2 gold-btn text-[10px] font-extrabold uppercase tracking-wider py-1.5 px-3 rounded-xl text-center shadow-xs">
+                          <div className="mt-2 gold-btn text-[11px] font-extrabold uppercase tracking-wider py-1.5 px-3 rounded-xl text-center shadow-xs">
                             + Viva (Pass Required)
                           </div>
                         )}

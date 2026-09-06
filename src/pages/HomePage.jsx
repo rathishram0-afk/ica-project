@@ -127,7 +127,7 @@ export default function HomePage({ setActivePage }) {
           <div className="w-full lg:w-[52%] xl:w-[48%] space-y-5 sm:space-y-6">
 
             {/* Outlined Gold Badge */}
-            <div className="hero-badge inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-[#8A6B1F] bg-white/80 px-4 py-1.5 rounded-full border border-[#C8A24A]/50 shadow-xs animate-border-shimmer" style={{opacity: 0}}>
+            <div className="hero-badge inline-flex items-center gap-2 text-[11px] sm:text-[11px] font-extrabold uppercase tracking-widest text-[#8A6B1F] bg-white/80 px-4 py-1.5 rounded-full border border-[#C8A24A]/50 shadow-xs animate-border-shimmer" style={{opacity: 0}}>
               <Sparkles size={12} className="animate-float-medium" />
               WELCOME TO INTERNATIONAL CUBE ACADEMY
             </div>
@@ -147,7 +147,7 @@ export default function HomePage({ setActivePage }) {
             <div className="flex flex-wrap gap-4 pt-1 sm:pt-2">
               <MagneticButton
                 onClick={() => setActivePage('about')}
-                className="hero-cta bg-white px-7 py-3 rounded-full font-bold text-xs uppercase tracking-wider text-[#0B2D6B] hover:bg-[#0B2D6B] hover:text-white border border-[#0B2D6B]/20 transition-all duration-400 shadow-sm hover:shadow-md flex items-center gap-2 group"
+                className="hero-cta bg-white px-7 py-3.5 min-h-[44px] rounded-full font-bold text-xs uppercase tracking-wider text-[#0B2D6B] hover:bg-[#0B2D6B] hover:text-white border border-[#0B2D6B]/20 transition-all duration-400 shadow-sm hover:shadow-md flex items-center gap-2 group"
                 style={{opacity: 0}}
               >
                 <span>ABOUT ICA</span>
@@ -155,7 +155,7 @@ export default function HomePage({ setActivePage }) {
               </MagneticButton>
               <MagneticButton
                 onClick={() => setActivePage('contact')}
-                className="hero-cta gold-btn px-7 py-3 rounded-full font-bold text-xs uppercase tracking-wider text-white transition-all duration-400 shadow-md hover:shadow-lg flex items-center gap-2 group"
+                className="hero-cta gold-btn px-7 py-3.5 min-h-[44px] rounded-full font-bold text-xs uppercase tracking-wider text-white transition-all duration-400 shadow-md hover:shadow-lg flex items-center gap-2 group"
                 style={{opacity: 0}}
               >
                 <span>PARTNER WITH US</span>

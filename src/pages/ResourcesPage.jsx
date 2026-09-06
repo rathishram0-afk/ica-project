@@ -142,8 +142,8 @@ export default function ResourcesPage({ setActivePage }) {
                       <div className="flex-1">
                         <h3 className="font-bold text-sm text-[#0B2D6B] leading-tight">{res.title}</h3>
                         <div className="flex items-center gap-1.5 mt-1">
-                          <span className="text-[10px] font-bold text-[#C8A24A] bg-[#C8A24A]/10 px-2 py-0.5 rounded-full">{res.type}</span>
-                          <span className="text-[10px] text-slate-400">{res.size}</span>
+                          <span className="text-[11px] font-bold text-[#C8A24A] bg-[#C8A24A]/10 px-2 py-0.5 rounded-full">{res.type}</span>
+                          <span className="text-[11px] text-slate-400">{res.size}</span>
                         </div>
                       </div>
                     </div>
@@ -151,7 +151,7 @@ export default function ResourcesPage({ setActivePage }) {
                   </div>
                   <button
                     onClick={() => setActivePage && setActivePage('contact')}
-                    className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-[#0B2D6B]/20 text-[#0B2D6B] text-xs font-bold hover:bg-[#0B2D6B] hover:text-white transition-all duration-200"
+                    className="mt-4 w-full flex items-center justify-center gap-2 py-3 min-h-[44px] rounded-xl border border-[#0B2D6B]/20 text-[#0B2D6B] text-xs font-bold hover:bg-[#0B2D6B] hover:text-white transition-all duration-200"
                   >
                     <Download size={13} /> Request Download
                   </button>

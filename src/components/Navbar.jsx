@@ -249,7 +249,7 @@ export default function Navbar({ activePage }) {
           <div className="flex lg:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-[#0B2D6B] hover:bg-slate-100 transition-colors duration-200"
+              className="p-3 -mr-1 rounded-lg text-[#0B2D6B] hover:bg-slate-100 transition-colors duration-200"
             >
               <div className="relative w-[22px] h-[22px]">
                 <X size={22} className={`absolute inset-0 transition-all duration-300 ${mobileMenuOpen ? 'opacity-100 rotate-0' : 'opacity-0 rotate-90'}`} />

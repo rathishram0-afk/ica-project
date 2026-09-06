@@ -31,7 +31,7 @@ export default function ImagePlaceholder({
         <span className="text-xs font-bold uppercase tracking-wider text-[#0B2E6B] mb-0.5">
           {label}
         </span>
-        <span className="text-[10px] text-slate-400 font-mono flex items-center gap-1">
+        <span className="text-[11px] text-slate-400 font-mono flex items-center gap-1">
           <ShieldCheck size={11} className="text-[#C8A24A]" />
           {subtext}
         </span>

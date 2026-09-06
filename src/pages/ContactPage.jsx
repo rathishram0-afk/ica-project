@@ -67,7 +67,7 @@ export default function ContactPage() {
                   {
                     icon: MapPin,
                     title: "Global Headquarters",
-                    content: <>ICA Secretariat, International Knowledge Park<br /><span className="font-mono text-[10px] text-slate-400">[ Office Location Placeholder ]</span></>
+                    content: <>ICA Secretariat, International Knowledge Park<br /><span className="font-mono text-[11px] text-slate-400">[ Office Location Placeholder ]</span></>
                   },
                   {
                     icon: Mail,
