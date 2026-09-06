@@ -35,12 +35,12 @@ function RubiksCubeModel({ position = [0, 0, 0] }) {
         <mesh key={index} position={pos}>
           <boxGeometry args={[1, 1, 1]} />
           {/* Main material: ICA Gold with metallic sheen */}
-          <meshStandardMaterial 
-            color="#C8A24A" 
-            metalness={0.7} 
-            roughness={0.2} 
-            clearcoat={1}
-            envMapIntensity={2}
+          {/* clearcoat belongs to MeshPhysicalMaterial and envMapIntensity
+              needs an environment map — both were silently ignored here. */}
+          <meshStandardMaterial
+            color="#C8A24A"
+            metalness={0.7}
+            roughness={0.2}
           />
           {/* Edges highlight in dark blue for contrast */}
           <Edges 

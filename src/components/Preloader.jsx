@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import anime from 'animejs';
 import useAssetPreloader from '../hooks/useAssetPreloader';
 import useReducedMotion from '../hooks/useReducedMotion';
+import { markIntroSeen } from '../lib/intro';
 
 /**
  * Block on the logo alone — it is the only image on the first screen. The
@@ -87,6 +88,7 @@ export default function Preloader({ onComplete }) {
     // backgrounded tab, so without this the site could stay hidden behind a
     // finished preloader indefinitely. Whatever happens, release the page.
     const failsafe = setTimeout(() => {
+      markIntroSeen();
       document.body.style.overflow = 'unset';
       if (onComplete) onComplete();
     }, 1400);
@@ -98,6 +100,7 @@ export default function Preloader({ onComplete }) {
       const handover = setTimeout(() => {
         release();
         warmSecondaryAssets();
+        markIntroSeen();
         document.body.style.overflow = 'unset';
         if (onComplete) onComplete();
       }, 200);
@@ -127,6 +130,7 @@ export default function Preloader({ onComplete }) {
           begin: warmSecondaryAssets,
           complete: () => {
             release();
+            markIntroSeen();
             document.body.style.overflow = 'unset';
             if (onComplete) onComplete();
           },
