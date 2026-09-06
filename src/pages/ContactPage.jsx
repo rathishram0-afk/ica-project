@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ImagePlaceholder from '../components/ImagePlaceholder';
-import { Mail, Phone, MapPin, Send, Globe, CheckCircle, ShieldCheck } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import ParticleField from '../components/ParticleField';
 

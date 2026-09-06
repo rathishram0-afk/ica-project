@@ -1,7 +1,13 @@
 import React from 'react';
 import {
-  Brain, GraduationCap, CheckCircle2, ChevronDown, ChevronUp,
-  Award, BookOpen, Users, Star, ClipboardList, Trophy, ArrowRight
+  GraduationCap,
+  Award,
+  BookOpen,
+  Users,
+  Star,
+  ClipboardList,
+  Trophy,
+  ArrowRight
 } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import ParticleField from '../components/ParticleField';

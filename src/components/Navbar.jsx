@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import anime from 'animejs';
+import SmartImage from './SmartImage';
+import { prefersReducedMotion } from '../lib/motion';
 
 export default function Navbar({ activePage, setActivePage }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -46,6 +48,9 @@ export default function Navbar({ activePage, setActivePage }) {
   useEffect(() => {
     if (navLinksRef.current && !hasAnimatedLinks.current) {
       hasAnimatedLinks.current = true;
+      // Reduced motion: leave the links exactly as rendered rather than
+      // hiding them for an entrance that will never play.
+      if (prefersReducedMotion()) return;
       const links = navLinksRef.current.querySelectorAll('.nav-item');
       anime.set(links, { opacity: 0, translateY: -8 });
       anime({
@@ -61,7 +66,7 @@ export default function Navbar({ activePage, setActivePage }) {
 
   // Animate dropdown appearance
   useEffect(() => {
-    if (programsOpen && dropdownRef.current) {
+    if (programsOpen && dropdownRef.current && !prefersReducedMotion()) {
       anime({
         targets: dropdownRef.current,
         opacity: [0, 1],
@@ -85,7 +90,7 @@ export default function Navbar({ activePage, setActivePage }) {
 
   // Animate mobile menu
   useEffect(() => {
-    if (mobileMenuOpen && mobileMenuRef.current) {
+    if (mobileMenuOpen && mobileMenuRef.current && !prefersReducedMotion()) {
       anime({
         targets: mobileMenuRef.current,
         opacity: [0, 1],
@@ -143,25 +148,24 @@ export default function Navbar({ activePage, setActivePage }) {
             className="flex items-center cursor-pointer shrink-0 group"
             onClick={() => handleNav('home')}
           >
-            <img
+            <SmartImage
               src="/images/logo/ica-logo.png"
               alt="International Cube Academy"
+              loading="eager"
+              wrapperClassName="h-12 sm:h-14 lg:h-16"
+              skeletonClassName="rounded-xl"
               className="h-12 sm:h-14 lg:h-16 w-auto object-contain block bg-transparent transition-all duration-300 group-hover:scale-105"
-              onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'flex';
-              }}
+              placeholderClassName="w-32 sm:w-36 lg:w-40"
+              fallback={
+                <div className="flex items-center gap-2">
+                  <div className="w-9 h-9 rounded-xl bg-[#0B2D6B] flex items-center justify-center text-[#C8A24A] font-extrabold text-lg font-serif">I</div>
+                  <div>
+                    <div className="font-serif font-extrabold text-sm text-[#0B2D6B] leading-none">International</div>
+                    <div className="font-serif font-extrabold text-sm text-[#C8A24A] leading-none">Cube Academy</div>
+                  </div>
+                </div>
+              }
             />
-            <div
-              className="hidden items-center gap-2"
-              style={{ display: 'none' }}
-            >
-              <div className="w-9 h-9 rounded-xl bg-[#0B2D6B] flex items-center justify-center text-[#C8A24A] font-extrabold text-lg font-serif">I</div>
-              <div>
-                <div className="font-serif font-extrabold text-sm text-[#0B2D6B] leading-none">International</div>
-                <div className="font-serif font-extrabold text-sm text-[#C8A24A] leading-none">Cube Academy</div>
-              </div>
-            </div>
           </div>
 
           {/* Desktop Nav */}

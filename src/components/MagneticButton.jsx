@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import anime from 'animejs';
+import { prefersReducedMotion } from '../lib/motion';
 
 export default function MagneticButton({ children, className = '', onClick, as: Tag = 'button', ...props }) {
   const ref = useRef(null);
@@ -10,6 +11,8 @@ export default function MagneticButton({ children, className = '', onClick, as: 
 
     // We only apply magnetic effect on desktop devices (hoverable)
     if (window.matchMedia("(pointer: coarse)").matches) return;
+    // A button that chases the cursor is motion and nothing else.
+    if (prefersReducedMotion()) return;
 
     const handleMouseMove = (e) => {
       const rect = el.getBoundingClientRect();

@@ -1,15 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { 
-  ArrowRight, Brain, Globe, GraduationCap, Trophy, Users, CheckCircle2, 
-  Sparkles, Award, Lightbulb, Send, ChevronRight, School, ChevronLeft, Calendar
+import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
+import {
+  ArrowRight,
+  GraduationCap,
+  Trophy,
+  CheckCircle2,
+  Sparkles,
+  Award,
+  Send,
+  Calendar
 } from 'lucide-react';
 import anime from 'animejs';
 import useParallax from '../hooks/useParallax';
 import useCountUp from '../hooks/useCountUp';
 import AnimatedSection from '../components/AnimatedSection';
 import ParticleField from '../components/ParticleField';
+import SmartImage from '../components/SmartImage';
 import MagneticButton from '../components/MagneticButton';
-import Cube3D from '../components/Cube3D';
+// three.js + drei weigh ~1MB minified — 84% of the bundle — for one decorative
+// hero cube. Loading it lazily keeps that off the critical path so the rest of
+// the site is interactive first; the cube streams in behind a soft placeholder.
+const Cube3D = lazy(() => import('../components/Cube3D'));
 
 /* Stat counter sub-component */
 function StatItem({ icon: Icon, num, label }) {
@@ -27,6 +37,18 @@ function StatItem({ icon: Icon, num, label }) {
           {label}
         </div>
       </div>
+    </div>
+  );
+}
+
+/** Holds the hero cube's space while three.js streams in. */
+function Cube3DPlaceholder() {
+  return (
+    <div
+      aria-hidden="true"
+      className="w-full h-full flex items-center justify-center pointer-events-none"
+    >
+      <div className="w-1/2 h-1/2 rounded-[28%] bg-[radial-gradient(circle_at_50%_45%,rgba(200,162,74,0.22)_0%,rgba(200,162,74,0.07)_45%,transparent_70%)] animate-gold-glow" />
     </div>
   );
 }
@@ -110,7 +132,9 @@ export default function HomePage({ setActivePage }) {
         <div className="absolute inset-0 z-0 overflow-hidden">
           {/* Position the cube slightly to the right */}
           <div ref={parallaxBgRef} className="absolute right-[-10%] md:right-[5%] lg:right-[15%] top-1/2 -translate-y-1/2 w-[120vw] h-[120vw] md:w-[800px] md:h-[800px]">
-            <Cube3D />
+            <Suspense fallback={<Cube3DPlaceholder />}>
+              <Cube3D />
+            </Suspense>
           </div>
           {/* Gradient overlay for contrast on left side text */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#041232]/95 via-[#07245b]/80 to-transparent pointer-events-none" />
@@ -314,9 +338,11 @@ export default function HomePage({ setActivePage }) {
             
             <AnimatedSection animation="fadeLeft" className="lg:col-span-6">
               <div className="w-full h-64 sm:h-72 border border-[#C8A24A]/30 rounded-2xl p-0 overflow-hidden shadow-md group relative card-3d-tilt">
-                <img 
+                <SmartImage 
                   src="/images/events/world-map.png" 
                   alt="ICA World Map" 
+                  wrapperClassName="w-full h-full"
+                  skeletonClassName="rounded-2xl"
                   className="w-full h-full object-cover object-center block select-none transform group-hover:scale-[1.05] transition-transform duration-700"
                 />
                 {/* Overlay glow */}

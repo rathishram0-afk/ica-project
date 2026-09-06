@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import anime from 'animejs';
+import { prefersReducedMotion } from '../lib/motion';
 
 /**
  * ParticleField — floating gold shimmer particles on dark backgrounds.
@@ -11,6 +12,9 @@ export default function ParticleField({ count = 25, className = '' }) {
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+
+    // Drifting particles carry no information — reduced motion drops them.
+    if (prefersReducedMotion()) return;
 
     // Clear existing particles
     container.innerHTML = '';
@@ -35,7 +39,7 @@ export default function ParticleField({ count = 25, className = '' }) {
     }
 
     // Animate each particle in a floating loop
-    particles.forEach((p, i) => {
+    particles.forEach((p) => {
       anime({
         targets: p,
         translateY: () => [

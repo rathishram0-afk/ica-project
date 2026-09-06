@@ -1,7 +1,8 @@
 import React from 'react';
-import { Handshake, Building2, ArrowRight, Globe, GraduationCap, Award, CheckCircle2, MapPin, School, Sparkles, FileText, Search, FileCheck, Users, Rocket, ShieldCheck, HeartHandshake } from 'lucide-react';
+import { Handshake, ArrowRight, Globe, GraduationCap, Award, School, Sparkles, FileText, Search, FileCheck, Users, Rocket, ShieldCheck, HeartHandshake } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import ParticleField from '../components/ParticleField';
+import SmartImage from '../components/SmartImage';
 
 export default function PartnersPage({ setActivePage }) {
   return (
@@ -14,9 +15,13 @@ export default function PartnersPage({ setActivePage }) {
         
         {/* World Map Asset Overlay — Transparent PNG (Zero Rectangular Box, Zero Blue Mismatch) */}
         <div className="absolute top-0 right-0 w-full sm:w-[65%] lg:w-[58%] h-full pointer-events-none z-0 overflow-hidden flex items-center justify-end">
-          <img 
+          <SmartImage 
             src="/images/events/world-map-transparent.png" 
             alt="ICA Global World Map" 
+            loading="eager"
+            wrapperClassName="w-full h-full"
+            skeletonClassName="rounded-3xl"
+            variant="dark"
             className="w-full h-full object-contain object-right block bg-transparent"
           />
         </div>

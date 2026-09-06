@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { Target, Lightbulb, Users, Globe, ArrowRight, ShieldCheck, Zap, BookOpen, GraduationCap, Medal, Sparkles, Eye, Trophy, Flag } from 'lucide-react';
+import { Lightbulb, Users, ArrowRight, ShieldCheck, BookOpen, Sparkles, Trophy, Flag } from 'lucide-react';
 import anime from 'animejs';
 import useParallax from '../hooks/useParallax';
 import AnimatedSection from '../components/AnimatedSection';
 import ParticleField from '../components/ParticleField';
-import { AnimatedBrain, AnimatedSchool, AnimatedShield, AnimatedTrophy } from '../components/AnimatedIcons';
+import SmartImage from '../components/SmartImage';
+import { AnimatedBrain, AnimatedShield } from '../components/AnimatedIcons';
 import MagneticButton from '../components/MagneticButton';
 
 export default function AboutPage({ setActivePage }) {
@@ -93,10 +94,15 @@ export default function AboutPage({ setActivePage }) {
             {/* RIGHT COLUMN - Image with Parallax */}
             <AnimatedSection animation="fadeRight" delay={300} className="lg:col-span-6 flex justify-center lg:justify-end items-center relative">
               <div ref={imageParallaxRef}>
-                <img 
+                <SmartImage 
                   src="/images/hero/ica-about-cube.png" 
                   alt="International Cube Academy About Visual" 
-                  className="w-full max-w-[480px] lg:max-w-[520px] h-auto object-contain block bg-transparent mx-auto lg:mr-0 transform hover:scale-[1.03] transition-transform duration-500 animate-float-slow"
+                  loading="eager"
+                  wrapperClassName="w-full max-w-[480px] lg:max-w-[520px] mx-auto lg:mr-0"
+                  placeholderClassName="h-64 sm:h-80 lg:h-[380px]"
+                  skeletonClassName="rounded-3xl"
+                  variant="dark"
+                  className="w-full h-auto object-contain block bg-transparent transform hover:scale-[1.03] transition-transform duration-500 animate-float-slow"
                 />
               </div>
             </AnimatedSection>
@@ -192,10 +198,14 @@ export default function AboutPage({ setActivePage }) {
               <ParticleField count={10} />
               
               <div className="w-full max-w-[320px] mx-auto relative z-10 my-auto">
-                <img 
+                <SmartImage 
                   src="/images/founder/dr-r-chandrika.png" 
                   alt="Dr. R. Chandrika - Founder & President, International Cube Academy" 
-                  className="w-full h-auto object-contain block mx-auto rounded-2xl drop-shadow-xl transform hover:scale-[1.03] transition-transform duration-500"
+                  wrapperClassName="w-full mx-auto"
+                  placeholderClassName="h-72 sm:h-80"
+                  skeletonClassName="rounded-2xl"
+                  variant="dark"
+                  className="w-full h-auto object-contain block rounded-2xl drop-shadow-xl transform hover:scale-[1.03] transition-transform duration-500"
                 />
               </div>
 

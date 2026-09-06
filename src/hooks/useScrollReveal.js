@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 import anime from 'animejs';
+import { prefersReducedMotion } from '../lib/motion';
 
 /**
  * useScrollReveal — triggers Anime.js animations when elements enter the viewport.
@@ -47,14 +48,23 @@ export default function useScrollReveal({
       default:
         return base;
     }
-  }, [animation, delay, duration, staggerDelay]);
+    // `animation` is not read here — the type arrives as an argument.
+  }, [delay, duration, staggerDelay]);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    // Set initial state
     const targets = animation === 'stagger' ? el.children : el;
+
+    // Reduced motion: show everything immediately. Hiding content and then
+    // declining to animate it back in would leave the page blank.
+    if (prefersReducedMotion()) {
+      anime.set(targets, { opacity: 1, translateX: 0, translateY: 0, scale: 1 });
+      return;
+    }
+
+    // Set initial state
     anime.set(targets, { opacity: 0 });
 
     const observer = new IntersectionObserver(

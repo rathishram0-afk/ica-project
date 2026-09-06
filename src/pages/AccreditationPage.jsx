@@ -1,8 +1,7 @@
 import React from 'react';
-import { School, CheckCircle2, ArrowRight, Globe, BookOpen, Users, Trophy, Star } from 'lucide-react';
+import { School, ArrowRight, Globe, BookOpen, Users, Trophy, Star } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import ParticleField from '../components/ParticleField';
-import useCountUp from '../hooks/useCountUp';
 
 const benefits = [
   { icon: BookOpen, title: "Curriculum Resources", desc: "Access ICA's internationally designed curriculum, lesson plans, and teaching materials." },

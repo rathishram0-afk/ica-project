@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Image, Calendar, X, ChevronLeft, ChevronRight, Eye, ArrowRight, Camera, Trophy, Sparkles } from 'lucide-react';
-import AnimatedSection from '../components/AnimatedSection';
+import React, { useCallback, useState, useEffect } from 'react';
+import { Image, Calendar, X, ChevronLeft, ChevronRight, Eye, ArrowRight, Camera } from 'lucide-react';
+import SmartImage from '../components/SmartImage';
 
-export default function MediaPage({ setActivePage }) {
+export default function MediaPage() {
   const [activeTab, setActiveTab] = useState('gallery');
   const [visibleCount, setVisibleCount] = useState(6);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -124,18 +124,19 @@ export default function MediaPage({ setActivePage }) {
   };
 
   // Close Lightbox
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setLightboxOpen(false);
-  };
+  }, []);
 
-  // Lightbox Navigation
-  const prevImage = () => {
+  // Lightbox Navigation — memoised so the keyboard effect below can depend on
+  // them honestly instead of capturing a stale render's copy.
+  const prevImage = useCallback(() => {
     setCurrentImageIndex((prev) => (prev === 0 ? currentItems.length - 1 : prev - 1));
-  };
+  }, [currentItems.length]);
 
-  const nextImage = () => {
+  const nextImage = useCallback(() => {
     setCurrentImageIndex((prev) => (prev === currentItems.length - 1 ? 0 : prev + 1));
-  };
+  }, [currentItems.length]);
 
   // Keyboard navigation for lightbox
   useEffect(() => {
@@ -148,7 +149,7 @@ export default function MediaPage({ setActivePage }) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen, currentItems.length]);
+  }, [lightboxOpen, closeLightbox, prevImage, nextImage]);
 
   return (
     <div className="w-full bg-white text-slate-800">
@@ -225,10 +226,12 @@ export default function MediaPage({ setActivePage }) {
               className="w-full aspect-[4/3] bg-[#F8F9FB] rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:border-[#C8A24A]/70 hover:shadow-md hover:-translate-y-1 transition-all duration-300 relative group cursor-pointer"
             >
               {item.image ? (
-                <img
+                <SmartImage
                   src={item.image}
                   alt={item.alt || item.title || "Gallery Photo"}
                   loading="lazy"
+                  wrapperClassName="w-full h-full"
+                  skeletonClassName="rounded-3xl"
                   style={{
                     objectPosition: item.objectPosition || 'center',
                     objectFit: item.objectFit || 'cover',
@@ -313,9 +316,15 @@ export default function MediaPage({ setActivePage }) {
             className="relative max-w-full max-h-[92vh] flex items-center justify-center pointer-events-auto"
           >
             {currentItems[currentImageIndex]?.image ? (
-              <img
+              <SmartImage
+                key={currentItems[currentImageIndex].image}
                 src={currentItems[currentImageIndex].image}
                 alt={currentItems[currentImageIndex].title}
+                loading="eager"
+                wrapperClassName="flex items-center justify-center"
+                placeholderClassName="w-[80vw] max-w-[900px] h-[60vh]"
+                skeletonClassName="rounded-md"
+                variant="dark"
                 className="max-w-full max-h-[92vh] w-auto h-auto object-contain block mx-auto rounded-md shadow-2xl transition-all duration-300 select-none"
               />
             ) : (

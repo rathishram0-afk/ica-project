@@ -1,11 +1,10 @@
 import React from 'react';
-import { Trophy, Users, Award, Medal, School, Box, Star, Sparkles, Building2 } from 'lucide-react';
-import AchievementImagePlaceholder from '../components/AchievementImagePlaceholder';
+import { Trophy, Users, Medal, School, Box, Star } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import ParticleField from '../components/ParticleField';
-import useCountUp from '../hooks/useCountUp';
+import SmartImage from '../components/SmartImage';
 
-export default function AchievementsPage({ setActivePage }) {
+export default function AchievementsPage() {
   const stats = [
     {
       num: "8+",
@@ -106,9 +105,13 @@ export default function AchievementsPage({ setActivePage }) {
           {/* RIGHT COLUMN (45%) — GUINNESS WORLD RECORD STUDENTS PHOTO */}
           <div className="lg:col-span-5 flex items-center justify-center">
             <div className="w-full rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs bg-white flex items-center justify-center">
-              <img
+              <SmartImage
                 src="/images/achievements/guinness-world-record-students.jpg"
                 alt="Students trained for Guinness World Records in Rubik's Cube solving"
+                loading="eager"
+                wrapperClassName="w-full"
+                placeholderClassName="h-72 sm:h-96"
+                skeletonClassName="rounded-3xl"
                 className="w-full h-auto max-h-[480px] object-contain object-center block mx-auto rounded-3xl"
               />
             </div>

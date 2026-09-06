@@ -1,6 +1,7 @@
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin, Globe } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
+import SmartImage from './SmartImage';
 
 export default function Footer({ setActivePage }) {
   const navGroups = [
@@ -46,11 +47,15 @@ export default function Footer({ setActivePage }) {
           {/* Brand Column */}
           <div className="lg:col-span-3 space-y-4">
             <div className="flex items-center gap-3">
-              <img
+              <SmartImage
                 src="/images/logo/ica-logo.png"
                 alt="International Cube Academy"
+                loading="eager"
+                wrapperClassName="h-12"
+                skeletonClassName="rounded-lg"
+                variant="dark"
+                placeholderClassName="w-28"
                 className="h-12 w-auto bg-white/90 p-1.5 rounded-lg transition-transform duration-300 hover:scale-105"
-                onError={(e) => { e.target.style.display = 'none'; }}
               />
             </div>
             <div className="font-serif font-extrabold text-base text-white leading-snug">

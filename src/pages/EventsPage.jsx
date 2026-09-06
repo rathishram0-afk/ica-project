@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Trophy, Calendar, Users, Globe, ArrowRight, Star, ChevronRight, Award, GraduationCap, School } from 'lucide-react';
+import { Trophy, Calendar, Users, Globe, ArrowRight, Star, ChevronRight, Award, School } from 'lucide-react';
 import anime from 'animejs';
 import useCountUp from '../hooks/useCountUp';
 import AnimatedSection from '../components/AnimatedSection';
 import ParticleField from '../components/ParticleField';
+import SmartImage from '../components/SmartImage';
+import { prefersReducedMotion } from '../lib/motion';
 
 /* Stat counter sub-component */
 function EventStat({ icon: Icon, num, label }) {
@@ -30,7 +32,7 @@ export default function EventsPage({ setActivePage }) {
 
   // Animate tab content on switch
   useEffect(() => {
-    if (contentRef.current) {
+    if (contentRef.current && !prefersReducedMotion()) {
       anime({
         targets: contentRef.current,
         opacity: [0, 1],
@@ -128,9 +130,11 @@ export default function EventsPage({ setActivePage }) {
               <div className="bg-[#F8F9FB] rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-xs hover:border-[#C8A24A]/50 card-hover-lift transition-all duration-400 flex flex-col justify-between group">
                 <div className="space-y-4">
                   <div className="overflow-hidden rounded-2xl shadow-sm bg-slate-100">
-                    <img 
+                    <SmartImage 
                       src="/images/events/TNCA-img-1.webp" 
                       alt="Competition Highlights - ICA Students with Trophies" 
+                      wrapperClassName="w-full"
+                      skeletonClassName="rounded-2xl"
                       className="w-full h-56 sm:h-64 object-cover block transform group-hover:scale-[1.05] transition-transform duration-700"
                     />
                   </div>
@@ -153,9 +157,11 @@ export default function EventsPage({ setActivePage }) {
               <div className="bg-[#F8F9FB] rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-xs hover:border-[#C8A24A]/50 card-hover-lift transition-all duration-400 flex flex-col justify-between group">
                 <div className="space-y-4">
                   <div className="overflow-hidden rounded-2xl shadow-sm bg-slate-100">
-                    <img 
+                    <SmartImage 
                       src="/images/events/TNCA-img-2.webp" 
                       alt="Championship Recognition - Award Ceremony" 
+                      wrapperClassName="w-full"
+                      skeletonClassName="rounded-2xl"
                       className="w-full h-56 sm:h-64 object-cover block transform group-hover:scale-[1.05] transition-transform duration-700"
                     />
                   </div>
@@ -252,9 +258,11 @@ export default function EventsPage({ setActivePage }) {
               <div className="bg-[#F8F9FB] rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-xs hover:border-[#C8A24A]/50 card-hover-lift transition-all duration-400 flex flex-col justify-between group">
                 <div className="space-y-4">
                   <div className="overflow-hidden rounded-2xl shadow-sm bg-slate-100">
-                    <img 
+                    <SmartImage 
                       src="/images/events/conference.jpg" 
                       alt="Conferences - ICA Global Education Summit" 
+                      wrapperClassName="w-full"
+                      skeletonClassName="rounded-2xl"
                       className="w-full h-56 sm:h-64 object-cover block transform group-hover:scale-[1.05] transition-transform duration-700"
                     />
                   </div>
@@ -280,9 +288,11 @@ export default function EventsPage({ setActivePage }) {
               <div className="bg-[#F8F9FB] rounded-3xl p-4 sm:p-5 border border-slate-200/80 shadow-xs hover:border-[#C8A24A]/50 card-hover-lift transition-all duration-400 flex flex-col justify-between group">
                 <div className="space-y-4">
                   <div className="overflow-hidden rounded-2xl shadow-sm bg-slate-100">
-                    <img 
+                    <SmartImage 
                       src="/images/events/workshop.jpg" 
                       alt="Workshops - Teacher & Student Development" 
+                      wrapperClassName="w-full"
+                      skeletonClassName="rounded-2xl"
                       className="w-full h-56 sm:h-64 object-cover block transform group-hover:scale-[1.05] transition-transform duration-700"
                     />
                   </div>
