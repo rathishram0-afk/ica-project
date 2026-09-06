@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ArrowRight,
   GraduationCap,
@@ -10,45 +10,28 @@ import {
   Calendar
 } from 'lucide-react';
 import anime from 'animejs';
-import useParallax from '../hooks/useParallax';
 import useCountUp from '../hooks/useCountUp';
 import AnimatedSection from '../components/AnimatedSection';
 import ParticleField from '../components/ParticleField';
 import SmartImage from '../components/SmartImage';
 import MagneticButton from '../components/MagneticButton';
-// three.js + drei weigh ~1MB minified — 84% of the bundle — for one decorative
-// hero cube. Loading it lazily keeps that off the critical path so the rest of
-// the site is interactive first; the cube streams in behind a soft placeholder.
-const Cube3D = lazy(() => import('../components/Cube3D'));
 
 /* Stat counter sub-component */
 function StatItem({ icon: Icon, num, label }) {
   const { ref, displayValue } = useCountUp(num, 2200);
   return (
     <div className="flex items-center gap-3 px-4 sm:px-6 py-2">
-      <div className="w-9 h-9 rounded-xl bg-white/10 text-[#C8A24A] flex items-center justify-center shrink-0 border border-white/10 icon-hover-rotate">
+      <div className="w-9 h-9 rounded-xl bg-[#0B2D6B]/[0.06] text-[#B08A2E] flex items-center justify-center shrink-0 border border-[#0B2D6B]/10 icon-hover-rotate">
         <Icon size={18} />
       </div>
       <div>
-        <div ref={ref} className="text-xl sm:text-2xl font-extrabold text-white font-serif leading-none">
+        <div ref={ref} className="text-xl sm:text-2xl font-extrabold text-[#0B2D6B] font-serif leading-none">
           {displayValue}
         </div>
-        <div className="text-[11px] font-bold text-[#C8A24A] uppercase tracking-wider mt-1">
+        <div className="text-[11px] font-bold text-[#B08A2E] uppercase tracking-wider mt-1">
           {label}
         </div>
       </div>
-    </div>
-  );
-}
-
-/** Holds the hero cube's space while three.js streams in. */
-function Cube3DPlaceholder() {
-  return (
-    <div
-      aria-hidden="true"
-      className="w-full h-full flex items-center justify-center pointer-events-none"
-    >
-      <div className="w-1/2 h-1/2 rounded-[28%] bg-[radial-gradient(circle_at_50%_45%,rgba(200,162,74,0.22)_0%,rgba(200,162,74,0.07)_45%,transparent_70%)] animate-gold-glow" />
     </div>
   );
 }
@@ -57,7 +40,6 @@ export default function HomePage({ setActivePage }) {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [emailInput, setEmailInput] = useState('');
   const heroContentRef = useRef(null);
-  const parallaxBgRef = useParallax(0.15);
 
   // Hero entrance animation timeline
   useEffect(() => {
@@ -124,48 +106,49 @@ export default function HomePage({ setActivePage }) {
       {/* ---------------------------------------------------- */}
       {/* HERO SECTION */}
       {/* ---------------------------------------------------- */}
-      <section 
-        className="relative w-full overflow-hidden bg-[#07245b] border-b border-slate-100 flex flex-col justify-between"
+      <section
+        className="relative w-full overflow-hidden bg-[#F7F9FC] border-b border-slate-200/70 flex flex-col justify-between"
         style={{ minHeight: 'calc(100vh - 64px)' }}
       >
-        {/* Background Layer with Interactive 3D Cube */}
+        {/* Hero background photograph. Anchored right so the cube sits clear
+            of the copy, with the artwork's own pale field filling the left. */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          {/* Position the cube slightly to the right */}
-          <div ref={parallaxBgRef} className="absolute right-[-10%] md:right-[5%] lg:right-[15%] top-1/2 -translate-y-1/2 w-[120vw] h-[120vw] md:w-[800px] md:h-[800px]">
-            <Suspense fallback={<Cube3DPlaceholder />}>
-              <Cube3D />
-            </Suspense>
-          </div>
-          {/* Gradient overlay for contrast on left side text */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#041232]/95 via-[#07245b]/80 to-transparent pointer-events-none" />
+          <img
+            src="/images/hero/ica-hero-bg.png"
+            alt=""
+            aria-hidden="true"
+            fetchPriority="high"
+            className="w-full h-full object-cover object-[78%_center] md:object-[72%_center] select-none"
+            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+          />
+          {/* Legibility scrim: opaque behind the copy, clear over the cube. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#F7F9FC] via-[#F7F9FC]/85 to-transparent md:via-[#F7F9FC]/70 pointer-events-none" />
+          {/* Softens the seam into the stats strip below. */}
+          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#F7F9FC] to-transparent pointer-events-none" />
         </div>
 
-        {/* Gold Particle Overlay */}
-        <ParticleField count={20} />
-
-        {/* Decorative floating shapes */}
-        <div className="absolute top-20 right-[15%] w-24 h-24 border border-[#C8A24A]/15 rounded-full animate-float-slow pointer-events-none z-[2]"></div>
-        <div className="absolute bottom-40 right-[30%] w-16 h-16 border border-white/10 rounded-full animate-float-medium pointer-events-none z-[2]"></div>
-        <div className="absolute top-[40%] left-[5%] w-2 h-2 bg-[#C8A24A]/30 rounded-full animate-float-slow pointer-events-none z-[2]"></div>
+        {/* Decorative floating rings, re-tuned for a pale ground */}
+        <div className="absolute top-20 right-[15%] w-24 h-24 border border-[#C8A24A]/25 rounded-full animate-float-slow pointer-events-none z-[2]"></div>
+        <div className="absolute bottom-40 right-[30%] w-16 h-16 border border-[#0B2D6B]/10 rounded-full animate-float-medium pointer-events-none z-[2]"></div>
 
         {/* Hero Left Content Container */}
         <div ref={heroContentRef} className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-16 flex-1 flex items-center py-10 lg:py-14">
           <div className="w-full lg:w-[52%] xl:w-[48%] space-y-5 sm:space-y-6">
 
             {/* Outlined Gold Badge */}
-            <div className="hero-badge inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] glass px-4 py-1.5 rounded-full border border-[#C8A24A]/40 shadow-xs animate-border-shimmer" style={{opacity: 0}}>
+            <div className="hero-badge inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-[#8A6B1F] bg-white/80 px-4 py-1.5 rounded-full border border-[#C8A24A]/50 shadow-xs animate-border-shimmer" style={{opacity: 0}}>
               <Sparkles size={12} className="animate-float-medium" />
               WELCOME TO INTERNATIONAL CUBE ACADEMY
             </div>
 
             {/* Main Headline */}
             <h1 className="hero-headline font-serif font-extrabold leading-[1.1] tracking-tight">
-              <span className="text-white text-3xl sm:text-5xl xl:text-6xl block drop-shadow-md" style={{opacity: 0}}>Empowering Minds.</span>
-              <span className="text-[#C8A24A] text-3xl sm:text-5xl xl:text-6xl block drop-shadow-md" style={{opacity: 0}}>Building Tomorrow.</span>
+              <span className="text-[#0B2D6B] text-3xl sm:text-5xl xl:text-6xl block" style={{opacity: 0}}>Empowering Minds.</span>
+              <span className="text-[#B08A2E] text-3xl sm:text-5xl xl:text-6xl block" style={{opacity: 0}}>Building Tomorrow.</span>
             </h1>
 
             {/* Description Paragraph */}
-            <p className="hero-desc text-slate-100/90 text-xs sm:text-sm lg:text-[15px] font-light max-w-lg leading-relaxed" style={{opacity: 0}}>
+            <p className="hero-desc text-slate-600 text-xs sm:text-sm lg:text-[15px] font-light max-w-lg leading-relaxed" style={{opacity: 0}}>
               The International Cube Academy (ICA) is a global educational institution dedicated to developing cognitive skills through Rubik's Cube-based learning. Our innovative programs combine brain development, STEM education, creativity, and leadership to help learners of all ages unlock their full potential.
             </p>
 
@@ -173,11 +156,11 @@ export default function HomePage({ setActivePage }) {
             <div className="flex flex-wrap gap-4 pt-1 sm:pt-2">
               <MagneticButton
                 onClick={() => setActivePage('about')}
-                className="hero-cta glass px-7 py-3 rounded-full font-bold text-xs uppercase tracking-wider text-white hover:bg-white/15 border border-white/30 transition-all duration-400 shadow-md hover:shadow-lg flex items-center gap-2 group"
+                className="hero-cta bg-white px-7 py-3 rounded-full font-bold text-xs uppercase tracking-wider text-[#0B2D6B] hover:bg-[#0B2D6B] hover:text-white border border-[#0B2D6B]/20 transition-all duration-400 shadow-sm hover:shadow-md flex items-center gap-2 group"
                 style={{opacity: 0}}
               >
                 <span>ABOUT ICA</span>
-                <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300 text-[#C8A24A]" />
+                <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300 text-[#C8A24A] group-hover:text-white" />
               </MagneticButton>
               <MagneticButton
                 onClick={() => setActivePage('contact')}
@@ -193,9 +176,9 @@ export default function HomePage({ setActivePage }) {
         </div>
 
         {/* Bottom Statistics Panel */}
-        <AnimatedSection animation="fadeUp" delay={800} className="relative z-10 w-full glass-dark border-t border-white/15">
+        <AnimatedSection animation="fadeUp" delay={800} className="relative z-10 w-full bg-white/85 border-t border-slate-200">
           <div className="max-w-[1440px] mx-auto px-4 lg:px-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/15 py-3 sm:py-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-200 py-3 sm:py-4">
               <StatItem icon={Award} num="15+" label="Years of Experience" />
               <StatItem icon={GraduationCap} num="1 Lakh+" label="Students Trained" />
               <StatItem icon={Calendar} num="80+" label="Events Organized" />
