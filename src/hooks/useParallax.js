@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { prefersReducedMotion } from '../lib/motion';
 
 /**
  * useParallax — scroll-driven translation at a given speed factor.
@@ -14,6 +15,17 @@ export default function useParallax(speed = 0.3, direction = 'vertical') {
     const el = ref.current;
     if (!el) return;
 
+    // Parallax is motion; a visitor who asked for less of it keeps the
+    // element exactly where the stylesheet put it.
+    if (prefersReducedMotion()) return;
+
+    // Whatever transform the element already carries (a Tailwind
+    // `-translate-y-1/2`, say) has to be preserved. Writing style.transform
+    // replaces the class-based one outright, which silently knocked the hero
+    // cube several hundred pixels down and out of its clipped container.
+    const baseTransform = getComputedStyle(el).transform;
+    const base = baseTransform && baseTransform !== 'none' ? `${baseTransform} ` : '';
+
     const handleScroll = () => {
       if (!ticking.current) {
         ticking.current = true;
@@ -26,9 +38,9 @@ export default function useParallax(speed = 0.3, direction = 'vertical') {
             const scrolled = (windowHeight - rect.top) * speed;
 
             if (direction === 'vertical') {
-              el.style.transform = `translate3d(0, ${scrolled}px, 0)`;
+              el.style.transform = `${base}translate3d(0, ${scrolled}px, 0)`;
             } else {
-              el.style.transform = `translate3d(${scrolled}px, 0, 0)`;
+              el.style.transform = `${base}translate3d(${scrolled}px, 0, 0)`;
             }
           }
           ticking.current = false;
