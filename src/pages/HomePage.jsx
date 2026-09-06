@@ -107,29 +107,32 @@ export default function HomePage({ setActivePage }) {
       {/* HERO SECTION */}
       {/* ---------------------------------------------------- */}
       <section
-        className="relative w-full overflow-hidden bg-[#F7F9FC] border-b border-slate-200/70 flex flex-col justify-between"
+        className="relative w-full overflow-hidden bg-[#F7F7F9] border-b border-slate-200/70 flex flex-col justify-between"
         style={{ minHeight: 'calc(100vh - 64px)' }}
       >
-        {/* Hero background photograph. Anchored right so the cube sits clear
-            of the copy, with the artwork's own pale field filling the left. */}
+        {/* Hero artwork. The section ground is set to the photograph's own
+            field colour (#F7F7F9, sampled from its corners), so the image is
+            anchored right and simply dissolves into the background — no seam,
+            and the copy keeps a clean column on the left. */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
-            src="/images/hero/ica-hero-bg.png"
+            src="/images/hero/ica-about-cube.png"
             alt=""
             aria-hidden="true"
             fetchPriority="high"
-            className="w-full h-full object-cover object-[78%_center] md:object-[72%_center] select-none"
-            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            className="absolute inset-y-0 right-0 h-full w-full md:w-[64%] lg:w-[58%] object-contain object-center md:object-right select-none"
           />
-          {/* Legibility scrim: opaque behind the copy, clear over the cube. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F7F9FC] via-[#F7F9FC]/85 to-transparent md:via-[#F7F9FC]/70 pointer-events-none" />
-          {/* Softens the seam into the stats strip below. */}
-          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#F7F9FC] to-transparent pointer-events-none" />
+          {/* Below md the artwork sits under the copy, so it needs a scrim.
+              From md up the two occupy separate columns and it is barely
+              needed — hence the much lighter wash. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#F7F7F9] via-[#F7F7F9]/90 to-transparent md:via-[#F7F7F9]/40 pointer-events-none" />
+          {/* Softens the join into the stats strip below. */}
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#F7F7F9] to-transparent pointer-events-none" />
         </div>
 
-        {/* Decorative floating rings, re-tuned for a pale ground */}
-        <div className="absolute top-20 right-[15%] w-24 h-24 border border-[#C8A24A]/25 rounded-full animate-float-slow pointer-events-none z-[2]"></div>
-        <div className="absolute bottom-40 right-[30%] w-16 h-16 border border-[#0B2D6B]/10 rounded-full animate-float-medium pointer-events-none z-[2]"></div>
+        {/* The artwork carries its own orbit rings and floating cubes, so the
+            old decorative circles were removed rather than restyled — two
+            competing sets of rings read as clutter. */}
 
         {/* Hero Left Content Container */}
         <div ref={heroContentRef} className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-16 flex-1 flex items-center py-10 lg:py-14">
