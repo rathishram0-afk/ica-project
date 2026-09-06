@@ -1,0 +1,3 @@
+# SPA fallback for Netlify-style static hosts: every path serves index.html
+# so a deep link or refresh on /about does not 404.
+/*  /index.html  200

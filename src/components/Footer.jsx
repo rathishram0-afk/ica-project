@@ -2,8 +2,10 @@ import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin, Globe } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 import SmartImage from './SmartImage';
+import { Link } from 'react-router-dom';
+import { pathFor } from '../routes';
 
-export default function Footer({ setActivePage }) {
+export default function Footer() {
   const navGroups = [
     {
       title: "Organization",
@@ -46,7 +48,7 @@ export default function Footer({ setActivePage }) {
 
           {/* Brand Column */}
           <div className="lg:col-span-3 space-y-4">
-            <div className="flex items-center gap-3">
+            <Link to={pathFor('home')} className="flex items-center gap-3" aria-label="International Cube Academy — home">
               <SmartImage
                 src="/images/logo/ica-logo.png"
                 alt="International Cube Academy"
@@ -57,7 +59,7 @@ export default function Footer({ setActivePage }) {
                 placeholderClassName="w-28"
                 className="h-12 w-auto bg-white/90 p-1.5 rounded-lg transition-transform duration-300 hover:scale-105"
               />
-            </div>
+            </Link>
             <div className="font-serif font-extrabold text-base text-white leading-snug">
               International<br />
               <span className="text-gradient-gold" style={{WebkitTextFillColor: 'unset', background: 'none', color: '#C8A24A'}}>Cube Academy</span>
@@ -88,13 +90,13 @@ export default function Footer({ setActivePage }) {
               <ul className="space-y-2 text-xs">
                 {group.links.map((link, li) => (
                   <li key={li}>
-                    <button
-                      onClick={() => setActivePage(link.id)}
+                    <Link
+                      to={pathFor(link.id)}
                       className="text-slate-300 hover:text-[#C8A24A] transition-all duration-200 flex items-center gap-1.5 group hover:translate-x-1"
                     >
                       <span className="text-[#C8A24A] transition-transform duration-200 group-hover:scale-125">›</span>
                       <span>{link.name}</span>
-                    </button>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -135,11 +137,11 @@ export default function Footer({ setActivePage }) {
               © 2026 International Cube Academy. All Rights Reserved.
             </div>
             <div className="flex items-center space-x-4">
-              <button onClick={() => setActivePage('about')} className="hover:text-[#C8A24A] transition-colors duration-200">Privacy Policy</button>
+              <Link to={pathFor('about')} className="hover:text-[#C8A24A] transition-colors duration-200">Privacy Policy</Link>
               <span>|</span>
-              <button onClick={() => setActivePage('about')} className="hover:text-[#C8A24A] transition-colors duration-200">Terms of Service</button>
+              <Link to={pathFor('about')} className="hover:text-[#C8A24A] transition-colors duration-200">Terms of Service</Link>
               <span>|</span>
-              <button onClick={() => setActivePage('resources')} className="hover:text-[#C8A24A] transition-colors duration-200">Resources</button>
+              <Link to={pathFor('resources')} className="hover:text-[#C8A24A] transition-colors duration-200">Resources</Link>
             </div>
           </div>
         </AnimatedSection>

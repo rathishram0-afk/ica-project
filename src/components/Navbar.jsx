@@ -3,8 +3,10 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import anime from 'animejs';
 import SmartImage from './SmartImage';
 import { prefersReducedMotion } from '../lib/motion';
+import { Link } from 'react-router-dom';
+import { pathFor } from '../routes';
 
-export default function Navbar({ activePage, setActivePage }) {
+export default function Navbar({ activePage }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [programsOpen, setProgramsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -126,8 +128,8 @@ export default function Navbar({ activePage, setActivePage }) {
     return activePage === link.id;
   };
 
-  const handleNav = (id) => {
-    setActivePage(id);
+  // <Link> does the navigating; this only closes the menus afterwards.
+  const closeMenus = () => {
     setMobileMenuOpen(false);
     setProgramsOpen(false);
   };
@@ -144,9 +146,11 @@ export default function Navbar({ activePage, setActivePage }) {
         <div className="flex items-center justify-between h-18 lg:h-20 py-2">
 
           {/* Logo */}
-          <div
+          <Link
+            to={pathFor('home')}
+            onClick={closeMenus}
+            aria-label="International Cube Academy — home"
             className="flex items-center cursor-pointer shrink-0 group"
-            onClick={() => handleNav('home')}
           >
             <SmartImage
               src="/images/logo/ica-logo.png"
@@ -166,7 +170,7 @@ export default function Navbar({ activePage, setActivePage }) {
                 </div>
               }
             />
-          </div>
+          </Link>
 
           {/* Desktop Nav */}
           <div ref={navLinksRef} className="hidden lg:flex items-center gap-1 flex-1 justify-center mx-4">
@@ -191,9 +195,10 @@ export default function Navbar({ activePage, setActivePage }) {
                         className="absolute top-full left-1/2 -translate-x-1/2 mt-1.5 bg-white/95 backdrop-blur-xl rounded-2xl shadow-elevated border border-slate-100 overflow-hidden min-w-[220px] z-50"
                       >
                         {link.children.map(child => (
-                          <button
+                          <Link
                             key={child.id}
-                            onClick={() => handleNav(child.id)}
+                            to={pathFor(child.id)}
+                            onClick={closeMenus}
                             className={`w-full text-left px-4 py-3 text-xs font-semibold transition-all duration-200 flex items-center gap-2 ${
                               activePage === child.id
                                 ? 'bg-[#0B2D6B]/5 text-[#0B2D6B]'
@@ -202,7 +207,7 @@ export default function Navbar({ activePage, setActivePage }) {
                           >
                             {activePage === child.id && <span className="w-1.5 h-1.5 rounded-full bg-[#C8A24A] animate-pulseGold"></span>}
                             {child.label}
-                          </button>
+                          </Link>
                         ))}
                       </div>
                     )}
@@ -210,9 +215,10 @@ export default function Navbar({ activePage, setActivePage }) {
                 );
               }
               return (
-                <button
+                <Link
                   key={link.id}
-                  onClick={() => handleNav(link.id)}
+                  to={pathFor(link.id)}
+                  onClick={closeMenus}
                   className={`nav-item nav-link-hover text-[11px] font-semibold uppercase tracking-wider px-3 py-2 rounded-lg transition-all duration-300 relative ${
                     activePage === link.id
                       ? 'text-[#0B2D6B] font-extrabold bg-[#0B2D6B]/5'
@@ -223,19 +229,20 @@ export default function Navbar({ activePage, setActivePage }) {
                   {activePage === link.id && (
                     <span className="absolute bottom-0.5 left-3 right-3 h-0.5 bg-[#C8A24A] rounded-full"></span>
                   )}
-                </button>
+                </Link>
               );
             })}
           </div>
 
           {/* JOIN ICA Button */}
           <div className="hidden lg:flex items-center shrink-0 nav-item">
-            <button
-              onClick={() => handleNav('contact')}
-              className="gold-btn px-5 py-2.5 rounded-full text-[11px] font-bold uppercase tracking-wider text-white transition-all duration-300 shadow-sm hover:shadow-gold-button transform hover:-translate-y-0.5"
+            <Link
+              to={pathFor('contact')}
+              onClick={closeMenus}
+              className="gold-btn inline-block px-5 py-2.5 rounded-full text-[11px] font-bold uppercase tracking-wider text-white transition-all duration-300 shadow-sm hover:shadow-gold-button transform hover:-translate-y-0.5"
             >
               JOIN ICA
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Toggle */}
@@ -265,41 +272,44 @@ export default function Navbar({ activePage, setActivePage }) {
                       {link.label}
                     </div>
                     {link.children.map(child => (
-                      <button
+                      <Link
                         key={child.id}
-                        onClick={() => handleNav(child.id)}
-                        className={`mobile-nav-item w-full text-left py-2.5 px-5 text-xs font-semibold rounded-xl transition-all duration-200 ${
+                        to={pathFor(child.id)}
+                        onClick={closeMenus}
+                        className={`mobile-nav-item block w-full text-left py-2.5 px-5 text-xs font-semibold rounded-xl transition-all duration-200 ${
                           activePage === child.id
                             ? 'bg-[#0B2D6B]/5 text-[#0B2D6B] font-bold'
                             : 'text-slate-600 hover:bg-[#F8F9FB]'
                         }`}
                       >
                         {child.label}
-                      </button>
+                      </Link>
                     ))}
                   </div>
                 );
               }
               return (
-                <button
+                <Link
                   key={link.id}
-                  onClick={() => handleNav(link.id)}
-                  className={`mobile-nav-item w-full text-left py-2.5 px-3 text-xs font-semibold rounded-xl transition-all duration-200 ${
+                  to={pathFor(link.id)}
+                  onClick={closeMenus}
+                  className={`mobile-nav-item block w-full text-left py-2.5 px-3 text-xs font-semibold rounded-xl transition-all duration-200 ${
                     activePage === link.id
                       ? 'bg-[#0B2D6B]/5 text-[#0B2D6B] font-bold'
                       : 'text-slate-600 hover:bg-[#F8F9FB]'
                   }`}
                 >
                   {link.label}
-                </button>
+                </Link>
               );
             })}
-            <button
-              onClick={() => handleNav('contact')}
-              className="mobile-nav-item gold-btn w-full py-3 mt-3 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm"
+            <Link
+              to={pathFor('contact')}
+              onClick={closeMenus}
+              className="mobile-nav-item gold-btn block w-full text-center py-3 mt-3 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm"
             >
               JOIN ICA
-            </button>
+            </Link>
           </div>
         </div>
       )}

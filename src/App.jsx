@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import anime from 'animejs';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Preloader from './components/Preloader';
 import PageSkeleton from './components/PageSkeleton';
 import { prefersReducedMotion } from './lib/motion';
+import { SKELETON_VARIANTS, keyFor, pathFor, titleFor } from './routes';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
@@ -21,72 +23,53 @@ import CertificationApplyPage from './pages/CertificationApplyPage';
 /** How long the page skeleton holds before the real page is revealed. */
 const SKELETON_HOLD_MS = 420;
 
-/** Which skeleton shape each route shows while it swaps in. */
-const SKELETON_VARIANTS = {
-  home: 'hero-split',
-  about: 'hero-split',
-  programs: 'grid',
-  certification: 'grid',
-  'certification-apply': 'form',
-  accreditation: 'grid',
-  research: 'grid',
-  events: 'grid',
-  achievements: 'hero-split',
-  partners: 'grid',
-  media: 'grid',
-  resources: 'grid',
-  contact: 'form',
-};
-
 export default function App() {
-  const [activePage, setActivePage] = useState('home');
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
   const [showPreloader, setShowPreloader] = useState(true);
   const [showSkeleton, setShowSkeleton] = useState(false);
   const mainRef = useRef(null);
-  const prevPage = useRef('home');
   const skeletonTimer = useRef(null);
+  const isFirstRoute = useRef(true);
+
+  const activePage = keyFor(location.pathname);
+
+  /**
+   * Pages and the nav still call `setActivePage('about')`; that key is simply
+   * translated into a URL here, so no page component had to change.
+   */
+  const handlePageChange = useCallback(
+    (key) => {
+      const next = pathFor(key);
+      if (next !== location.pathname) navigate(next);
+    },
+    [navigate, location.pathname]
+  );
 
   useEffect(() => () => clearTimeout(skeletonTimer.current), []);
 
-  const handlePageChange = useCallback(
-    (page) => {
-      if (page === activePage || isTransitioning) return;
+  // Title per route, so tabs, bookmarks and search results are meaningful.
+  useEffect(() => {
+    document.title = titleFor(location.pathname);
+  }, [location.pathname]);
 
-      setIsTransitioning(true);
-
-      const commit = () => {
-        prevPage.current = activePage;
-        setActivePage(page);
-        setShowSkeleton(true);
-        setIsTransitioning(false);
-        window.scrollTo({ top: 0, behavior: 'instant' });
-
-        clearTimeout(skeletonTimer.current);
-        skeletonTimer.current = setTimeout(() => setShowSkeleton(false), SKELETON_HOLD_MS);
-      };
-
-      // Reduced motion: swap straight to the new page, no fade-out first.
-      if (mainRef.current && !prefersReducedMotion()) {
-        anime({
-          targets: mainRef.current,
-          opacity: [1, 0],
-          translateY: [0, -8],
-          duration: 200,
-          easing: 'easeInCubic',
-          complete: commit,
-        });
-      } else {
-        commit();
-      }
-    },
-    [activePage, isTransitioning]
-  );
+  // Route change: hold a skeleton briefly, reset scroll, then reveal. This
+  // covers <Link> clicks, back/forward and programmatic navigation alike.
+  useEffect(() => {
+    if (isFirstRoute.current) {
+      isFirstRoute.current = false;
+      return;
+    }
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setShowSkeleton(true);
+    clearTimeout(skeletonTimer.current);
+    skeletonTimer.current = setTimeout(() => setShowSkeleton(false), SKELETON_HOLD_MS);
+  }, [location.pathname]);
 
   useEffect(() => {
-    if (showPreloader || isTransitioning || !mainRef.current) return;
+    if (showPreloader || !mainRef.current) return;
 
-    // While the skeleton is up, the shell is simply visible — the shimmer is
+    // While the skeleton is up the shell is simply visible — the shimmer is
     // doing the work, so there is nothing to fade.
     if (showSkeleton || prefersReducedMotion()) {
       anime.set(mainRef.current, { opacity: 1, translateY: 0 });
@@ -100,39 +83,9 @@ export default function App() {
       duration: 400,
       easing: 'easeOutCubic',
     });
-  }, [activePage, showPreloader, isTransitioning, showSkeleton]);
+  }, [location.pathname, showPreloader, showSkeleton]);
 
-  const renderPage = () => {
-    switch (activePage) {
-      case 'home':
-        return <HomePage setActivePage={handlePageChange} />;
-      case 'about':
-        return <AboutPage setActivePage={handlePageChange} />;
-      case 'programs':
-      case 'certification':
-        return <ProgramsPage setActivePage={handlePageChange} />;
-      case 'certification-apply':
-        return <CertificationApplyPage setActivePage={handlePageChange} />;
-      case 'accreditation':
-        return <AccreditationPage setActivePage={handlePageChange} />;
-      case 'research':
-        return <ResearchPage setActivePage={handlePageChange} />;
-      case 'events':
-        return <EventsPage setActivePage={handlePageChange} />;
-      case 'achievements':
-        return <AchievementsPage setActivePage={handlePageChange} />;
-      case 'partners':
-        return <PartnersPage setActivePage={handlePageChange} />;
-      case 'media':
-        return <MediaPage setActivePage={handlePageChange} />;
-      case 'resources':
-        return <ResourcesPage setActivePage={handlePageChange} />;
-      case 'contact':
-        return <ContactPage setActivePage={handlePageChange} />;
-      default:
-        return <HomePage setActivePage={handlePageChange} />;
-    }
-  };
+  const nav = handlePageChange;
 
   return (
     <>
@@ -140,15 +93,31 @@ export default function App() {
 
       {!showPreloader && (
         <div className="min-h-screen flex flex-col font-sans text-slate-800 selection:bg-ica-gold selection:text-ica-blue-dark">
-          <Navbar activePage={activePage} setActivePage={handlePageChange} />
+          <Navbar activePage={activePage} />
           <main ref={mainRef} className="flex-grow pt-0" style={{ opacity: 0 }}>
             {showSkeleton ? (
               <PageSkeleton variant={SKELETON_VARIANTS[activePage] || 'grid'} />
             ) : (
-              renderPage()
+              <Routes>
+                <Route path="/" element={<HomePage setActivePage={nav} />} />
+                <Route path="/about" element={<AboutPage setActivePage={nav} />} />
+                <Route path="/programs" element={<ProgramsPage setActivePage={nav} />} />
+                <Route path="/certification" element={<ProgramsPage setActivePage={nav} />} />
+                <Route path="/certification/apply" element={<CertificationApplyPage setActivePage={nav} />} />
+                <Route path="/accreditation" element={<AccreditationPage setActivePage={nav} />} />
+                <Route path="/research" element={<ResearchPage setActivePage={nav} />} />
+                <Route path="/events" element={<EventsPage setActivePage={nav} />} />
+                <Route path="/achievements" element={<AchievementsPage setActivePage={nav} />} />
+                <Route path="/partners" element={<PartnersPage setActivePage={nav} />} />
+                <Route path="/media" element={<MediaPage setActivePage={nav} />} />
+                <Route path="/resources" element={<ResourcesPage setActivePage={nav} />} />
+                <Route path="/contact" element={<ContactPage setActivePage={nav} />} />
+                {/* Unknown URL: send people home rather than showing nothing. */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
             )}
           </main>
-          <Footer setActivePage={handlePageChange} />
+          <Footer />
         </div>
       )}
     </>
