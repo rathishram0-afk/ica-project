@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   ArrowRight,
   GraduationCap,
@@ -6,7 +6,6 @@ import {
   CheckCircle2,
   Sparkles,
   Award,
-  Send,
   Calendar
 } from 'lucide-react';
 import anime from 'animejs';
@@ -37,8 +36,6 @@ function StatItem({ icon: Icon, num, label }) {
 }
 
 export default function HomePage({ setActivePage }) {
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
-  const [emailInput, setEmailInput] = useState('');
   const heroContentRef = useRef(null);
 
   // Hero entrance animation timeline
@@ -75,15 +72,6 @@ export default function HomePage({ setActivePage }) {
         delay: anime.stagger(100),
       }, '-=300');
   }, []);
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (emailInput.trim()) {
-      setEmailSubmitted(true);
-      setTimeout(() => setEmailSubmitted(false), 4000);
-      setEmailInput('');
-    }
-  };
 
   const whyChooseChecklist = [
     "Internationally Designed Curriculum",
@@ -363,57 +351,6 @@ export default function HomePage({ setActivePage }) {
       </section>
 
 
-      {/* ---------------------------------------------------- */}
-      {/* NEWSLETTER SECTION */}
-      {/* ---------------------------------------------------- */}
-      <section className="py-14 bg-[#F8F9FB] relative overflow-hidden">
-        {/* Decorative */}
-        <div className="absolute top-0 right-0 w-72 h-72 bg-[#C8A24A]/5 rounded-full blur-3xl pointer-events-none"></div>
-
-        <AnimatedSection animation="fadeUp" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl p-8 sm:p-10 border border-slate-200/80 shadow-premium flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-            
-            {/* Shimmer accent line */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C8A24A] to-transparent animate-gradient-shift"></div>
-
-            <div className="flex items-center gap-5 max-w-xl">
-              <div className="w-14 h-14 rounded-full bg-[#C8A24A]/15 text-[#C8A24A] flex items-center justify-center shrink-0 animate-gold-glow">
-                <Send size={24} />
-              </div>
-              <div>
-                <h3 className="font-serif font-bold text-xl text-[#0B2D6B]">Stay Updated with ICA</h3>
-                <p className="text-slate-600 text-xs font-light mt-1">
-                  Subscribe to our newsletter and never miss important updates, events and opportunities.
-                </p>
-              </div>
-            </div>
-
-            <form onSubmit={handleSubscribe} className="flex w-full md:w-auto items-center gap-2">
-              <input 
-                type="email"
-                required
-                placeholder="Enter your email"
-                value={emailInput}
-                onChange={(e) => setEmailInput(e.target.value)}
-                className="px-4 py-3 rounded-full bg-[#F8F9FB] border border-slate-200 text-xs text-[#0B2D6B] focus:outline-none focus:border-[#C8A24A] focus:shadow-glass-gold transition-all duration-300 w-full md:w-64"
-              />
-              <button 
-                type="submit"
-                className="px-6 py-3 rounded-full bg-[#0B2D6B] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#071d47] transition-all duration-300 shrink-0 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
-              >
-                Subscribe
-              </button>
-            </form>
-
-          </div>
-
-          {emailSubmitted && (
-            <div className="mt-4 p-3 bg-emerald-50 text-emerald-800 text-xs rounded-lg text-center animate-fadeIn">
-              ✓ Thank you for subscribing to ICA updates.
-            </div>
-          )}
-        </AnimatedSection>
-      </section>
 
     </div>
   );
