@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import ImagePlaceholder from '../components/ImagePlaceholder';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Building2 } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import ParticleField from '../components/ParticleField';
 
@@ -55,52 +54,128 @@ export default function ContactPage() {
             {/* Left: Office Details & Social Links */}
             <AnimatedSection animation="fadeLeft" className="lg:col-span-5 space-y-8">
               <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#C8A24A]">Direct Contact</span>
-                <h2 className="font-serif text-3xl font-bold text-[#0B2E6B] mt-2 mb-4">Global Head Office</h2>
+                <span className="text-xs font-bold uppercase tracking-widest text-[#C8A24A] block">Direct Contact</span>
+                <h2 className="font-serif text-3xl font-bold text-[#0B2E6B] mt-2 mb-4">Official Regional Offices</h2>
                 <p className="text-slate-600 text-sm leading-relaxed font-light">
-                  Our regional representatives assist schools with curriculum demos, teacher training schedules, and accreditation criteria.
+                  Connect with ICA administrative headquarters in Chennai or our regional coordination offices in the UAE.
                 </p>
               </div>
 
               <div className="space-y-6 text-sm text-slate-700">
-                {[
-                  {
-                    icon: MapPin,
-                    title: "Global Headquarters",
-                    content: <>ICA Secretariat, International Knowledge Park<br /><span className="font-mono text-[11px] text-slate-400">[ Office Location Placeholder ]</span></>
-                  },
-                  {
-                    icon: Mail,
-                    title: "Admissions & Accreditation Email",
-                    content: "accreditation@cubeacademy.org"
-                  },
-                  {
-                    icon: Phone,
-                    title: "Telephone Desk",
-                    content: "+1 (800) ICA-CUBE / +65 6789 0123"
-                  }
-                ].map((item, idx) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={idx} className="flex items-start gap-4 p-4 rounded-xl bg-[#F8F9FB] border border-slate-100 card-hover-lift transition-all duration-300 group">
-                      <Icon size={20} className="text-[#C8A24A] shrink-0 mt-1 group-hover:scale-110 transition-transform duration-300" />
+                {/* 1. HEAD OFFICE / CHENNAI OFFICE */}
+                <div className="p-5 rounded-xl bg-[#F8F9FB] border border-slate-100 card-hover-lift transition-all duration-300 group">
+                  <div className="flex items-start gap-4">
+                    <MapPin size={22} className="text-[#C8A24A] shrink-0 mt-1 group-hover:scale-110 transition-transform duration-300" />
+                    <div>
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#C8A24A] block">Head Office</span>
+                      <h4 className="font-bold text-[#0B2E6B] text-base mt-0.5">Chennai Office</h4>
+                      <p className="text-xs text-slate-600 font-light mt-1.5 leading-relaxed">
+                        No. 1/90, Ground Floor, Shop No. 1 & 2,<br />
+                        Pillaiyar Koil Street, Kolapakkam,<br />
+                        Chennai – 600 128, Tamil Nadu, India
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. UAE OFFICES */}
+                <div className="p-5 rounded-xl bg-[#F8F9FB] border border-slate-100 card-hover-lift transition-all duration-300 group">
+                  <div className="flex items-start gap-4">
+                    <Building2 size={22} className="text-[#C8A24A] shrink-0 mt-1 group-hover:scale-110 transition-transform duration-300" />
+                    <div className="w-full space-y-4">
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#C8A24A] block">UAE Offices</span>
+                      
                       <div>
-                        <h4 className="font-bold text-[#0B2E6B]">{item.title}</h4>
-                        <p className="text-xs text-slate-500 font-light mt-0.5">{item.content}</p>
+                        <h4 className="font-bold text-[#0B2E6B] text-xs uppercase tracking-wider">Dubai Office</h4>
+                        <p className="text-xs text-slate-600 font-light mt-0.5 leading-relaxed">
+                          Office #203, NBQ Building,<br />
+                          Burman MS Exit 4, Dubai, UAE
+                        </p>
+                      </div>
+
+                      <div className="border-t border-slate-200/60 pt-3">
+                        <h4 className="font-bold text-[#0B2E6B] text-xs uppercase tracking-wider">Sharjah Office</h4>
+                        <p className="text-xs text-slate-600 font-light mt-0.5 leading-relaxed">
+                          Office #405, Faisal Building,<br />
+                          Al Qasimia, Sharjah, UAE
+                        </p>
                       </div>
                     </div>
-                  );
-                })}
+                  </div>
+                </div>
+
+                {/* 3. CONTACT NUMBERS */}
+                <div className="p-5 rounded-xl bg-[#F8F9FB] border border-slate-100 card-hover-lift transition-all duration-300 group">
+                  <div className="flex items-start gap-4">
+                    <Phone size={22} className="text-[#C8A24A] shrink-0 mt-1 group-hover:scale-110 transition-transform duration-300" />
+                    <div>
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#C8A24A] block">Contact Numbers</span>
+                      <h4 className="font-bold text-[#0B2E6B] text-sm mt-0.5">Telephone & WhatsApp</h4>
+                      <div className="mt-2.5 space-y-2 text-xs">
+                        <div className="space-y-1">
+                          <span className="text-slate-400 font-medium text-[11px] block uppercase tracking-wider">Chennai / India:</span>
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3">
+                            <a href="tel:+918220713743" className="font-mono text-[#0B2E6B] font-bold hover:text-[#C8A24A] transition-colors">
+                              +91 82207 13743
+                            </a>
+                            <span className="hidden sm:inline text-slate-300">|</span>
+                            <a href="tel:+919500849544" className="font-mono text-[#0B2E6B] font-bold hover:text-[#C8A24A] transition-colors">
+                              +91 95008 49544
+                            </a>
+                          </div>
+                        </div>
+                        <div className="border-t border-slate-200/60 pt-2">
+                          <span className="text-slate-400 font-medium text-[11px] block uppercase tracking-wider">UAE:</span>
+                          <a href="tel:+971564895227" className="font-mono text-[#0B2E6B] font-bold hover:text-[#C8A24A] transition-colors block mt-0.5">
+                            +971 56 489 5227
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 4. OFFICIAL EMAIL */}
+                <div className="p-5 rounded-xl bg-[#F8F9FB] border border-slate-100 card-hover-lift transition-all duration-300 group">
+                  <div className="flex items-start gap-4">
+                    <Mail size={22} className="text-[#C8A24A] shrink-0 mt-1 group-hover:scale-110 transition-transform duration-300" />
+                    <div>
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#C8A24A] block">Official Email</span>
+                      <h4 className="font-bold text-[#0B2E6B] text-sm mt-0.5">Admissions & General Inquiries</h4>
+                      <a 
+                        href="mailto:internationalcubeacademy@gmail.com" 
+                        className="text-xs font-mono font-semibold text-[#0B2E6B] hover:text-[#C8A24A] transition-colors block mt-1 break-all"
+                      >
+                        internationalcubeacademy@gmail.com
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Social Links */}
               <div>
                 <span className="text-xs font-bold uppercase tracking-widest text-[#C8A24A] block mb-3">Official Media Channels</span>
                 <div className="flex items-center gap-3">
-                  {['LinkedIn', 'Twitter', 'Facebook', 'YouTube'].map((net, idx) => (
-                    <span key={idx} className="px-3.5 py-1.5 rounded-full bg-[#F8F9FB] text-xs font-bold text-[#0B2E6B] border border-slate-200 hover:bg-[#0B2D6B] hover:text-white hover:border-[#0B2D6B] transition-all duration-300 cursor-pointer">
-                      {net}
-                    </span>
+                  {[
+                    {
+                      name: 'Facebook',
+                      url: import.meta.env.VITE_FACEBOOK_URL || 'https://www.facebook.com/TamilNaduCubeAssociation',
+                    },
+                    {
+                      name: 'YouTube',
+                      url: 'https://www.youtube.com/@CubesKool_no1toystores',
+                    },
+                  ].map((net) => (
+                    <a
+                      key={net.name}
+                      href={net.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3.5 py-1.5 rounded-full bg-[#F8F9FB] text-xs font-bold text-[#0B2E6B] border border-slate-200 hover:bg-[#0B2D6B] hover:text-white hover:border-[#0B2D6B] transition-all duration-300 inline-flex items-center justify-center cursor-pointer"
+                    >
+                      {net.name}
+                    </a>
                   ))}
                 </div>
               </div>
@@ -200,24 +275,6 @@ export default function ContactPage() {
         </section>
 
 
-        {/* ---------------------------------------------------- */}
-        {/* MAP PLACEHOLDER */}
-        {/* ---------------------------------------------------- */}
-        <AnimatedSection animation="fadeUp" as="section">
-          <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#C8A24A]">Location</span>
-            <h2 className="font-serif text-3xl font-bold text-[#0B2E6B]">Headquarters Map Location</h2>
-          </div>
-
-          <ImagePlaceholder 
-            label="Map Placeholder"
-            subtext="Interactive Google Map / Satellite View of ICA Global Secretariat Campus"
-            aspectRatio="banner"
-            height="h-80"
-            className="shadow-premium"
-          />
-        </AnimatedSection>
-
 
         {/* ---------------------------------------------------- */}
         {/* CALL TO ACTION BANNER */}
@@ -231,9 +288,12 @@ export default function ContactPage() {
               <h2 className="font-serif text-3xl font-bold">Ready to Elevate Your School's Cognitive Brand?</h2>
               <p className="text-slate-300 text-sm font-light">Join over 50+ leading international schools currently offering ICA accredited programs.</p>
               <div className="pt-2">
-                <span className="inline-block px-6 py-2 glass text-[#C8A24A] font-mono text-xs font-bold rounded-full border border-[#C8A24A]/30 animate-border-shimmer">
-                  Official Hotline: admissions@cubeacademy.org
-                </span>
+                <a 
+                  href="mailto:internationalcubeacademy@gmail.com"
+                  className="inline-block px-6 py-2 glass text-[#C8A24A] font-mono text-xs font-bold rounded-full border border-[#C8A24A]/30 animate-border-shimmer hover:bg-[#C8A24A]/20 transition-all duration-300"
+                >
+                  Official Email: internationalcubeacademy@gmail.com
+                </a>
               </div>
             </div>
           </div>

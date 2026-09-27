@@ -2,60 +2,33 @@ import React from 'react';
 import { Handshake, ArrowRight, Globe, GraduationCap, Award, School, Sparkles, FileText, Search, FileCheck, Users, Rocket, ShieldCheck, HeartHandshake } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import ParticleField from '../components/ParticleField';
-import SmartImage from '../components/SmartImage';
 
 export default function PartnersPage({ setActivePage }) {
   return (
     <div className="w-full bg-white text-slate-800">
 
       {/* ---------------------------------------------------- */}
-      {/* HERO SECTION — PARTNERS & TRAINING CENTRES (MATCHING REFERENCE) */}
+      {/* HERO SECTION — PARTNERS & TRAINING CENTRES */}
       {/* ---------------------------------------------------- */}
       <section className="relative py-16 lg:py-24 bg-gradient-to-r from-[#061F4F] via-[#0B2D6B] to-[#082B68] text-white overflow-hidden">
-        
-        {/* World Map Asset Overlay — Transparent PNG (Zero Rectangular Box, Zero Blue Mismatch) */}
-        <div className="absolute top-0 right-0 w-full sm:w-[65%] lg:w-[58%] h-full pointer-events-none z-0 overflow-hidden flex items-center justify-end">
-          <SmartImage 
-            src="/images/events/world-map-transparent.png" 
-            alt="ICA Global World Map" 
-            loading="eager"
-            wrapperClassName="w-full h-full"
-            skeletonClassName="rounded-3xl"
-            variant="dark"
-            className="w-full h-full object-contain object-right block bg-transparent"
-          />
-        </div>
-
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-16 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            
-            {/* LEFT COLUMN (48%) — Clean Text Content (Zero Map Overlap) */}
-            <div className="lg:col-span-6 space-y-6 text-left relative z-20 py-4">
-              
-              {/* Outlined Gold Eyebrow Badge */}
-              <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white/10 px-4 py-1.5 rounded-full border border-[#C8A24A]/40 backdrop-blur-sm shadow-sm">
-                <Handshake size={14} /> PARTNERS & TRAINING CENTRES
-              </div>
-
-              {/* Main Heading */}
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.14] tracking-tight text-white">
-                Grow Together with<br />
-                <span className="text-[#C8A24A]">ICA Partnership</span>
-              </h1>
-
-              {/* Supporting Text */}
-              <p className="text-slate-300 text-xs sm:text-sm font-light leading-relaxed max-w-lg">
-                ICA welcomes schools, universities, organizations, and educational leaders to collaborate in expanding innovative learning opportunities across the globe.
-              </p>
-
-            </div>
-
-            {/* RIGHT COLUMN (52%) — Space reserved for right-aligned World Map PNG */}
-            <div className="lg:col-span-6 relative min-h-[300px] sm:min-h-[360px] lg:min-h-[400px] flex items-center justify-end z-10">
-              {/* The PNG asset in the absolute background renders map + locations seamlessly */}
-            </div>
-
+        <div className="max-w-4xl mx-auto px-6 lg:px-12 text-center space-y-6 relative z-10">
+          
+          {/* Outlined Gold Eyebrow Badge */}
+          <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block">
+            PARTNERS & TRAINING CENTRES
           </div>
+
+          {/* Main Heading */}
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.14] tracking-tight text-white">
+            Grow Together with<br />
+            <span className="text-[#C8A24A]">ICA Partnership</span>
+          </h1>
+
+          {/* Supporting Text */}
+          <p className="text-slate-300 text-xs sm:text-sm font-light leading-relaxed max-w-2xl mx-auto">
+            ICA welcomes schools, universities, organizations, and educational leaders to collaborate in expanding innovative learning opportunities across the globe.
+          </p>
+
         </div>
       </section>
 
@@ -67,7 +40,7 @@ export default function PartnersPage({ setActivePage }) {
         {/* ─── 1. BECOME A PARTNER SECTION ─── */}
         <section className="space-y-12">
           <div className="text-center space-y-2">
-            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] bg-[#F8F9FB] px-4 py-1.5 rounded-full border border-[#C8A24A]/30">
+            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block">
               JOIN OUR NETWORK
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0B2D6B] pt-1">Become a Partner</h2>
@@ -210,7 +183,7 @@ export default function PartnersPage({ setActivePage }) {
             
             {/* Left Box (Training Centre Intro + Button) */}
             <div className="lg:col-span-5 space-y-5 text-left">
-              <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] bg-[#F8F9FB] px-4 py-1.5 rounded-full border border-[#C8A24A]/30">
+              <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block">
                 OUR TRAINING CENTRES
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0B2D6B] leading-tight">
@@ -272,37 +245,28 @@ export default function PartnersPage({ setActivePage }) {
           </div>
         </section>
 
-        {/* ─── 4. REFINED "ICA GLOBAL PRESENCE" SECTION (CLEAN SOLID NAVY - NO MAP IMAGE) ─── */}
+        {/* ─── 4. ICA GLOBAL PRESENCE SECTION ─── */}
         <AnimatedSection animation="scaleIn" as="section" className="bg-gradient-to-br from-[#061F4F] to-[#0B2D6B] rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-elevated">
           <ParticleField count={10} />
           <div className="relative z-10 space-y-8 text-center max-w-3xl mx-auto">
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white/10 px-4 py-1.5 rounded-full border border-[#C8A24A]/30">
-                <Globe size={14} /> Global Expansion
+              <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block">
+                GLOBAL PRESENCE
               </div>
               <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold">
                 ICA Global Presence
               </h2>
-              <p className="text-slate-300 text-xs sm:text-sm font-light">
-                Starting in Dubai. Expanding to the USA.
+              <p className="text-slate-300 text-xs sm:text-sm font-light max-w-xl mx-auto leading-relaxed">
+                Established in Dubai, with our current international office serving as a foundation for global growth.
               </p>
             </div>
 
-            {/* 3 Accurate Current Statistics Cards */}
-            <div className="grid grid-cols-3 gap-4 max-w-xl mx-auto">
-              <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
-                <div className="font-serif text-3xl font-extrabold text-[#C8A24A]">2</div>
-                <div className="text-slate-200 text-[11px] font-medium mt-1">Global Locations</div>
-              </div>
-
-              <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
-                <div className="font-serif text-3xl font-extrabold text-[#C8A24A]">1</div>
-                <div className="text-slate-200 text-[11px] font-medium mt-1">Active Office (Dubai)</div>
-              </div>
-
-              <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
-                <div className="font-serif text-3xl font-extrabold text-[#C8A24A]">1</div>
-                <div className="text-slate-200 text-[11px] font-medium mt-1">Upcoming (USA)</div>
+            {/* Dubai Active Office Card */}
+            <div className="max-w-xs mx-auto">
+              <div className="bg-white/10 rounded-2xl p-6 border border-white/10 shadow-xs">
+                <div className="font-serif text-4xl font-extrabold text-[#C8A24A]">1</div>
+                <div className="text-white text-xs font-bold uppercase tracking-wider mt-1">Active Office</div>
+                <div className="text-slate-300 text-xs font-light mt-1">Dubai, UAE</div>
               </div>
             </div>
           </div>

@@ -62,8 +62,8 @@ export default function AboutPage({ setActivePage }) {
             {/* LEFT COLUMN - Content */}
             <div ref={heroRef} className="lg:col-span-6 space-y-6 text-left">
               
-              <div className="about-badge inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white px-4 py-1.5 rounded-full border border-[#C8A24A]/30 shadow-xs animate-border-shimmer" style={{opacity: 0}}>
-                <Sparkles size={12} className="animate-float-medium" /> ABOUT ICA
+              <div className="about-badge text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block" style={{opacity: 0}}>
+                ABOUT ICA
               </div>
 
               <h1 className="about-headline font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B2D6B] leading-[1.15] tracking-tight" style={{opacity: 0}}>

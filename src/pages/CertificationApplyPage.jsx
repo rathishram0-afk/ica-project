@@ -250,7 +250,6 @@ export default function CertificationApplyPage({ setActivePage }) {
                       <option value="Certified Trainer">Certified Trainer</option>
                       <option value="Senior Trainer">Senior Trainer</option>
                       <option value="Master Trainer">Master Trainer</option>
-                      <option value="International Trainer">International Trainer</option>
                     </select>
                   </div>
 
@@ -267,7 +266,7 @@ export default function CertificationApplyPage({ setActivePage }) {
                     >
                       <option value="Foundation & Beginner Program">Foundation & Beginner Program</option>
                       <option value="Intermediate & Advanced Program">Intermediate & Advanced Program</option>
-                      <option value="Master & International Trainer Program">Master & International Trainer Program</option>
+                      <option value="Master Trainer Program">Master Trainer Program</option>
                     </select>
                   </div>
                 </div>

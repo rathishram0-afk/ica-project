@@ -71,7 +71,7 @@ const faqs = [
   },
   {
     q: "What are the different levels of Teacher Certification?",
-    a: "ICA offers four teacher certification levels: Certified Trainer, Senior Trainer, Master Trainer, and International Trainer. Each level has specific assessment criteria including theory and practical teaching evaluations.",
+    a: "ICA offers three teacher certification levels: Certified Trainer, Senior Trainer, and Master Trainer. Each level has specific assessment criteria including theory and practical teaching evaluations.",
   },
   {
     q: "Can I start an ICA Training Centre?",
@@ -101,8 +101,8 @@ export default function ResourcesPage({ setActivePage }) {
       <section className="relative py-16 lg:py-20 bg-[#F8F9FB] border-b border-slate-100 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.10] world-map-bg pointer-events-none"></div>
         <div className="max-w-5xl mx-auto px-6 lg:px-12 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white px-5 py-2 rounded-full border border-[#C8A24A]/40 shadow-xs">
-            <Download size={14} /> Resources
+          <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block">
+            Resources
           </div>
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B2D6B] leading-tight">
             Everything You Need<br />

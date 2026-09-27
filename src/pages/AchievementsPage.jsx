@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trophy, Users, Medal, School, Box, Star } from 'lucide-react';
+import { Trophy, Users, Medal, School, Box, Star, Award, Globe } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import ParticleField from '../components/ParticleField';
 import SmartImage from '../components/SmartImage';
@@ -7,16 +7,29 @@ import SmartImage from '../components/SmartImage';
 export default function AchievementsPage() {
   const stats = [
     {
-      num: "8+",
-      label: "Students Trained for Guinness World Records"
+      num: "12+",
+      label: "Students Trained for Guinness World Records",
+      icon: Trophy,
     },
     {
       num: "100+",
-      label: "Blind Students Trained"
+      label: "Blind Students Trained",
+      icon: Users,
     },
     {
-      num: "45+",
-      label: "Deaf-Mute Students Trained"
+      num: "60+",
+      label: "Deaf-Mute Students Trained",
+      icon: Users,
+    },
+    {
+      num: "50+",
+      label: "National Records",
+      icon: Medal,
+    },
+    {
+      num: "20+",
+      label: "Asia Records",
+      icon: Award,
     }
   ];
 
@@ -34,12 +47,12 @@ export default function AchievementsPage() {
     {
       icon: Trophy,
       title: "Guinness World Records",
-      desc: "Trained 8 students to set Guinness World Records in Rubik’s Cube solving."
+      desc: "Trained 12 students to set Guinness World Records in Rubik’s Cube solving."
     },
     {
       icon: Users,
       title: "Inclusive Training",
-      desc: "Trained 100 blind and 45 deaf-mute students to learn cube solving techniques."
+      desc: "Trained 100 blind and 60 deaf-mute students to learn cube solving techniques."
     },
     {
       icon: Box,
@@ -59,15 +72,15 @@ export default function AchievementsPage() {
 
         {/* ─── 1. CENTER TOP EYEBROW BADGE ─── */}
         <AnimatedSection animation="fadeUp" className="text-center">
-          <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white px-5 py-2 rounded-full border border-[#C8A24A]/40 shadow-xs animate-border-shimmer">
-            <Trophy size={14} /> ACHIEVEMENTS & RECOGNITION
+          <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block">
+            ACHIEVEMENTS & RECOGNITION
           </div>
         </AnimatedSection>
 
         {/* ─── 2. HERO TWO-COLUMN SECTION ─── */}
         <section className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
-          {/* LEFT COLUMN (55%) — Content + 3 Stats Cards */}
+          {/* LEFT COLUMN (55%) — Content + 5 Stats Cards */}
           <div className="lg:col-span-7 space-y-8 flex flex-col justify-between text-left">
             
             <div className="space-y-4">
@@ -83,21 +96,29 @@ export default function AchievementsPage() {
               </p>
             </div>
 
-            {/* 3 STATISTIC CARDS SIDE-BY-SIDE */}
-            <AnimatedSection animation="stagger" staggerDelay={120} className="grid grid-cols-3 gap-4 pt-2">
-              {stats.map((st, i) => (
-                <div key={i} className="bg-[#F8F9FB] rounded-2xl p-4 sm:p-5 border border-slate-200/80 text-center flex flex-col items-center justify-between group hover:border-[#C8A24A]/50 transition-all duration-300 shadow-xs card-hover-lift">
-                  <div className="w-10 h-10 rounded-full bg-white text-[#C8A24A] flex items-center justify-center mb-3 shadow-xs border border-slate-100 group-hover:bg-[#0B2D6B] transition-colors duration-300">
-                    <Users size={18} className="icon-hover-rotate" />
+            {/* 5 STATISTIC CARDS IN BALANCED RESPONSIVE GRID WITH GENEROUS BREATHING ROOM */}
+            <AnimatedSection animation="stagger" staggerDelay={80} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3.5 sm:gap-4 pt-2">
+              {stats.map((st, i) => {
+                const Icon = st.icon;
+                return (
+                  <div
+                    key={i}
+                    className={`bg-[#F8F9FB] rounded-2xl p-4 sm:p-5 border border-slate-200/80 text-center flex flex-col items-center justify-between group hover:border-[#C8A24A]/50 transition-all duration-300 shadow-xs card-hover-lift ${
+                      i === 4 ? 'col-span-2 sm:col-span-1' : 'col-span-1'
+                    }`}
+                  >
+                    <div className="w-10 h-10 rounded-full bg-white text-[#C8A24A] flex items-center justify-center mb-3 shadow-xs border border-slate-100 group-hover:bg-[#0B2D6B] transition-colors duration-300 shrink-0">
+                      <Icon size={18} className="icon-hover-rotate" />
+                    </div>
+                    <div className="font-serif text-2xl sm:text-3xl font-extrabold text-[#0B2D6B] mb-1.5 leading-none">
+                      {st.num}
+                    </div>
+                    <div className="text-xs sm:text-[12px] text-slate-500 font-light leading-snug px-1">
+                      {st.label}
+                    </div>
                   </div>
-                  <div className="font-serif text-2xl sm:text-3xl font-extrabold text-[#0B2D6B] mb-1">
-                    {st.num}
-                  </div>
-                  <div className="text-[11px] sm:text-xs text-slate-500 font-light leading-tight">
-                    {st.label}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </AnimatedSection>
 
           </div>
@@ -131,7 +152,7 @@ export default function AchievementsPage() {
               </div>
               <div>
                 <h3 className="font-serif font-bold text-base sm:text-xl text-white leading-snug">
-                  8 Students Trained for Guinness World Records
+                  12 Students Trained for Guinness World Records
                 </h3>
                 <p className="text-xs text-[#C8A24A] font-semibold tracking-wider mt-0.5">
                   Rubik's Cube Solving
@@ -142,7 +163,7 @@ export default function AchievementsPage() {
             {/* Right Supporting Description */}
             <div className="md:col-span-6 text-left">
               <p className="text-slate-200 text-xs sm:text-sm font-light leading-relaxed">
-                ICA is proud to have trained 8 students who have set Guinness World Records in Rubik’s Cube solving, showcasing their dedication, discipline, and excellence.
+                ICA is proud to have trained 12 students who have set Guinness World Records in Rubik’s Cube solving, showcasing their dedication, discipline, and excellence.
               </p>
             </div>
 

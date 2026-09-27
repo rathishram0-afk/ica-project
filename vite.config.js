@@ -4,6 +4,9 @@ import react from '@vitejs/plugin-react'
 // Vite Configuration for International Cube Academy (ICA) Prototype
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ['animejs', 'react-router-dom', 'lucide-react']
+  },
   server: {
     port: 3005,
     strictPort: false,

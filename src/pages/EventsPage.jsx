@@ -62,8 +62,8 @@ export default function EventsPage({ setActivePage }) {
         <div className="absolute bottom-10 right-20 w-24 h-24 border border-[#0B2D6B]/10 rounded-full animate-float-medium pointer-events-none"></div>
 
         <AnimatedSection animation="fadeUp" className="max-w-4xl mx-auto px-6 relative z-10 space-y-4">
-          <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white px-4 py-1.5 rounded-full border border-[#C8A24A]/30 shadow-xs animate-border-shimmer">
-            <Trophy size={14} /> EVENTS & COMPETITIONS
+          <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block">
+            EVENTS & COMPETITIONS
           </div>
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B2D6B] leading-tight">
             Showcase Your Skills on the <span className="text-[#C8A24A]">Global Stage</span>

@@ -23,8 +23,10 @@ export default function Navbar({ activePage }) {
       id: 'programs',
       label: 'Programs',
       children: [
-        { id: 'programs', label: 'Programs & Certifications' },
-        { id: 'accreditation', label: 'School Accreditation' },
+        { id: 'teachers-programs', label: 'Teachers Programs' },
+        { id: 'students-certification', label: 'Students Certification' },
+        { id: 'teachers-certification', label: 'Teachers Certification' },
+        { id: 'school-affiliation', label: 'School Accreditation' },
         { id: 'research', label: 'Research & Innovation' },
       ],
     },
@@ -136,40 +138,46 @@ export default function Navbar({ activePage }) {
 
   return (
     <nav
-      className={`sticky top-0 left-0 w-full z-50 transition-all duration-500 ease-smooth ${
+      className={`sticky top-0 left-0 w-full z-50 transition-all duration-500 ease-smooth border-b border-[#0B2D6B] ${
         scrolled
           ? 'navbar-solid'
-          : 'bg-white border-b border-slate-100 shadow-sm'
+          : 'bg-white shadow-sm'
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-4 lg:px-12">
-        <div className="flex items-center justify-between h-18 lg:h-20 py-2">
+        <div className="flex items-center justify-between min-h-[58px] sm:min-h-[68px] lg:h-20 py-1 sm:py-2">
 
           {/* Logo */}
           <Link
             to={pathFor('home')}
             onClick={closeMenus}
             aria-label="International Cube Academy — home"
-            className="flex items-center cursor-pointer shrink-0 group"
+            className="flex flex-col items-start cursor-pointer shrink-0 group py-0.5"
           >
             <SmartImage
               src="/images/logo/ica-logo.png"
               alt="International Cube Academy"
               loading="eager"
-              wrapperClassName="h-12 sm:h-14 lg:h-16"
+              wrapperClassName="h-11 sm:h-13 lg:h-16"
               skeletonClassName="rounded-xl"
-              className="h-12 sm:h-14 lg:h-16 w-auto object-contain block bg-transparent transition-all duration-300 group-hover:scale-105"
-              placeholderClassName="w-32 sm:w-36 lg:w-40"
+              className="h-11 sm:h-13 lg:h-16 w-auto object-contain block bg-transparent transition-all duration-300 group-hover:scale-[1.02]"
+              placeholderClassName="w-28 sm:w-34 lg:w-40"
               fallback={
                 <div className="flex items-center gap-2">
-                  <div className="w-9 h-9 rounded-xl bg-[#0B2D6B] flex items-center justify-center text-[#C8A24A] font-extrabold text-lg font-serif">I</div>
+                  <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-xl bg-[#0B2D6B] flex items-center justify-center text-[#C8A24A] font-extrabold text-base sm:text-lg font-serif">I</div>
                   <div>
-                    <div className="font-serif font-extrabold text-sm text-[#0B2D6B] leading-none">International</div>
-                    <div className="font-serif font-extrabold text-sm text-[#C8A24A] leading-none">Cube Academy</div>
+                    <div className="font-serif font-extrabold text-xs sm:text-sm text-[#0B2D6B] leading-none">International</div>
+                    <div className="font-serif font-extrabold text-xs sm:text-sm text-[#C8A24A] leading-none">Cube Academy</div>
                   </div>
                 </div>
               }
             />
+            {/* ICA Brand Signature Line */}
+            <div className="w-full max-w-[120px] sm:max-w-[150px] mt-0.5 sm:mt-1 flex items-center justify-center gap-1.5 opacity-85 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-[#0B2D6B]/50 to-[#0B2D6B]"></span>
+              <span className="w-1.5 h-1.5 rotate-45 bg-[#C8A24A] shrink-0 transition-transform duration-300 group-hover:rotate-[225deg]"></span>
+              <span className="h-[1px] flex-1 bg-gradient-to-r from-[#0B2D6B] via-[#0B2D6B]/50 to-transparent"></span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
@@ -249,7 +257,8 @@ export default function Navbar({ activePage }) {
           <div className="flex lg:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-3 -mr-1 rounded-lg text-[#0B2D6B] hover:bg-slate-100 transition-colors duration-200"
+              className="p-2 sm:p-2.5 -mr-1 rounded-lg text-[#0B2D6B] hover:bg-slate-100 transition-colors duration-200"
+              aria-label="Toggle navigation menu"
             >
               <div className="relative w-[22px] h-[22px]">
                 <X size={22} className={`absolute inset-0 transition-all duration-300 ${mobileMenuOpen ? 'opacity-100 rotate-0' : 'opacity-0 rotate-90'}`} />

@@ -56,7 +56,6 @@ export default function useScrollReveal({
     if (!el) return;
 
     const targets = animation === 'stagger' ? el.children : el;
-
     // Reduced motion: show everything immediately. Hiding content and then
     // declining to animate it back in would leave the page blank.
     if (prefersReducedMotion()) {
@@ -72,17 +71,38 @@ export default function useScrollReveal({
         if (entry.isIntersecting && !(once && hasAnimated.current)) {
           hasAnimated.current = true;
           const props = getAnimationProps(animation);
-          anime({
-            targets,
-            ...props,
-          });
+          try {
+            anime({
+              targets,
+              ...props,
+            });
+          } catch (e) {
+            anime.set(targets, { opacity: 1 });
+          }
           if (once) observer.unobserve(el);
         }
       },
       { threshold }
     );
 
-    observer.observe(el);
+    // If element is already in viewport on mount, trigger reveal immediately
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      hasAnimated.current = true;
+      const props = getAnimationProps(animation);
+      try {
+        anime({
+          targets,
+          ...props,
+        });
+      } catch (e) {
+        anime.set(targets, { opacity: 1 });
+      }
+    } else {
+      anime.set(targets, { opacity: 0 });
+      observer.observe(el);
+    }
+
     return () => observer.disconnect();
   }, [animation, delay, duration, staggerDelay, threshold, once, getAnimationProps]);
 

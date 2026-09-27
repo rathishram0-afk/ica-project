@@ -160,8 +160,8 @@ export default function MediaPage() {
       <section className="relative py-14 lg:py-18 bg-[#F8F9FB] border-b border-slate-100 overflow-hidden text-center">
         <div className="absolute inset-0 opacity-[0.10] world-map-bg pointer-events-none"></div>
         <div className="max-w-4xl mx-auto px-6 relative z-10 space-y-4">
-          <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white px-5 py-2 rounded-full border border-[#C8A24A]/40 shadow-xs">
-            <Camera size={14} /> MEDIA & GALLERY
+          <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block">
+            MEDIA & GALLERY
           </div>
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B2D6B] leading-tight">
             Our Story in <span className="text-[#C8A24A]">Pictures & Moments</span>

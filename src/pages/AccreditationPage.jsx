@@ -29,8 +29,8 @@ export default function AccreditationPage({ setActivePage }) {
         <div className="absolute inset-0 opacity-[0.10] world-map-bg pointer-events-none"></div>
         <div className="absolute top-10 right-20 w-32 h-32 border border-[#C8A24A]/10 rounded-full animate-float-slow pointer-events-none"></div>
         <AnimatedSection animation="fadeUp" className="max-w-5xl mx-auto px-6 lg:px-12 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white px-5 py-2 rounded-full border border-[#C8A24A]/40 shadow-xs animate-border-shimmer">
-            <School size={14} /> School Accreditation
+          <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block">
+            SCHOOL ACCREDITATION
           </div>
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B2D6B] leading-tight">
             Partner with ICA

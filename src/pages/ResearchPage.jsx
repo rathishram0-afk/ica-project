@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlaskConical, Lightbulb, ArrowRight, BookOpen, Cpu, Globe, Brain, Microscope, Zap } from 'lucide-react';
+import { Lightbulb, BookOpen, Cpu, Globe, Brain, Microscope, Zap } from 'lucide-react';
 
 const researchAreas = [
   { icon: Brain, title: "Cognitive Development", desc: "Studying how puzzle-based learning activates and strengthens neural pathways, enhancing memory, focus, and analytical thinking." },
@@ -24,8 +24,8 @@ export default function ResearchPage({ setActivePage }) {
         <div className="absolute inset-0 opacity-10 world-map-bg pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-full h-16 bg-white" style={{ clipPath: 'ellipse(55% 100% at 50% 100%)' }}></div>
         <div className="max-w-5xl mx-auto px-6 lg:px-12 relative z-10 text-center space-y-4 pb-8">
-          <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white/10 px-5 py-2 rounded-full border border-[#C8A24A]/40 backdrop-blur-sm">
-            <FlaskConical size={14} /> Research & Innovation
+          <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block">
+            Research & Innovation
           </div>
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
             Advancing the Science of<br />
@@ -69,23 +69,6 @@ export default function ResearchPage({ setActivePage }) {
           </div>
         </section>
 
-        {/* RESEARCH PILLARS BANNER */}
-        <section className="bg-gradient-to-br from-[#0B2D6B] to-[#16489C] rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10 world-map-bg pointer-events-none rounded-3xl"></div>
-          <div className="relative z-10 grid md:grid-cols-3 gap-6 text-center">
-            {[
-              { num: "50+", label: "Research Publications" },
-              { num: "12+", label: "University Partnerships" },
-              { num: "5+", label: "Countries in Active Study" },
-            ].map((stat, i) => (
-              <div key={i} className="space-y-1">
-                <div className="font-serif text-4xl font-extrabold text-[#C8A24A]">{stat.num}</div>
-                <div className="text-slate-200 text-sm font-light">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* INNOVATION */}
         <section>
           <div className="text-center mb-10">
@@ -111,23 +94,6 @@ export default function ResearchPage({ setActivePage }) {
               );
             })}
           </div>
-        </section>
-
-        {/* COLLABORATE CTA */}
-        <section className="bg-[#F8F9FB] rounded-3xl p-8 sm:p-12 border border-slate-200/80 text-center">
-          <div className="w-16 h-16 rounded-full bg-[#C8A24A]/15 text-[#C8A24A] flex items-center justify-center mx-auto mb-5">
-            <FlaskConical size={30} />
-          </div>
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0B2D6B] mb-3">Collaborate with ICA Research</h2>
-          <p className="text-slate-500 text-sm font-light max-w-xl mx-auto mb-6 leading-relaxed">
-            Are you a researcher, educator, or institution interested in collaborating on cognitive development and puzzle-based learning research? We'd love to hear from you.
-          </p>
-          <button
-            onClick={() => setActivePage && setActivePage('contact')}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0B2D6B] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#071d47] transition-all shadow-lg"
-          >
-            Contact Our Research Team <ArrowRight size={14} />
-          </button>
         </section>
 
       </div>

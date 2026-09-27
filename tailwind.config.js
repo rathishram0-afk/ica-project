@@ -31,8 +31,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
-        serif: ['Playfair Display', 'Georgia', 'serif']
+        sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Inter', 'sans-serif'],
+        serif: ['Playfair Display', 'Georgia', 'Cambria', 'Times New Roman', 'serif']
       },
       boxShadow: {
         'glass': '0 8px 32px 0 rgba(11, 46, 107, 0.06)',

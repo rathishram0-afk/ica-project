@@ -3,31 +3,29 @@ import {
   ArrowRight,
   GraduationCap,
   Trophy,
+  Users,
   CheckCircle2,
   Sparkles,
   Award,
   Calendar
 } from 'lucide-react';
 import anime from 'animejs';
-import useCountUp from '../hooks/useCountUp';
 import AnimatedSection from '../components/AnimatedSection';
 import ParticleField from '../components/ParticleField';
-import SmartImage from '../components/SmartImage';
 import MagneticButton from '../components/MagneticButton';
 
-/* Stat counter sub-component */
+/* Stat counter sub-component — Institutional Achievement Strip (Static Final Values) */
 function StatItem({ icon: Icon, num, label }) {
-  const { ref, displayValue } = useCountUp(num, 2200);
   return (
-    <div className="flex items-center gap-3 px-4 sm:px-6 py-2">
-      <div className="w-9 h-9 rounded-xl bg-[#0B2D6B]/[0.06] text-[#B08A2E] flex items-center justify-center shrink-0 border border-[#0B2D6B]/10 icon-hover-rotate">
-        <Icon size={18} />
+    <div className="flex items-center justify-start sm:justify-center gap-3 p-3.5 sm:px-5 sm:py-3 min-w-0">
+      <div className="w-9 h-9 rounded-xl bg-[#FEF9EE] text-[#B08A2E] flex items-center justify-center shrink-0 border border-[#F3E5C8]">
+        <Icon size={17} />
       </div>
-      <div>
-        <div ref={ref} className="text-xl sm:text-2xl font-extrabold text-[#0B2D6B] font-serif leading-none">
-          {displayValue}
+      <div className="min-w-0">
+        <div className="text-lg sm:text-xl md:text-2xl font-extrabold text-[#0B2D6B] font-serif leading-none">
+          {num}
         </div>
-        <div className="text-[11px] font-bold text-[#B08A2E] uppercase tracking-wider mt-1">
+        <div className="text-[11px] font-medium text-slate-600 mt-1 font-sans leading-tight">
           {label}
         </div>
       </div>
@@ -45,29 +43,29 @@ export default function HomePage({ setActivePage }) {
 
     tl
       .add({
-        targets: heroContentRef.current.querySelector('.hero-badge'),
+        targets: heroContentRef.current.querySelector('.hero-label-block'),
         opacity: [0, 1],
         translateY: [20, 0],
-        duration: 600,
+        duration: 500,
       })
       .add({
         targets: heroContentRef.current.querySelectorAll('.hero-headline span'),
         opacity: [0, 1],
-        translateY: [40, 0],
-        duration: 700,
+        translateY: [30, 0],
+        duration: 600,
         delay: anime.stagger(150),
-      }, '-=300')
+      }, '-=250')
       .add({
         targets: heroContentRef.current.querySelector('.hero-desc'),
         opacity: [0, 1],
         translateY: [25, 0],
-        duration: 600,
-      }, '-=400')
+        duration: 550,
+      }, '-=350')
       .add({
         targets: heroContentRef.current.querySelectorAll('.hero-cta'),
         opacity: [0, 1],
         translateY: [20, 0],
-        scale: [0.9, 1],
+        scale: [0.95, 1],
         duration: 500,
         delay: anime.stagger(100),
       }, '-=300');
@@ -96,44 +94,40 @@ export default function HomePage({ setActivePage }) {
       {/* ---------------------------------------------------- */}
       <section
         className="relative w-full overflow-hidden bg-[#F7F7F9] border-b border-slate-200/70 flex flex-col justify-between"
-        style={{ minHeight: 'calc(100vh - 64px)' }}
       >
-        {/* Hero artwork. The section ground is set to the photograph's own
-            field colour (#F7F7F9, sampled from its corners), so the image is
-            anchored right and simply dissolves into the background — no seam,
-            and the copy keeps a clean column on the left. */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* Hero artwork with responsive mobile opacity and positioning matching reference */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <img
             src="/images/hero/ica-about-cube.png"
             alt=""
             aria-hidden="true"
             fetchPriority="high"
-            className="absolute inset-y-0 right-0 h-full w-full md:w-[64%] lg:w-[58%] object-contain object-center md:object-right select-none"
+            className="absolute top-[44%] -translate-y-1/2 sm:top-[46%] sm:-translate-y-1/2 md:top-auto md:translate-y-0 md:bottom-0 right-[-2%] sm:right-0 md:right-0 h-[68%] sm:h-[75%] md:h-full w-[80%] sm:w-[70%] md:w-[64%] lg:w-[58%] object-contain object-right select-none opacity-[0.14] sm:opacity-20 md:opacity-100 transition-all duration-300 pointer-events-none"
           />
-          {/* Below md the artwork sits under the copy, so it needs a scrim.
-              From md up the two occupy separate columns and it is barely
-              needed — hence the much lighter wash. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F7F7F9] via-[#F7F7F9]/90 to-transparent md:via-[#F7F7F9]/40 pointer-events-none" />
-          {/* Softens the join into the stats strip below. */}
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#F7F7F9] to-transparent pointer-events-none" />
+          {/* Subtle gradient overlays to guarantee maximum text readability on all phone screens */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#F7F7F9] via-[#F7F7F9]/80 to-transparent md:via-[#F7F7F9]/40 pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-12 sm:h-20 bg-gradient-to-t from-[#F7F7F9] to-transparent pointer-events-none" />
         </div>
 
-        {/* The artwork carries its own orbit rings and floating cubes, so the
-            old decorative circles were removed rather than restyled — two
-            competing sets of rings read as clutter. */}
-
         {/* Hero Left Content Container */}
-        <div ref={heroContentRef} className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-16 flex-1 flex items-center py-10 lg:py-14">
-          <div className="w-full lg:w-[52%] xl:w-[48%] space-y-5 sm:space-y-6">
+        <div ref={heroContentRef} className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-16 flex-1 flex items-center py-6 sm:py-10 lg:py-14">
+          <div className="w-full lg:w-[52%] xl:w-[48%] space-y-3.5 sm:space-y-5">
 
-            {/* Outlined Gold Badge */}
-            <div className="hero-badge inline-flex items-center gap-2 text-[11px] sm:text-[11px] font-extrabold uppercase tracking-widest text-[#8A6B1F] bg-white/80 px-4 py-1.5 rounded-full border border-[#C8A24A]/50 shadow-xs animate-border-shimmer" style={{opacity: 0}}>
-              <Sparkles size={12} className="animate-float-medium" />
-              WELCOME TO INTERNATIONAL CUBE ACADEMY
+            {/* CHANGE 1 — HERO LABEL / TAGLINE (Exact photo match) */}
+            <div className="hero-label-block flex items-start gap-3" style={{opacity: 0}}>
+              <div className="w-[3px] h-8 sm:h-9 bg-[#B08A2E] rounded-full shrink-0 mt-0.5" />
+              <div>
+                <div className="text-[10px] sm:text-xs font-extrabold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#0B2D6B] leading-tight font-sans">
+                  INTERNATIONAL CUBE ACADEMY
+                </div>
+                <div className="text-xs sm:text-sm font-medium text-slate-500 tracking-wide mt-1 font-sans">
+                  A Global Community for Cognitive Growth
+                </div>
+              </div>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="hero-headline font-serif font-extrabold leading-[1.1] tracking-tight">
+            {/* Main Headline (Preserved Exactly) */}
+            <h1 className="hero-headline font-serif font-extrabold leading-[1.14] sm:leading-[1.1] tracking-tight pt-0.5 sm:pt-1">
               <span className="text-[#0B2D6B] text-3xl sm:text-5xl xl:text-6xl block" style={{opacity: 0}}>Empowering Minds.</span>
               <span className="text-[#B08A2E] text-3xl sm:text-5xl xl:text-6xl block" style={{opacity: 0}}>Building Tomorrow.</span>
             </h1>
@@ -144,36 +138,46 @@ export default function HomePage({ setActivePage }) {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 pt-1 sm:pt-2">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-1 sm:pt-2 w-full sm:w-auto">
               <MagneticButton
                 onClick={() => setActivePage('about')}
-                className="hero-cta bg-white px-7 py-3.5 min-h-[44px] rounded-full font-bold text-xs uppercase tracking-wider text-[#0B2D6B] hover:bg-[#0B2D6B] hover:text-white border border-[#0B2D6B]/20 transition-all duration-400 shadow-sm hover:shadow-md flex items-center gap-2 group"
+                className="hero-cta bg-[#0B2D6B] px-6 sm:px-7 py-3.5 min-h-[44px] rounded-full font-bold text-xs uppercase tracking-wider text-white hover:bg-[#05183B] border border-[#0B2D6B] transition-all duration-400 shadow-sm hover:shadow-md flex items-center justify-center gap-2 group w-full sm:w-auto"
                 style={{opacity: 0}}
               >
                 <span>ABOUT ICA</span>
-                <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300 text-[#C8A24A] group-hover:text-white" />
+                <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300 text-[#C8A24A]" />
               </MagneticButton>
               <MagneticButton
                 onClick={() => setActivePage('contact')}
-                className="hero-cta gold-btn px-7 py-3.5 min-h-[44px] rounded-full font-bold text-xs uppercase tracking-wider text-white transition-all duration-400 shadow-md hover:shadow-lg flex items-center gap-2 group"
+                className="hero-cta bg-white/90 px-6 sm:px-7 py-3.5 min-h-[44px] rounded-full font-bold text-xs uppercase tracking-wider text-[#8A6B1F] hover:text-[#0B2D6B] border border-[#C8A24A]/80 hover:border-[#0B2D6B] transition-all duration-400 shadow-xs hover:shadow-sm flex items-center justify-center gap-2 group w-full sm:w-auto"
                 style={{opacity: 0}}
               >
                 <span>PARTNER WITH US</span>
-                <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+                <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300 text-[#C8A24A]" />
               </MagneticButton>
             </div>
 
           </div>
         </div>
 
-        {/* Bottom Statistics Panel */}
-        <AnimatedSection animation="fadeUp" delay={800} className="relative z-10 w-full bg-white/85 border-t border-slate-200">
-          <div className="max-w-[1440px] mx-auto px-4 lg:px-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-200 py-3 sm:py-4">
-              <StatItem icon={Award} num="15+" label="Years of Experience" />
+        {/* CHANGE 2 — STATISTICS / METRICS AREA (Static values & balanced 2-column mobile layout) */}
+        <AnimatedSection animation="fadeUp" delay={800} className="relative z-10 w-full bg-white border-t border-slate-200/80 shadow-xs">
+          <div className="max-w-[1440px] mx-auto px-2 sm:px-4 lg:px-12">
+            <div className="grid grid-cols-2 md:grid-cols-5 divide-x divide-y md:divide-y-0 divide-slate-200/80 py-1 sm:py-2 items-center">
+              <StatItem icon={Users} num="15+" label="Years of Experience" />
               <StatItem icon={GraduationCap} num="1 Lakh+" label="Students Trained" />
               <StatItem icon={Calendar} num="80+" label="Events Organized" />
-              <StatItem icon={Trophy} num="8+" label="Guinness World Records" />
+              <StatItem icon={Trophy} num="12+" label="Guinness World Records" />
+              {/* Rightmost Institutional Tagline (Matching photo) */}
+              <div className="col-span-2 md:col-span-1 hidden md:flex flex-col justify-center px-4 sm:px-6 py-2 sm:py-1">
+                <div className="font-serif italic text-xs sm:text-sm text-[#0B2D6B] font-semibold leading-tight">
+                  More Than a Puzzle.
+                </div>
+                <div className="font-serif italic text-xs sm:text-sm text-[#0B2D6B] font-semibold leading-tight mt-0.5">
+                  A Global Community.
+                </div>
+                <div className="w-6 h-[2px] bg-[#C8A24A] mt-2 rounded-full" />
+              </div>
             </div>
           </div>
         </AnimatedSection>
@@ -231,7 +235,7 @@ export default function HomePage({ setActivePage }) {
         <div className="max-w-[1440px] mx-auto px-6 lg:px-16 space-y-10">
           
           <AnimatedSection animation="fadeUp" className="text-center space-y-2 max-w-2xl mx-auto">
-            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] bg-white px-4 py-1.5 rounded-full border border-[#C8A24A]/30 animate-border-shimmer inline-block">
+            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block">
               EXCELLENCE THAT INSPIRES
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0B2D6B] pt-1">
@@ -299,8 +303,8 @@ export default function HomePage({ setActivePage }) {
       {/* ---------------------------------------------------- */}
       {/* OUR IMPACT SECTION */}
       {/* ---------------------------------------------------- */}
-      <section className="py-16 bg-[#0B2D6B] text-white relative overflow-hidden">
-        {/* World Map Overlay */}
+      <section className="py-16 lg:py-20 bg-[#0B2D6B] text-white relative overflow-hidden">
+        {/* World Map Background Overlay */}
         <div className="absolute inset-0 opacity-15 world-map-bg pointer-events-none"></div>
         <ParticleField count={12} />
 
@@ -308,45 +312,27 @@ export default function HomePage({ setActivePage }) {
         <div className="absolute -bottom-10 -right-10 w-60 h-60 border border-[#C8A24A]/10 rounded-full animate-float-slow pointer-events-none"></div>
 
         <div className="max-w-[1440px] mx-auto px-6 lg:px-16 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            
-            <AnimatedSection animation="fadeLeft" className="lg:col-span-6">
-              <div className="w-full h-64 sm:h-72 border border-[#C8A24A]/30 rounded-2xl p-0 overflow-hidden shadow-md group relative card-3d-tilt">
-                <SmartImage 
-                  src="/images/events/world-map.png" 
-                  alt="ICA World Map" 
-                  wrapperClassName="w-full h-full"
-                  skeletonClassName="rounded-2xl"
-                  className="w-full h-full object-cover object-center block select-none transform group-hover:scale-[1.05] transition-transform duration-700"
-                />
-                {/* Overlay glow */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B2D6B]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-              </div>
-            </AnimatedSection>
+          <AnimatedSection animation="fadeUp" className="max-w-3xl mx-auto text-center space-y-6">
+            <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A] block">
+              OUR IMPACT
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold">
+              Creating a Global Impact
+            </h2>
+            <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-light max-w-2xl mx-auto">
+              ICA is building a global learning community by empowering students, educators, schools, and training centres through quality education, internationally recognized certification programs, and innovative teaching methodologies.
+            </p>
 
-            <AnimatedSection animation="fadeRight" className="lg:col-span-6 space-y-6">
-              <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#C8A24A]">
-                OUR IMPACT
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold">
-                Creating a Global Impact
-              </h2>
-              <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-light">
-                ICA is building a global learning community by empowering students, educators, schools, and training centres through quality education, internationally recognized certification programs, and innovative teaching methodologies.
-              </p>
-
-              <div>
-                <button 
-                  onClick={() => setActivePage('about')}
-                  className="gold-btn px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider text-white transition-all duration-300 inline-flex items-center gap-2 shadow-md hover:shadow-gold-glow transform hover:-translate-y-0.5 group"
-                >
-                  <span>Read Full ICA Profile</span>
-                  <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
-                </button>
-              </div>
-            </AnimatedSection>
-
-          </div>
+            <div className="pt-2">
+              <button 
+                onClick={() => setActivePage('about')}
+                className="gold-btn px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider text-white transition-all duration-300 inline-flex items-center gap-2 shadow-md hover:shadow-gold-glow transform hover:-translate-y-0.5 group"
+              >
+                <span>Read Full ICA Profile</span>
+                <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+              </button>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 

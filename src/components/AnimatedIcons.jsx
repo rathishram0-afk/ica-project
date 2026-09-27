@@ -18,15 +18,19 @@ function useDrawSVG() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             // Animate stroke dashoffset to 0
-            anime({
-              targets: el.querySelectorAll('path, circle, rect, line, polyline, polygon'),
-              strokeDashoffset: [anime.setDashoffset, 0],
-              easing: 'easeInOutSine',
-              duration: 1500,
-              delay: function(el, i) { return i * 150 },
-              direction: 'alternate',
-              loop: false,
-            });
+            try {
+              anime({
+                targets: el.querySelectorAll('path, circle, rect, line, polyline, polygon'),
+                strokeDashoffset: [anime.setDashoffset, 0],
+                easing: 'easeInOutSine',
+                duration: 1500,
+                delay: function(el, i) { return i * 150 },
+                direction: 'alternate',
+                loop: false,
+              });
+            } catch (e) {
+              console.warn('SVG animation skipped:', e);
+            }
             observer.unobserve(el);
           }
         });
